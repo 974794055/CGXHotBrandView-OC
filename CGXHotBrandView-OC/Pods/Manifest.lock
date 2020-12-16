@@ -1,0 +1,39 @@
+PODS:
+  - CGXHotBrandViewOC (0.1):
+    - CGXHotBrandViewOC/Base (= 0.1)
+    - CGXHotBrandViewOC/Custom (= 0.1)
+    - CGXHotBrandViewOC/Cycle (= 0.1)
+    - CGXHotBrandViewOC/HotBrand (= 0.1)
+    - CGXHotBrandViewOC/PageControl (= 0.1)
+  - CGXHotBrandViewOC/Base (0.1):
+    - CGXHotBrandViewOC/Custom
+  - CGXHotBrandViewOC/Custom (0.1)
+  - CGXHotBrandViewOC/Cycle (0.1):
+    - CGXHotBrandViewOC/Base
+  - CGXHotBrandViewOC/HotBrand (0.1):
+    - CGXHotBrandViewOC/Base
+    - CGXHotBrandViewOC/PageControl
+  - CGXHotBrandViewOC/PageControl (0.1)
+  - SDWebImage (5.9.4):
+    - SDWebImage/Core (= 5.9.4)
+  - SDWebImage/Core (5.9.4)
+
+DEPENDENCIES:
+  - CGXHotBrandViewOC (from `../`)
+  - SDWebImage
+
+SPEC REPOS:
+  https://cdn.cocoapods.org/:
+    - SDWebImage
+
+EXTERNAL SOURCES:
+  CGXHotBrandViewOC:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CGXHotBrandViewOC: be146efff090143ccc57ef469e8bff37adee7677
+  SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
+
+PODFILE CHECKSUM: 12d4863de68581180da27419bd5ac8c84453181a
+
+COCOAPODS: 1.9.3

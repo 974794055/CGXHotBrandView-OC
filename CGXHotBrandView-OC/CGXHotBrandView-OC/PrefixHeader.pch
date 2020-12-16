@@ -1,0 +1,27 @@
+//
+//  PrefixHeader.pch
+//  CGXHotBrandView-OC
+//
+//  Created by CGX on 2020/12/16.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#import "CustomCollectionViewCell.h"
+#define KScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define KScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#import <CGXHotBrandViewOC/CGXHotBrandViewOC.h>
+#define KRandom(X)    arc4random_uniform(X)/255.0
+
+
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIButton+WebCache.h>
+#import <SDWebImage/SDWebImageDownloader.h>
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */

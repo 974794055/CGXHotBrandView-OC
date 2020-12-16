@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/Cycle/CGXHotBrandCycleView.h

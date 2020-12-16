@@ -1,0 +1,8 @@
+#source 'https://github.com/CocoaPods/Specs.git'
+platform:ios,'9.0'
+target "CGXHotBrandView-OC" do
+
+  pod 'CGXHotBrandViewOC', :path => '../'
+  pod 'SDWebImage'
+end
+

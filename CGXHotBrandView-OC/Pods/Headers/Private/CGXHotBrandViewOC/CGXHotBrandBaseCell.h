@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/Base/CGXHotBrandBaseCell.h
