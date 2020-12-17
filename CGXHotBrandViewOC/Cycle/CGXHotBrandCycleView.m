@@ -83,6 +83,15 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return self.minimumInteritemSpacing;
 }
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIEdgeInsets insets = self.edgeInsets;
+    CGFloat spaceW = insets.left+insets.right;
+    CGFloat spaceH = insets.top+insets.bottom;
+    CGFloat width = (CGRectGetWidth(collectionView.frame) - spaceW-self.minimumInteritemSpacing*(self.itemRowCount-1)) / self.itemRowCount;
+    CGFloat height = (CGRectGetHeight(collectionView.frame) - spaceH-self.minimumLineSpacing*(self.itemSectionCount-1)) / self.itemSectionCount;
+    return CGSizeMake(width, height);
+}
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -133,10 +142,18 @@
 {
     CGFloat itemWW = scrollView.contentSize.width / self.totalInter;
     if (scrollView.contentOffset.x<=itemWW) {
-        [self.collectionView setContentOffset:CGPointMake(scrollView.contentSize.width-2*itemWW+scrollView.contentOffset.x, 0) animated:NO];
+        [self.collectionView performBatchUpdates:^{
+            [self.collectionView setContentOffset:CGPointMake(scrollView.contentSize.width-2*itemWW+scrollView.contentOffset.x, 0) animated:NO];
+        } completion:^(BOOL finished) {
+            
+        }];
     }
     if (scrollView.contentOffset.x >= itemWW*(self.totalInter-1)) {
-        [self.collectionView setContentOffset:CGPointMake(scrollView.contentOffset.x - itemWW*(self.totalInter-1) + 2*itemWW, 0) animated:NO];
+        [self.collectionView performBatchUpdates:^{
+            [self.collectionView setContentOffset:CGPointMake(scrollView.contentOffset.x - itemWW*(self.totalInter-1) + 2*itemWW, 0) animated:NO];
+        } completion:^(BOOL finished) {
+            
+        }];
     }
 }
 - (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray;

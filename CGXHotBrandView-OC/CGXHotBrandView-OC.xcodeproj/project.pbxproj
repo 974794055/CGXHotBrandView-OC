@@ -17,6 +17,8 @@
 		B5031C6225879EB8002010D0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B5031C5F25879EB8002010D0 /* LICENSE */; };
 		B5031C6325879EB8002010D0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B5031C6025879EB8002010D0 /* README.md */; };
 		B55F82012588F6750018472C /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55F82002588F6750018472C /* CustomCollectionViewCell.m */; };
+		B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDEE75258B8B6E00359A78 /* CycleViewController.m */; };
+		B5EDEE79258B993C00359A78 /* HotImagw.png in Resources */ = {isa = PBXBuildFile; fileRef = B5EDEE78258B993C00359A78 /* HotImagw.png */; };
 		B627137E971B883F05749DA6 /* libPods-CGXHotBrandView-OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,9 @@
 		B55F81FF2588F6750018472C /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		B55F82002588F6750018472C /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
 		B5DA5E20258A5B100044A0CF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B5EDEE74258B8B6E00359A78 /* CycleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CycleViewController.h; sourceTree = "<group>"; };
+		B5EDEE75258B8B6E00359A78 /* CycleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CycleViewController.m; sourceTree = "<group>"; };
+		B5EDEE78258B993C00359A78 /* HotImagw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HotImagw.png; sourceTree = "<group>"; };
 		C7CB7AD86E851CBE37EBCA1C /* Pods-CGXHotBrandView-OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.debug.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.debug.xcconfig"; sourceTree = "<group>"; };
 		DF9AC596FFE1958157B59526 /* Pods-CGXHotBrandView-OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.release.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,9 +94,12 @@
 				04AD1F6A258711F600B7544D /* AppDelegate.m */,
 				04AD1F6F258711F600B7544D /* ViewController.h */,
 				04AD1F70258711F600B7544D /* ViewController.m */,
+				B5EDEE74258B8B6E00359A78 /* CycleViewController.h */,
+				B5EDEE75258B8B6E00359A78 /* CycleViewController.m */,
 				B55F81FF2588F6750018472C /* CustomCollectionViewCell.h */,
 				B55F82002588F6750018472C /* CustomCollectionViewCell.m */,
 				B5DA5E20258A5B100044A0CF /* PrefixHeader.pch */,
+				B5EDEE78258B993C00359A78 /* HotImagw.png */,
 				04AD1F72258711F600B7544D /* Main.storyboard */,
 				04AD1F75258711FC00B7544D /* Assets.xcassets */,
 				04AD1F77258711FC00B7544D /* LaunchScreen.storyboard */,
@@ -179,6 +187,7 @@
 				B5031C6325879EB8002010D0 /* README.md in Resources */,
 				04AD1F79258711FC00B7544D /* LaunchScreen.storyboard in Resources */,
 				04AD1F76258711FC00B7544D /* Assets.xcassets in Resources */,
+				B5EDEE79258B993C00359A78 /* HotImagw.png in Resources */,
 				B5031C6125879EB8002010D0 /* CGXHotBrandViewOC.podspec in Resources */,
 				04AD1F74258711F600B7544D /* Main.storyboard in Resources */,
 				B5031C6225879EB8002010D0 /* LICENSE in Resources */,
@@ -221,6 +230,7 @@
 				04AD1F6B258711F600B7544D /* AppDelegate.m in Sources */,
 				04AD1F7C258711FC00B7544D /* main.m in Sources */,
 				B55F82012588F6750018472C /* CustomCollectionViewCell.m in Sources */,
+				B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

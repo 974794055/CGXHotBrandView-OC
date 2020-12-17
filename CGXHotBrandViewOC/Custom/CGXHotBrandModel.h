@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 // 背景颜色
 @property (nonatomic, strong) UIColor *itemColor;
 
-@property (nonatomic, copy) void(^loadImageCallback)(UIImageView *imageView, NSURL *imageURL);
+@property (nonatomic, copy) void(^loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
 // 图片
 @property (nonatomic, strong) NSString *hotPicStr;
 // 图片对应的文字显示
@@ -32,6 +32,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat titleSpaceTop;
 /** 文字下间距  默认 0 */
 @property (nonatomic, assign) CGFloat titleSpaceBottom;
+
+/** --边框--- */
+@property (nonatomic, strong) UIColor *borderColor;
+@property (nonatomic, assign) CGFloat borderWidth;
+@property (nonatomic, assign) CGFloat borderRadius;
+
 
 @end
 

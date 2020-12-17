@@ -16,7 +16,7 @@
 }
 /** 计算collectionView的滚动范围 */
 - (CGSize)collectionViewContentSize {
-
+    
     NSInteger const numberOfSections = self.collectionView.numberOfSections;
     CGFloat totalWidth = 0;
     for (int i = 0; i < numberOfSections; i++) {
@@ -24,8 +24,10 @@
         UIEdgeInsets edgeInsets = [self gx_insetForSectionAtIndex:i];
         NSInteger sectionCount = [self gx_referenceAtSection:i];
         NSInteger rowCount = [self gx_referenceAtRow:i];
-        // 计算出item的宽度
-        CGFloat itemWidth = (self.collectionView.frame.size.width - edgeInsets.left - rowCount * columnSpacing) / rowCount;
+
+        CGSize sizeItem = [self gx_sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:i]];
+        CGFloat itemWidth = sizeItem.width;
+//        CGFloat itemHeight = sizeItem.height;
         
         // 从collectionView中获取到有多少个item
         NSInteger itemTotalCount = [self.collectionView numberOfItemsInSection:i];
@@ -67,10 +69,11 @@
     UIEdgeInsets edgeInsets = [self gx_insetForSectionAtIndex:indexPath.section];
     NSInteger sectionCount = [self gx_referenceAtSection:indexPath.section];
     NSInteger rowCount = [self gx_referenceAtRow:indexPath.section];
-    // item的宽高由行列间距和collectionView的内边距决定
-    CGFloat itemWidth  = (self.collectionView.frame.size.width - edgeInsets.left - rowCount * columnSpacing) / rowCount;
-    CGFloat itemHeight = (self.collectionView.frame.size.height - edgeInsets.top - edgeInsets.bottom - (sectionCount - 1) * rowSpacing) / sectionCount;
 
+    CGSize sizeItem = [self gx_sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:indexPath.section]];
+    CGFloat itemWidth = sizeItem.width;
+    CGFloat itemHeight = sizeItem.height;
+    
     NSInteger item = indexPath.item;
     // 当前item所在的页
     NSInteger pageNumber = item / (sectionCount * rowCount);

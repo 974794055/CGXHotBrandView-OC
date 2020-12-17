@@ -22,12 +22,14 @@
     for (int i = 0; i < numberOfSections; i++) {
         NSInteger sectionCount = [self gx_referenceAtSection:i];
         NSInteger rowCount = [self gx_referenceAtRow:i];
-        CGFloat rowSpacing = [self gx_minimumInteritemSpacingForSectionAtIndex:i];
+//        CGFloat rowSpacing = [self gx_minimumInteritemSpacingForSectionAtIndex:i];
         CGFloat columnSpacing = [self gx_minimumLineSpacingForSectionAtIndex:i];
         UIEdgeInsets edgeInsets = [self gx_insetForSectionAtIndex:i];
-        // 计算出item的宽度
-        CGFloat itemWidth = (self.collectionView.frame.size.width - edgeInsets.left - rowCount * columnSpacing) / rowCount;
-        CGFloat itemHeight = (self.collectionView.frame.size.height - edgeInsets.top - edgeInsets.bottom - (sectionCount - 1) * rowSpacing) / sectionCount;
+        
+        CGSize sizeItem = [self gx_sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:i]];
+        CGFloat itemWidth = sizeItem.width;
+        CGFloat itemHeight = sizeItem.height;
+        
         id <CGXHotBrandCycleFlowLayoutDelegate> delegate  = (id <CGXHotBrandCycleFlowLayoutDelegate>)self.collectionView.delegate;
         if (delegate && [delegate respondsToSelector:@selector(hotBrand_collectionView:ItemWidthAtheight:)]) {
             itemWidth = [delegate hotBrand_collectionView:self.collectionView ItemWidthAtheight:itemHeight];
@@ -73,9 +75,10 @@
     NSInteger sectionCount = [self gx_referenceAtSection:indexPath.section];
     NSInteger rowCount = [self gx_referenceAtRow:indexPath.section];
     
-    // item的宽高由行列间距和collectionView的内边距决定
-    CGFloat itemWidth  = (self.collectionView.frame.size.width - edgeInsets.left - rowCount * columnSpacing) / rowCount;
-    CGFloat itemHeight = (self.collectionView.frame.size.height - edgeInsets.top - edgeInsets.bottom - (sectionCount - 1) * rowSpacing) / sectionCount;
+    CGSize sizeItem = [self gx_sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:indexPath.section]];
+    CGFloat itemWidth = sizeItem.width;
+    CGFloat itemHeight = sizeItem.height;
+    
     id <CGXHotBrandCycleFlowLayoutDelegate> delegate  = (id <CGXHotBrandCycleFlowLayoutDelegate>)self.collectionView.delegate;
     if (delegate && [delegate respondsToSelector:@selector(hotBrand_collectionView:ItemWidthAtheight:)]) {
         itemWidth = [delegate hotBrand_collectionView:self.collectionView ItemWidthAtheight:itemHeight];

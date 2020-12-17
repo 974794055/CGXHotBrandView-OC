@@ -25,6 +25,7 @@
     [super layoutSubviews];
     
 
+
 }
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
 {
@@ -32,10 +33,7 @@
     self.titleLabel.text = cellModel.titleStr;
     self.titleLabel.textColor = cellModel.titleColor;
     self.titleLabel.font = cellModel.titleFont;
-    if (cellModel.loadImageCallback != nil) {
-        cellModel.loadImageCallback(self.hotImageView, [NSURL URLWithString:cellModel.hotPicStr]);
-    }
-    
+
     NSLayoutConstraint *hotTitleHeight = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:self.cellModel.titleHeight];
     [self.titleLabel addConstraint:hotTitleHeight];
     
@@ -55,5 +53,12 @@
     [self.contentView addConstraint:hotImageLeft];
     [self.contentView addConstraint:hotImageRight];
     [self.contentView addConstraint:hotImageBottom];
+    
+
+
+    __weak typeof(self) weakSelf = self;
+    if (cellModel.loadImageCallback != nil) {
+        cellModel.loadImageCallback(weakSelf.hotImageView, [NSURL URLWithString:cellModel.hotPicStr]);
+    }
 }
 @end

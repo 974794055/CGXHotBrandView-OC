@@ -24,6 +24,10 @@
         self.titleHeight = 30;
         self.titleSpaceTop = 0;
         self.titleSpaceBottom = 0;
+        
+        self.borderColor = [UIColor colorWithWhite:0.93 alpha:1];
+        self.borderWidth = 0;
+        self.borderRadius = 0;
     }
     return self;
 }

@@ -39,9 +39,9 @@ typedef void (^CGXHotBrandBaseViewDidSelectItemBlock)(CGXHotBrandBaseView *hotVi
 @property(nonatomic,copy) CGXHotBrandBaseViewDidSelectItemBlock didSelectItemBlock;
 /*界面设置代理*/
 @property (nonatomic , weak) id<CGXHotBrandBaseViewDelegate>delegate;
-/** 多少行 */
+/** 多少行  默认2行 */
 @property (nonatomic, assign) NSInteger itemSectionCount;
-/** 每行展示多少个item */
+/** 每行展示多少个item  默认5个*/
 @property (nonatomic, assign) NSInteger itemRowCount;
 /** 列间距 */
 @property (nonatomic, assign) CGFloat minimumLineSpacing;
@@ -50,7 +50,7 @@ typedef void (^CGXHotBrandBaseViewDidSelectItemBlock)(CGXHotBrandBaseView *hotVi
 /** collectionView的内边距 */
 @property (nonatomic, assign) UIEdgeInsets edgeInsets;
 
-@property (nonatomic, copy) void(^loadImageCallback)(UIImageView *imageView, NSURL *imageURL);
+@property (nonatomic, copy) void(^loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
 
 
 - (void)initializeData NS_REQUIRES_SUPER;

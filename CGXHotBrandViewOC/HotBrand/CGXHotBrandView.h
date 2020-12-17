@@ -28,6 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) UIColor *selectColor;
 /* 背景色，默认灰色 */
 @property(nonatomic,strong) UIColor *normalColor;
+/* 是否分页 默认YES*/
+@property (nonatomic , assign) BOOL pagingEnabled;
+/* 是否回弹 默认YES*/
+@property (nonatomic , assign) BOOL bounces;
+
 
 - (void)updateWithDataArray:(NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *)dataArray;
 

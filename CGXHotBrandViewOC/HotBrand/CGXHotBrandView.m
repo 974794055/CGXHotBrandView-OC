@@ -23,14 +23,24 @@
 - (void)initializeData
 {
     [super initializeData];
-    self.collectionView.pagingEnabled = YES;
-    
     self.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
     self.placeholderImage = [UIColor hotBrandImageWithColor:[UIColor colorWithWhite:0.93 alpha:1]];
     self.onlyDisplayText = NO;
     self.pageHeight = 20;
     self.selectColor = [UIColor redColor];
     self.normalColor = [UIColor grayColor];
+    self.pagingEnabled = YES;
+    self.bounces = NO;
+}
+- (void)setPagingEnabled:(BOOL)pagingEnabled
+{
+    _pagingEnabled = pagingEnabled;
+    self.collectionView.pagingEnabled = pagingEnabled;
+}
+- (void)setBounces:(BOOL)bounces
+{
+    _bounces = bounces;
+    self.collectionView.bounces = bounces;
 }
 - (void)setSelectColor:(UIColor *)selectColor
 {
@@ -46,20 +56,25 @@
 {
     [super initializeViews];
     
+    self.collectionView.pagingEnabled = self.pagingEnabled;
+    
     self.pageControl = [[CGXHotBrandPageControl alloc] init];
     [self addSubview:self.pageControl];
     self.pageControl.currentPageIndicatorTintColor = self.selectColor;
     self.pageControl.pageIndicatorTintColor = self.normalColor;
     [self.pageControl setTransform:CGAffineTransformMakeScale(0.8, 0.8)];
     
-    
-    [self.collectionView reloadData];
+    [self reloadData];
 }
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.frame)-self.pageHeight-self.minimumLineSpacing, CGRectGetWidth(self.frame), self.pageHeight);
     self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-self.pageHeight-self.minimumLineSpacing);
+    [self reloadData];
+}
+- (void)reloadData
+{
     self.collectionView.collectionViewLayout = [self preferredFlowLayout];
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView reloadData];
@@ -70,12 +85,20 @@
 - (UICollectionViewLayout *)preferredFlowLayout
 {
     [super preferredFlowLayout];
+    if (self.pagingEnabled == YES) {
     CGXHotBrandFlowlayout *layout = [[CGXHotBrandFlowlayout alloc] init];
     layout.itemSectionCount = self.itemSectionCount;
     layout.itemRowCount = self.itemRowCount;
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    return layout;
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        return layout;
+    }else{
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        return layout;
+    }
 }
+
+
 /**
  返回自定义cell的class
  @return cell class
@@ -98,9 +121,17 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return self.minimumLineSpacing;
 }
-
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return self.minimumInteritemSpacing;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIEdgeInsets insets = self.edgeInsets;
+    CGFloat spaceW = insets.left+insets.right;
+    CGFloat spaceH = insets.top+insets.bottom;
+    CGFloat width = (CGRectGetWidth(collectionView.frame) - spaceW-self.minimumInteritemSpacing*(self.itemRowCount-1)) / self.itemRowCount;
+    CGFloat height = (CGRectGetHeight(collectionView.frame) - spaceH-self.minimumLineSpacing*(self.itemSectionCount-1)) / self.itemSectionCount;
+    return CGSizeMake(width, height);
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -152,6 +183,9 @@
     self.pageControl.numberOfPages = dataArray.count;
     self.pageControl.currentPage = 0;
     [self.collectionView reloadData];
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

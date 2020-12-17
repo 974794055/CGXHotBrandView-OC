@@ -19,7 +19,6 @@
 }
 - (void)initializeViews
 {
-    self.backgroundColor = [UIColor orangeColor];
     self.hotImageView = [[UIImageView alloc] init];
     self.hotImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:self.hotImageView];
