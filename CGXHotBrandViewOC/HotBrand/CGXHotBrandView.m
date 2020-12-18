@@ -16,22 +16,10 @@
 @property (nonatomic, strong,readwrite) NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *dataArray;
 
 @property (nonatomic, strong) CGXHotBrandPageControl *pageControl;
+
 @end
 
 @implementation CGXHotBrandView
-
-- (void)initializeData
-{
-    [super initializeData];
-    self.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
-    self.placeholderImage = [UIColor hotBrandImageWithColor:[UIColor colorWithWhite:0.93 alpha:1]];
-    self.onlyDisplayText = NO;
-    self.pageHeight = 20;
-    self.selectColor = [UIColor redColor];
-    self.normalColor = [UIColor grayColor];
-    self.pagingEnabled = YES;
-    self.bounces = NO;
-}
 - (void)setPagingEnabled:(BOOL)pagingEnabled
 {
     _pagingEnabled = pagingEnabled;
@@ -52,6 +40,28 @@
     _normalColor = normalColor;
     self.pageControl.pageIndicatorTintColor = normalColor;
 }
+- (void)setPageHeight:(CGFloat)pageHeight
+{
+    _pageHeight = pageHeight;
+}
+- (void)setIsHavePage:(BOOL)isHavePage
+{
+    _isHavePage = isHavePage;
+    self.pageControl.hidesForSinglePage = !isHavePage;
+}
+- (void)initializeData
+{
+    [super initializeData];
+    self.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
+    self.placeholderImage = [UIColor gx_hotBrandImageWithColor:[UIColor colorWithWhite:0.93 alpha:1]];
+    self.onlyDisplayText = NO;
+    self.pageHeight = 20;
+    self.selectColor = [UIColor redColor];
+    self.normalColor = [UIColor grayColor];
+    self.pagingEnabled = YES;
+    self.bounces = NO;
+    self.isHavePage = YES;
+}
 - (void)initializeViews
 {
     [super initializeViews];
@@ -60,17 +70,31 @@
     
     self.pageControl = [[CGXHotBrandPageControl alloc] init];
     [self addSubview:self.pageControl];
-    self.pageControl.currentPageIndicatorTintColor = self.selectColor;
-    self.pageControl.pageIndicatorTintColor = self.normalColor;
-    [self.pageControl setTransform:CGAffineTransformMakeScale(0.8, 0.8)];
     
     [self reloadData];
+    
+    if (@available(iOS 14.0, *)) {
+        self.pageControl.backgroundStyle = UIPageControlBackgroundStyleMinimal;
+//        self.pageControl.preferredIndicatorImage = [UIImage systemImageNamed:@"sun.max.fill"];//系统图片
+//        self.pageControl.preferredIndicatorImage = [UIImage imageNamed:@"flight"];//自定义图片
+//        [self.pageControl setIndicatorImage:[UIImage systemImageNamed:@"moon.fill"] forPage:0];
+    }
 }
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.frame)-self.pageHeight-self.minimumLineSpacing, CGRectGetWidth(self.frame), self.pageHeight);
-    self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-self.pageHeight-self.minimumLineSpacing);
+    if (self.isHavePage) {
+        self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.frame)-self.pageHeight-self.minimumLineSpacing, CGRectGetWidth(self.frame), self.pageHeight);
+        self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-self.pageHeight-self.minimumLineSpacing);
+    } else{
+        self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+    }
+    self.pageControl.currentPageIndicatorTintColor = self.selectColor;
+    self.pageControl.pageIndicatorTintColor = self.normalColor;
+    [self.pageControl setTransform:CGAffineTransformMakeScale(1, 1)];
+    self.pageControl.hidesForSinglePage = !self.isHavePage;
+    [self.pageControl setHidden:!self.isHavePage];
+    
     [self reloadData];
 }
 - (void)reloadData
@@ -97,8 +121,6 @@
         return layout;
     }
 }
-
-
 /**
  返回自定义cell的class
  @return cell class
@@ -156,7 +178,7 @@
 {
     NSMutableArray *sectionArr = self.dataArray[indexPath.section];
     CGXHotBrandModel *cellModel = sectionArr[indexPath.row];
-    cellModel.loadImageCallback = self.loadImageCallback;
+    cellModel.hotBrand_loadImageCallback = self.hotBrand_loadImageCallback;
     BOOL isHave = [cell respondsToSelector:@selector(updateWithHotBrandCellModel:Section:Row:)];
     if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandBaseCellDelegate)]) {
         [(UICollectionViewCell<CGXHotBrandBaseCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];
@@ -189,7 +211,7 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (!self.dataArray.count) return; // 解决清除timer时偶尔会出现的问题
+    if (!self.dataArray.count) return;
     NSInteger itemIndex = [self currentIndex];
     self.pageControl.currentPage = itemIndex;
 }
@@ -201,6 +223,9 @@
     int index = (self.collectionView.contentOffset.x + self.collectionView.frame.size.width* 0.5) / self.collectionView.frame.size.width;
     return MAX(0, index);
 }
+
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CGXHotBrandModel : NSObject
 
 /** 轮播图点击事件原始l数据源 */
-@property (nonatomic, strong) id dataModel;
+@property (nonatomic, strong) NSObject *dataModel;
 // 背景颜色
 @property (nonatomic, strong) UIColor *itemColor;
 
-@property (nonatomic, copy) void(^loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
+@property (nonatomic, copy) void(^hotBrand_loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
 // 图片
 @property (nonatomic, strong) NSString *hotPicStr;
 // 图片对应的文字显示

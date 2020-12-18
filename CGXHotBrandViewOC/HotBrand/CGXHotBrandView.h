@@ -32,7 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , assign) BOOL pagingEnabled;
 /* 是否回弹 默认YES*/
 @property (nonatomic , assign) BOOL bounces;
-
+/* 是否有分页原点*/
+@property (nonatomic , assign) BOOL isHavePage;
 
 - (void)updateWithDataArray:(NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *)dataArray;
 

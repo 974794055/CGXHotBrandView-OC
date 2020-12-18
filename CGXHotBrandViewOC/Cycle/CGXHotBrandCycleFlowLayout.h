@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol CGXHotBrandCycleFlowLayoutDelegate <NSObject>
 @optional
 
-
 - (CGFloat)hotBrand_collectionView:(UICollectionView *)collectionView
                  ItemWidthAtheight:(CGFloat)height;
 

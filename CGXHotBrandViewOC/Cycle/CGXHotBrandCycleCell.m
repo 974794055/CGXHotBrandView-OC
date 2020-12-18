@@ -37,13 +37,13 @@
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
 {
     [super updateWithHotBrandCellModel:cellModel Section:section Row:row];
-//    [self setNeedsLayout];
-//    [self layoutIfNeeded];
-    [self updateUI];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+//    [self updateUI];
     
     __weak typeof(self) weakSelf = self;
-    if (cellModel.loadImageCallback != nil) {
-        cellModel.loadImageCallback(weakSelf.hotImageView, [NSURL URLWithString:cellModel.hotPicStr]);
+    if (cellModel.hotBrand_loadImageCallback != nil) {
+        cellModel.hotBrand_loadImageCallback(weakSelf.hotImageView, [NSURL URLWithString:cellModel.hotPicStr]);
     }
 }
 

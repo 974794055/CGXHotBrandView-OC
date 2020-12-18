@@ -9,33 +9,30 @@
 #import "NSTimer+CGXHotBrandTimer.h"
 #import <objc/runtime.h>
 
-static const void *gx_private_currentCountTime = "gx_private_currentCountTime";
+static const void *gx_private_hotBrandCurrentCountTime = "gx_private_hotBrandCurrentCountTime";
 
 
 @implementation NSTimer (CGXHotBrandTimer)
-- (NSNumber *)gx_private_currentCountTime {
-    NSNumber *obj = objc_getAssociatedObject(self, gx_private_currentCountTime);
-    
+- (NSNumber *)gx_private_hotBrandCurrentCountTime {
+    NSNumber *obj = objc_getAssociatedObject(self, gx_private_hotBrandCurrentCountTime);
     if (obj == nil) {
         obj = @(0);
-        
-        [self setGx_private_currentCountTime:obj];
+        [self setGx_private_hotBrandCurrentCountTime:obj];
     }
-    
     return obj;
 }
 
-- (void)setGx_private_currentCountTime:(NSNumber *)time {
+- (void)setGx_private_hotBrandCurrentCountTime:(NSNumber *)time {
     objc_setAssociatedObject(self,
-                             gx_private_currentCountTime,
+                             gx_private_hotBrandCurrentCountTime,
                              time, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-+ (NSTimer *)gx_scheduledTimerWithTimeInterval:(NSTimeInterval)interval
++ (NSTimer *)gx_hotBrandTimerWithTimeInterval:(NSTimeInterval)interval
                                          count:(NSInteger)count
                                       callback:(GXHotBrandTimerCallback)callback {
     if (count <= 0) {
-        return [self gx_scheduledTimerWithTimeInterval:interval
+        return [self gx_hotBrandTimerWithTimeInterval:interval
                                                repeats:YES
                                               callback:callback];
     }
@@ -51,7 +48,7 @@ static const void *gx_private_currentCountTime = "gx_private_currentCountTime";
                                            repeats:YES];
 }
 
-+ (NSTimer *)gx_scheduledTimerWithTimeInterval:(NSTimeInterval)interval
++ (NSTimer *)gx_hotBrandTimerWithTimeInterval:(NSTimeInterval)interval
                                        repeats:(BOOL)repeats
                                       callback:(GXHotBrandTimerCallback)callback {
     return [NSTimer scheduledTimerWithTimeInterval:interval
@@ -61,15 +58,15 @@ static const void *gx_private_currentCountTime = "gx_private_currentCountTime";
                                            repeats:repeats];
 }
 
-- (void)gx_fireTimer {
+- (void)gx_hotFireTimer {
     [self setFireDate:[NSDate distantPast]];
 }
 
-- (void)gx_unfireTimer {
+- (void)gx_hotUnfireTimer {
     [self setFireDate:[NSDate distantFuture]];
 }
 
-- (void)gx_invalidate {
+- (void)gx_hotInvalidate {
     if (self.isValid) {
         [self invalidate];
     }
@@ -85,7 +82,7 @@ static const void *gx_private_currentCountTime = "gx_private_currentCountTime";
 }
 
 + (void)gx_onTimerUpdateCountBlock:(NSTimer *)timer {
-    NSInteger currentCount = [[timer gx_private_currentCountTime] integerValue];
+    NSInteger currentCount = [[timer gx_private_hotBrandCurrentCountTime] integerValue];
     
     NSDictionary *userInfo = timer.userInfo;
     GXHotBrandTimerCallback callback = userInfo[@"callback"];
@@ -93,26 +90,25 @@ static const void *gx_private_currentCountTime = "gx_private_currentCountTime";
     
     if (currentCount < count.integerValue) {
         currentCount++;
-        [timer setGx_private_currentCountTime:@(currentCount)];
+        [timer setGx_private_hotBrandCurrentCountTime:@(currentCount)];
         
         if (callback) {
             callback(timer);
         }
     } else {
         currentCount = 0;
-        [timer setGx_private_currentCountTime:@(currentCount)];
+        [timer setGx_private_hotBrandCurrentCountTime:@(currentCount)];
         
-        [timer gx_unfireTimer];
-        [timer gx_invalidate];
+        [timer gx_hotUnfireTimer];
+        [timer gx_hotInvalidate];
     }
 }
-- (void)resumeTimerAfterTimeInterval:(NSTimeInterval)interval
+- (void)gx_hotResumeTimerAfterTimeInterval:(NSTimeInterval)interval
 {
     if (![self isValid])
     {
         return ;
     }
-    
     [self setFireDate:[NSDate dateWithTimeIntervalSinceNow:interval]];
 }
 @end

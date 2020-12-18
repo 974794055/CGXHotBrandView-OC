@@ -25,12 +25,12 @@
     self.offsetX = 0.5;
     self.totalInter = 11;
     self.widthSpace = 1.0;
-    
 }
 - (void)initializeViews
 {
     [super initializeViews];
     self.collectionView.pagingEnabled = NO;
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     [self.collectionView reloadData];
 }
 - (void)layoutSubviews
@@ -108,7 +108,7 @@
 {
     int rowInter = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
     CGXHotBrandModel *cellModel = self.dataArray[rowInter];
-    cellModel.loadImageCallback = self.loadImageCallback;
+    cellModel.hotBrand_loadImageCallback = self.hotBrand_loadImageCallback;
     BOOL isHave = [cell respondsToSelector:@selector(updateWithHotBrandCellModel:Section:Row:)];
     if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandBaseCellDelegate)]) {
         [(UICollectionViewCell<CGXHotBrandBaseCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];

@@ -57,8 +57,8 @@
 
 
     __weak typeof(self) weakSelf = self;
-    if (cellModel.loadImageCallback != nil) {
-        cellModel.loadImageCallback(weakSelf.hotImageView, [NSURL URLWithString:cellModel.hotPicStr]);
+    if (cellModel.hotBrand_loadImageCallback != nil) {
+        cellModel.hotBrand_loadImageCallback(weakSelf.hotImageView, [NSURL URLWithString:cellModel.hotPicStr]);
     }
 }
 @end

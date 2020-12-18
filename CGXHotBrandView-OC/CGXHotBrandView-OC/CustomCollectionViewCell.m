@@ -20,7 +20,10 @@
 - (void)initializeViews
 {
     self.hotImageView = [[UIImageView alloc] init];
-    self.hotImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.hotImageView.layer.masksToBounds = YES;
+    self.hotImageView.clipsToBounds = YES;
+    self.hotImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.hotImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.contentView addSubview:self.hotImageView];
     self.hotImageView.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
@@ -36,8 +39,8 @@
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
 {
     self.hotImageView.backgroundColor = [UIColor blackColor];
-    if (cellModel.loadImageCallback != nil) {
-        cellModel.loadImageCallback(self.hotImageView, [NSURL URLWithString:@"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3547703274,3363083080&fm=11&gp=0.jpg"]);
+    if (cellModel.hotBrand_loadImageCallback != nil) {
+        cellModel.hotBrand_loadImageCallback(self.hotImageView, [NSURL URLWithString:@"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3547703274,3363083080&fm=11&gp=0.jpg"]);
     }
 }
 @end

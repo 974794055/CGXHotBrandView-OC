@@ -12,8 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class CGXHotBrandBaseView;
-@class CGXHotBrandModel;
-@class CGXHotBrandBaseCell;
 
 @protocol CGXHotBrandBaseViewDelegate <NSObject>
 
@@ -50,23 +48,21 @@ typedef void (^CGXHotBrandBaseViewDidSelectItemBlock)(CGXHotBrandBaseView *hotVi
 /** collectionView的内边距 */
 @property (nonatomic, assign) UIEdgeInsets edgeInsets;
 
-@property (nonatomic, copy) void(^loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
+@property (nonatomic, copy) void(^hotBrand_loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
+
 
 
 - (void)initializeData NS_REQUIRES_SUPER;
 
 - (void)initializeViews NS_REQUIRES_SUPER;
 
-/*
- 自定义layout
- */
+/*自定义layou */
 - (UICollectionViewLayout *)preferredFlowLayout NS_REQUIRES_SUPER;
 /**
  返回自定义cell的class
  @return cell class
  */
 - (Class)preferredCellClass NS_REQUIRES_SUPER;
-
 
 @end
 

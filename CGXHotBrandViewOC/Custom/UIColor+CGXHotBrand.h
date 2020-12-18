@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (CGXHotBrand)
 
-+ (UIImage*)hotBrandImageWithColor:(UIColor*)color;
++ (UIImage*)gx_hotBrandImageWithColor:(UIColor*)color;
 
 @end
 

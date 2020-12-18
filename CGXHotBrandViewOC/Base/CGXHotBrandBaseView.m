@@ -73,7 +73,6 @@
 }
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    
     UIResponder *next = newSuperview;
     while (next != nil) {
         if ([next isKindOfClass:[UIViewController class]]) {
@@ -97,7 +96,6 @@
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        
         _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:[self preferredFlowLayout]];
         _collectionView.backgroundColor = self.backgroundColor;
         _collectionView.bounces = YES;
@@ -162,6 +160,13 @@
 }
 
 
-
+- (void)disableScrollGesture {
+    self.collectionView.canCancelContentTouches = NO;
+    for (UIGestureRecognizer *gesture in self.collectionView.gestureRecognizers) {
+        if ([gesture isKindOfClass:[UIPanGestureRecognizer class]]) {
+            [self.collectionView removeGestureRecognizer:gesture];
+        }
+    }
+}
 
 @end

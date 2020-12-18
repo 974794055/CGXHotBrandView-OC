@@ -51,11 +51,12 @@
             hotBrandView.pagingEnabled = NO;
         }
         hotBrandView.bounces = YES;
+//        hotBrandView.isHavePage = NO;
         CGFloat height = (ScreenHeight-kTabBarHeight-kTopHeight-40)/3.0;
         hotBrandView.frame = CGRectMake(0, 10*(i+1) + i*height,ScreenWidth,height);
         hotBrandView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1];
         [self.view addSubview:hotBrandView];
-        hotBrandView.loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
+        hotBrandView.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
             [hotImageView sd_setImageWithURL:hotImageURL];
         };
         hotBrandView.pageHeight = 10;
@@ -87,6 +88,6 @@
 //}
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView DidSelectItemAtModel:(CGXHotBrandModel *)hotModel
 {
-    NSLog(@"%@" , hotModel.titleStr);
+    NSLog(@"%@---%@" , hotModel.titleStr,hotModel.dataModel);
 }
 @end

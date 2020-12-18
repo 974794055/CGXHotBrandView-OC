@@ -54,7 +54,7 @@
        
         hotBrandView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1];
         [self.view addSubview:hotBrandView];
-        hotBrandView.loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
+        hotBrandView.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
             [hotImageView sd_setImageWithURL:hotImageURL];
         };
         

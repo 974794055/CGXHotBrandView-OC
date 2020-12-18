@@ -10,7 +10,7 @@
 
 @implementation UIColor (CGXHotBrand)
 
-+ (UIImage*)hotBrandImageWithColor:(UIColor*)color
++ (UIImage*)gx_hotBrandImageWithColor:(UIColor*)color
 {
     CGRect rect=CGRectMake(0.0f,0.0f,1.0f,1.0f);
     UIGraphicsBeginImageContext(rect.size);
