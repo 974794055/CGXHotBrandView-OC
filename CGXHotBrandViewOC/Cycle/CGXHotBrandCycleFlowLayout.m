@@ -22,7 +22,6 @@
     for (int i = 0; i < numberOfSections; i++) {
         NSInteger sectionCount = [self gx_referenceAtSection:i];
         NSInteger rowCount = [self gx_referenceAtRow:i];
-//        CGFloat rowSpacing = [self gx_minimumInteritemSpacingForSectionAtIndex:i];
         CGFloat columnSpacing = [self gx_minimumLineSpacingForSectionAtIndex:i];
         UIEdgeInsets edgeInsets = [self gx_insetForSectionAtIndex:i];
         
@@ -93,13 +92,13 @@
     // 计算出item的坐标
     CGFloat itemX = edgeInsets.left + (itemWidth + columnSpacing) * x + indexPath.section * self.collectionView.frame.size.width;
     CGFloat itemY = edgeInsets.top + (itemHeight + rowSpacing) * y;
+    
     if (y % 2 == 0) {
         if (self.offsetX > 0 && self.offsetX < 1) {
             itemX = itemX - self.offsetX * itemWidth;
         }
     }
     UICollectionViewLayoutAttributes *attributes = [[super layoutAttributesForItemAtIndexPath:indexPath] copy];
-    // 每个item的frame
     attributes.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
     return attributes;
 }

@@ -25,9 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 /* 圆点所在高度 默认 20 */
 @property (nonatomic, assign) CGFloat pageHeight;
 ///* 选中的色，默认红色 */
-@property(nonatomic,strong) UIColor *selectColor;
+@property(nonatomic,strong) UIColor *pageSelectColor;
 /* 背景色，默认灰色 */
-@property(nonatomic,strong) UIColor *normalColor;
+@property(nonatomic,strong) UIColor *pageNormalColor;
 /* 是否分页 默认YES*/
 @property (nonatomic , assign) BOOL pagingEnabled;
 /* 是否回弹 默认YES*/
@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /* 是否有分页原点*/
 @property (nonatomic , assign) BOOL isHavePage;
 
+/** 更新数据源   */
 - (void)updateWithDataArray:(NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *)dataArray;
 
 @end

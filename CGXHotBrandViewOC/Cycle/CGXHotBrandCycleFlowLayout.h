@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CGXHotBrandCycleFlowLayout : CGXHotBrandBaseFlowLayout
 
+
 /* 比例 0.0 ～ 1.0 之间 两端无效 默认0.5 */
 @property (nonatomic, assign) CGFloat offsetX; //
 

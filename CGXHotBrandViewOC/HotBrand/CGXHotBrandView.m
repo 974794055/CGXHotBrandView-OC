@@ -30,15 +30,15 @@
     _bounces = bounces;
     self.collectionView.bounces = bounces;
 }
-- (void)setSelectColor:(UIColor *)selectColor
+- (void)setPageSelectColor:(UIColor *)pageSelectColor
 {
-    _selectColor = selectColor;
-    self.pageControl.currentPageIndicatorTintColor = selectColor;
+    _pageSelectColor = pageSelectColor;
+    self.pageControl.currentPageIndicatorTintColor = pageSelectColor;
 }
-- (void)setNormalColor:(UIColor *)normalColor
+- (void)setPageNormalColor:(UIColor *)pageNormalColor
 {
-    _normalColor = normalColor;
-    self.pageControl.pageIndicatorTintColor = normalColor;
+    _pageNormalColor = pageNormalColor;
+    self.pageControl.pageIndicatorTintColor = pageNormalColor;
 }
 - (void)setPageHeight:(CGFloat)pageHeight
 {
@@ -56,8 +56,8 @@
     self.placeholderImage = [UIColor gx_hotBrandImageWithColor:[UIColor colorWithWhite:0.93 alpha:1]];
     self.onlyDisplayText = NO;
     self.pageHeight = 20;
-    self.selectColor = [UIColor redColor];
-    self.normalColor = [UIColor grayColor];
+    self.pageSelectColor = [UIColor redColor];
+    self.pageNormalColor = [UIColor grayColor];
     self.pagingEnabled = YES;
     self.bounces = NO;
     self.isHavePage = YES;
@@ -65,7 +65,7 @@
 - (void)initializeViews
 {
     [super initializeViews];
-    
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     self.collectionView.pagingEnabled = self.pagingEnabled;
     
     self.pageControl = [[CGXHotBrandPageControl alloc] init];
@@ -89,8 +89,8 @@
     } else{
         self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     }
-    self.pageControl.currentPageIndicatorTintColor = self.selectColor;
-    self.pageControl.pageIndicatorTintColor = self.normalColor;
+    self.pageControl.currentPageIndicatorTintColor = self.pageSelectColor;
+    self.pageControl.pageIndicatorTintColor = self.pageNormalColor;
     [self.pageControl setTransform:CGAffineTransformMakeScale(1, 1)];
     self.pageControl.hidesForSinglePage = !self.isHavePage;
     [self.pageControl setHidden:!self.isHavePage];

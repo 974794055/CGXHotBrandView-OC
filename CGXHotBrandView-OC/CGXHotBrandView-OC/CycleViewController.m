@@ -42,7 +42,8 @@
         hotBrandView.itemRowCount = 5;
         hotBrandView.itemSectionCount = 3;
         
-        
+        hotBrandView.autoScroll = NO;
+        hotBrandView.offsetX = 0.5;
         CGFloat height = (ScreenHeight-kTopHeight-kTabBarHeight-30)/2.0;
         if (i == 0) {
             hotBrandView.widthSpace = 1;

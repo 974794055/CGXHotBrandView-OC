@@ -16,6 +16,12 @@
 
 @property (nonatomic, assign) NSInteger totalInter;
 
+/** 定时器 */
+@property (nonatomic, weak) NSTimer *timer;
+
+/** 自动滚动间隔时间,默认0.1s */
+@property (nonatomic, assign) CGFloat autoScrollTimeInterval;
+
 @end
 
 @implementation CGXHotBrandCycleView
@@ -25,6 +31,10 @@
     self.offsetX = 0.5;
     self.totalInter = 11;
     self.widthSpace = 1.0;
+    self.autoScrollTimeInterval = 0.1;
+    self.autoScroll = YES;
+    
+    self.scrollOffsetX = 10;
 }
 - (void)initializeViews
 {
@@ -38,10 +48,10 @@
     [super layoutSubviews];
     self.collectionView.collectionViewLayout = [self preferredFlowLayout];
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
     
     NSInteger targetIndex = self.dataArray.count * self.totalInter * 0.5;
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-    [self.collectionView reloadData];
 }
 /*
  自定义layout
@@ -156,18 +166,78 @@
         }];
     }
 }
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.autoScroll) {
+        [self invalidateTimer];
+    }
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (self.autoScroll) {
+        [self setupTimer];
+    }
+}
+
 - (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray;
 {
     [self.dataArray removeAllObjects];
     [self.dataArray addObjectsFromArray:dataArray];
     [self.collectionView reloadData];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+#pragma mark - 定时器
+- (void)setupTimer
+{
+    if (self.timer || self.autoScrollTimeInterval <= 0) {
+        return;
+    }
+    [self invalidateTimer]; // 创建定时器前先停止定时器，不然会出现僵尸定时器，导致轮播频率错误
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollTimeInterval target:self selector:@selector(automaticScroll) userInfo:nil repeats:YES];
+    self.timer = timer;
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
-*/
+// 停止定时器
+- (void)invalidateTimer
+{
+    if (!self.timer) {
+        return;
+    }
+    [self.timer  invalidate];
+    self.timer  = nil;
+}
+- (void)automaticScroll
+{
+    [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x+self.scrollOffsetX, 0) animated:YES];
+}
+-(void)setAutoScroll:(BOOL)autoScroll{
+    _autoScroll = autoScroll;
+    [self invalidateTimer];
+    if (_autoScroll) {
+        [self setupTimer];
+    }
+}
+- (void)setAutoScrollTimeInterval:(CGFloat)autoScrollTimeInterval
+{
+    _autoScrollTimeInterval = autoScrollTimeInterval;
+    [self setAutoScroll:self.autoScroll];
+}
+
+//解决当timer释放后 回调scrollViewDidScroll时访问野指针导致崩溃
+- (void)dealloc {
+    
+    self.collectionView.delegate = nil;
+    self.collectionView.dataSource = nil;
+}
+
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end

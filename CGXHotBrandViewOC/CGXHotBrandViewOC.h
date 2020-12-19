@@ -16,7 +16,6 @@
 #ifndef CGXHotBrandViewOC_h
 #define CGXHotBrandViewOC_h
 
-
 #import "CGXHotBrandModel.h"
 
 #import "CGXHotBrandBaseView.h"

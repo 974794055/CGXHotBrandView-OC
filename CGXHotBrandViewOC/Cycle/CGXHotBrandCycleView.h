@@ -18,8 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 /* 宽度是高度的倍数。默认 1.0  */
 @property (nonatomic, assign) CGFloat widthSpace; //
 
+/** 是否自动滚动,默认NO */
+@property (nonatomic,assign) BOOL autoScroll;
+/** 滚动速度设置  默认 10   */
+@property (nonatomic, assign) CGFloat scrollOffsetX;
+
 @property (nonatomic, strong,readonly) NSMutableArray<CGXHotBrandModel *> *dataArray;
 
+/** 更新数据源   */
 - (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray;
 
 @end
