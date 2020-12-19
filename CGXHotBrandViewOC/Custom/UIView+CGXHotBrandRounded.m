@@ -1,9 +1,9 @@
 //
 //  UIView+CGXRoundedCorners.h
-//  CGXCategoryKit-OC
+//  CGXHotBrandViewOC
 //
-//  Created by CGX on 2020/10/01.
-//  Copyright © 2020年 CGX. All rights reserved.
+//  Created by CGX on 2020/12/12.
+//  Copyright © 2020 CGX. All rights reserved.
 //
 
 #import "UIView+CGXHotBrandRounded.h"
