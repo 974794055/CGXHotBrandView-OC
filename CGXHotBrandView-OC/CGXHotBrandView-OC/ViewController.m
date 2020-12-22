@@ -7,7 +7,7 @@
 //
 #import "ViewController.h"
 
-@interface ViewController ()<CGXHotBrandBaseViewDelegate>
+@interface ViewController ()<CGXHotBrandCustomViewDelegate,CGXHotBrandViewDataSource>
 
 
 @end
@@ -31,9 +31,13 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
+    
+    NSMutableArray *imageArray = [NSMutableArray arrayWithObjects:@"icon_0",@"icon_1",@"icon_2",@"icon_3",@"icon_4",@"icon_5",@"icon_6",@"icon_7",@"icon_8",@"icon_9",@"icon_10", nil];
+    
     for (int i = 0; i<3; i++) {
         CGXHotBrandView *hotBrandView = [[CGXHotBrandView alloc] init];
         hotBrandView.delegate = self;
+        hotBrandView.dataSource =self;
         hotBrandView.minimumLineSpacing = 5;
         hotBrandView.minimumInteritemSpacing = 5;
         hotBrandView.edgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
@@ -56,21 +60,20 @@
         hotBrandView.frame = CGRectMake(0, 10*(i+1) + i*height,ScreenWidth,height);
         hotBrandView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1];
         [self.view addSubview:hotBrandView];
-        hotBrandView.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
-            [hotImageView sd_setImageWithURL:hotImageURL];
-        };
         hotBrandView.pageHeight = 10;
-
-        
         hotBrandView.tag = 10000+i;
+        hotBrandView.showType = i+1;
+        hotBrandView.isAnimation = i==1 ? NO:YES;
         NSMutableArray *dataArray = [NSMutableArray array];
-        for (int i = 0; i< 4; i++) {
+        for (int j = 0; j< 4; j++) {
             NSMutableArray *rowArray = [NSMutableArray array];
-            for (int j = 0; j< hotBrandView.itemSectionCount*hotBrandView.itemRowCount; j++) {
+            for (int k = 0; k< hotBrandView.itemSectionCount*hotBrandView.itemRowCount; k++) {
                 CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-                model.titleStr = [NSString stringWithFormat:@"猫咪%d-%d",i,j];
+                model.titleStr = [NSString stringWithFormat:@"猫咪%d-%d",j,k];
                 model.itemColor = [UIColor whiteColor];
-                model.hotPicStr = @"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3547703274,3363083080&fm=11&gp=0.jpg";
+                model.hotPicStr = imageArray[arc4random() % (imageArray.count)];
+                model.tagStr = (arc4random() % 2 == 0) ? @"秒杀":@"";
+                model.tagSpace = 10;
                 [rowArray addObject:model];
             }
             [dataArray addObject:rowArray];
@@ -86,8 +89,17 @@
 //    }
 //    return CustomCollectionViewCell.class;
 //}
-- (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView DidSelectItemAtModel:(CGXHotBrandModel *)hotModel
+- (void)gx_hotBrandView:(CGXHotBrandView *)hotView didSelectItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
     NSLog(@"%@---%@" , hotModel.titleStr,hotModel.dataModel);
+}
+- (void)gx_hotBrandView:(CGXHotBrandView *)hotView cellForItemAtIndexPath:(NSIndexPath *)indexPath AtCell:(nonnull UICollectionViewCell *)cell AtModel:(nonnull CGXHotBrandModel *)hotModel
+{
+    CGXHotBrandCell *newcell = (CGXHotBrandCell *)cell;
+    
+//    NSLog(@"cellForItemAtIndexPath： %@" , cell);
+
+//    [newcell.hotImageView sd_setImageWithURL:[NSURL URLWithString:hotModel.hotPicStr]];
+    newcell.hotImageView.image = [UIImage imageNamed:hotModel.hotPicStr];
 }
 @end

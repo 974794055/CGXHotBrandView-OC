@@ -8,7 +8,7 @@
 
 #import "CGXHotBrandCycleView.h"
 #import "CGXHotBrandCycleFlowLayout.h"
-#import "CGXHotBrandCycleCell.h"
+
 
 @interface CGXHotBrandCycleView ()<CGXHotBrandCycleFlowLayoutDelegate>
 
@@ -112,30 +112,34 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([self preferredCellClass]) forIndexPath:indexPath];;
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([self preferredCellClass]) forIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(gx_hotBrandCellClassForBaseView:)] && [self.delegate gx_hotBrandCellClassForBaseView:self]) {
+        return cell;
+    }else if ([self.delegate respondsToSelector:@selector(gx_hotBrandCellNibForBaseView:)] && [self.delegate gx_hotBrandCellNibForBaseView:self]) {
+        return cell;
+    }
+    return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     int rowInter = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
     CGXHotBrandModel *cellModel = self.dataArray[rowInter];
-    cellModel.hotBrand_loadImageCallback = self.hotBrand_loadImageCallback;
     BOOL isHave = [cell respondsToSelector:@selector(updateWithHotBrandCellModel:Section:Row:)];
     if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandBaseCellDelegate)]) {
         [(UICollectionViewCell<CGXHotBrandBaseCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];
+    }
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandCycleView:cellForItemAtIndexPath:AtCell:AtModel:)]) {
+        [self.dataSource gx_hotBrandCycleView:self cellForItemAtIndexPath:indexPath AtCell:cell AtModel:cellModel];
     }
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     int rowInter = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
     CGXHotBrandModel *cellModel = self.dataArray[rowInter];
-    __weak typeof(self) weskSelf = self;
-    if (self.didSelectItemBlock) {
-        self.didSelectItemBlock(weskSelf, cellModel);
-    } else{
-        if (self.delegate && [self.delegate respondsToSelector:@selector(gx_hotBrandBaseView:DidSelectItemAtModel:)]) {
-            [self.delegate gx_hotBrandBaseView:self DidSelectItemAtModel:cellModel];
-        }
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandCycleView:didSelectItemAtIndexPath:AtModel:)]) {
+        [self.dataSource gx_hotBrandCycleView:self didSelectItemAtIndexPath:indexPath AtModel:cellModel];
     }
+    
 }
 - (CGFloat)hotBrand_collectionView:(UICollectionView *)collectionView ItemWidthAtheight:(CGFloat)height
 {

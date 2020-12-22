@@ -36,8 +36,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    [self.contentView setNeedsLayout];
+    [self.contentView layoutIfNeeded];
     
-
 }
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
 {
@@ -47,7 +48,7 @@
     [self.contentView gx_hotBrandRoundedWithRadius:cellModel.borderRadius];
     [self.contentView gx_hotBrandBorderWithColor:cellModel.borderColor borderWidth:cellModel.borderWidth];
     
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
+    [self.contentView setNeedsLayout];
+    [self.contentView layoutIfNeeded];
 }
 @end

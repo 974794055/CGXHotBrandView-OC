@@ -129,7 +129,7 @@
 {
     return CGXHotBrandBaseCell.class;
 }
-- (void)setDelegate:(id<CGXHotBrandBaseViewDelegate>)delegate
+- (void)setDelegate:(id<CGXHotBrandCustomViewDelegate>)delegate
 {
     _delegate = delegate;
     

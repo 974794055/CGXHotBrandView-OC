@@ -7,10 +7,32 @@
 //
 
 #import "CGXHotBrandBaseView.h"
-
+#import "CGXHotBrandCycleCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
+@class CGXHotBrandCycleView;
+
+
+@protocol CGXHotBrandCycleViewDataSource <NSObject>
+
+@required
+
+@optional
+/*点击cell*/
+- (void)gx_hotBrandCycleView:(CGXHotBrandCycleView *)hotView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+                     AtModel:(CGXHotBrandModel *)hotModel;
+/* 处理cell显示*/
+- (void)gx_hotBrandCycleView:(CGXHotBrandCycleView *)hotView
+      cellForItemAtIndexPath:(NSIndexPath *)indexPath
+                      AtCell:(UICollectionViewCell *)cell
+                     AtModel:(CGXHotBrandModel *)hotModel;
+
+@end
+
 @interface CGXHotBrandCycleView : CGXHotBrandBaseView
+
+/*界面设置代理*/
+@property (nonatomic , weak) id<CGXHotBrandCycleViewDataSource>dataSource;
 
 /* 比例 0.0 ～ 1.0 之间 两端无效 默认0.5 */
 @property (nonatomic, assign) CGFloat offsetX; //

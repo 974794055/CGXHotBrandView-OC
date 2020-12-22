@@ -8,19 +8,33 @@
 
 #import "CGXHotBrandBaseView.h"
 #import "CGXHotBrandModel.h"
+#import "CGXHotBrandCell.h"
 NS_ASSUME_NONNULL_BEGIN
+
+@class CGXHotBrandView;
+@protocol CGXHotBrandViewDataSource <NSObject>
+
+@required
+
+@optional
+/*点击cell*/
+- (void)gx_hotBrandView:(CGXHotBrandView *)hotView
+didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+                AtModel:(CGXHotBrandModel *)hotModel;
+/* 处理cell显示*/
+- (void)gx_hotBrandView:(CGXHotBrandView *)hotView
+ cellForItemAtIndexPath:(NSIndexPath *)indexPath
+                 AtCell:(UICollectionViewCell *)cell
+                AtModel:(CGXHotBrandModel *)hotModel;
+
+@end
 
 @interface CGXHotBrandView : CGXHotBrandBaseView
 
 @property (nonatomic, strong,readonly) NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *dataArray;
 
-///** 只展示文字轮播 默认NO */
-@property (nonatomic, assign) BOOL onlyDisplayText;
-
-/** 轮播图片的ContentMode，默认为 UIViewContentModeScaleToFill */
-@property (nonatomic, assign) UIViewContentMode bannerImageViewContentMode;
-/** 占位图，用于网络未加载到图片时 */
-@property (nonatomic, strong) UIImage *placeholderImage;
+/*界面设置代理*/
+@property (nonatomic , weak) id<CGXHotBrandViewDataSource>dataSource;
 
 /* 圆点所在高度 默认 20 */
 @property (nonatomic, assign) CGFloat pageHeight;
@@ -34,6 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , assign) BOOL bounces;
 /* 是否有分页原点*/
 @property (nonatomic , assign) BOOL isHavePage;
+
+/* 是否回弹 默认YES*/
+@property (nonatomic , assign) CGXHotBrandViewShowType showType;
+// 角标是否有动画
+@property (nonatomic , assign) BOOL isAnimation;
 
 /** 更新数据源   */
 - (void)updateWithDataArray:(NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *)dataArray;

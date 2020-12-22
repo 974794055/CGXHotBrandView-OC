@@ -8,7 +8,7 @@
 
 #import "CycleViewController.h"
 
-@interface CycleViewController ()<CGXHotBrandBaseViewDelegate>
+@interface CycleViewController ()<CGXHotBrandCustomViewDelegate,CGXHotBrandCycleViewDataSource>
 
 
 @end
@@ -37,13 +37,14 @@
     for (int i = 0; i<2; i++) {
         CGXHotBrandCycleView *hotBrandView = [[CGXHotBrandCycleView alloc] init];
         hotBrandView.delegate = self;
+        hotBrandView.dataSource = self;
         hotBrandView.minimumLineSpacing = 10;
         hotBrandView.minimumInteritemSpacing = 10;
         hotBrandView.edgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
         hotBrandView.itemRowCount = 5;
         hotBrandView.itemSectionCount = 3;
         
-        hotBrandView.autoScroll = NO;
+        hotBrandView.autoScroll = (i == 0 ? YES : NO);
         hotBrandView.offsetX = 0.5;
         CGFloat height = (ScreenHeight-kTopHeight-kTabBarHeight-30)/2.0;
         if (i == 0) {
@@ -53,20 +54,14 @@
             hotBrandView.widthSpace = 0.8;
             hotBrandView.frame = CGRectMake(0, 20+height,ScreenWidth , height);
         }
-       
         hotBrandView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1];
         [self.view addSubview:hotBrandView];
-        hotBrandView.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
-            [hotImageView sd_setImageWithURL:hotImageURL];
-        };
-        
-        NSMutableArray *titleArr = [NSMutableArray arrayWithObjects:@"跑步鞋",@"运动袜",@"运动帽",@"单肩包",@"双肩包",@"男童鞋",@"女童鞋",@"男童装",@"女童装",@"跑步鞋",@"休闲鞋",@"训练鞋", @"羽绒服",@"紧身服",@"比赛服",nil];
+
         NSMutableArray *dataArray2 = [NSMutableArray array];
-        for (int i = 0; i< titleArr.count; i++) {
+        for (int i = 0; i< 15; i++) {
             CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-            model.titleStr = titleArr[i];
             model.itemColor = [UIColor whiteColor];
-            model.hotPicStr = @"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3547703274,3363083080&fm=11&gp=0.jpg";
+            model.hotPicStr = @"HotIcon";
             [dataArray2 addObject:model];
         }
         [hotBrandView updateWithDataArray:dataArray2];
@@ -77,10 +72,15 @@
 {
     return CustomCollectionViewCell.class;
 }
-- (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView DidSelectItemAtModel:(CGXHotBrandModel *)hotModel
+- (void)gx_hotBrandCycleView:(CGXHotBrandCycleView *)hotView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath AtModel:(nonnull CGXHotBrandModel *)hotModel
 {
-    NSLog(@"%@" , hotModel.titleStr);
+    NSLog(@"didSelectItemAtIndexPath: %@" , hotModel.hotPicStr);
 }
-
+- (void)gx_hotBrandCycleView:(CGXHotBrandCycleView *)hotView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath AtCell:(nonnull UICollectionViewCell *)cell AtModel:(nonnull CGXHotBrandModel *)hotModel
+{
+    CustomCollectionViewCell *newcell = (CustomCollectionViewCell *)cell;
+    newcell.hotImageView.image = [UIImage imageNamed:hotModel.hotPicStr];
+//    [newcell.hotImageView sd_setImageWithURL:[NSURL URLWithString:hotModel.hotPicStr]];
+}
 
 @end

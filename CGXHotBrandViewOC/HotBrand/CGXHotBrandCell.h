@@ -7,12 +7,16 @@
 //
 
 #import "CGXHotBrandBaseCell.h"
-
+#import "CGXHotBrandTagLabel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CGXHotBrandCell : CGXHotBrandBaseCell
 
 @property (nonatomic , strong) UILabel *titleLabel;
+@property (nonatomic , strong)CGXHotBrandTagLabel *tagLabel;
+
+
+- (void)updateWithSHowType:(CGXHotBrandViewShowType)showType IsAnimation:(BOOL)isAnimation;
 
 @end
 

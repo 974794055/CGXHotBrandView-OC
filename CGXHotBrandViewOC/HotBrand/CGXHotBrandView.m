@@ -7,7 +7,7 @@
 //
 
 #import "CGXHotBrandView.h"
-#import "CGXHotBrandCell.h"
+
 #import "CGXHotBrandFlowlayout.h"
 #import "CGXHotBrandPageControl.h"
 #import "UIColor+CGXHotBrand.h"
@@ -49,18 +49,27 @@
     _isHavePage = isHavePage;
     self.pageControl.hidesForSinglePage = !isHavePage;
 }
+- (void)setShowType:(CGXHotBrandViewShowType)showType
+{
+    _showType = showType;
+    [self.collectionView reloadData];
+}
+- (void)setIsAnimation:(BOOL)isAnimation
+{
+    _isAnimation = isAnimation;
+    [self.collectionView reloadData];
+}
 - (void)initializeData
 {
     [super initializeData];
-    self.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
-    self.placeholderImage = [UIColor gx_hotBrandImageWithColor:[UIColor colorWithWhite:0.93 alpha:1]];
-    self.onlyDisplayText = NO;
     self.pageHeight = 20;
     self.pageSelectColor = [UIColor redColor];
     self.pageNormalColor = [UIColor grayColor];
     self.pagingEnabled = YES;
     self.bounces = NO;
     self.isHavePage = YES;
+    self.isAnimation = NO;
+    self.showType = CGXHotBrandViewShowTypeRounded;
 }
 - (void)initializeViews
 {
@@ -178,24 +187,27 @@
 {
     NSMutableArray *sectionArr = self.dataArray[indexPath.section];
     CGXHotBrandModel *cellModel = sectionArr[indexPath.row];
-    cellModel.hotBrand_loadImageCallback = self.hotBrand_loadImageCallback;
     BOOL isHave = [cell respondsToSelector:@selector(updateWithHotBrandCellModel:Section:Row:)];
     if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandBaseCellDelegate)]) {
         [(UICollectionViewCell<CGXHotBrandBaseCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];
+    }
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandView:cellForItemAtIndexPath:AtCell:AtModel:)]) {
+        [self.dataSource gx_hotBrandView:self cellForItemAtIndexPath:indexPath AtCell:cell AtModel:cellModel];
+    }
+    if ([cell isKindOfClass:[CGXHotBrandCell class]]) {
+        CGXHotBrandCell *cellNe = (CGXHotBrandCell *)cell;
+        [cellNe updateWithSHowType:self.showType IsAnimation:self.isAnimation];
     }
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableArray *sectionArr = self.dataArray[indexPath.section];
     CGXHotBrandModel *cellModel = sectionArr[indexPath.row];
-    __weak typeof(self) weskSelf = self;
-    if (self.didSelectItemBlock) {
-        self.didSelectItemBlock(weskSelf, cellModel);
-    } else{
-        if (self.delegate && [self.delegate respondsToSelector:@selector(gx_hotBrandBaseView:DidSelectItemAtModel:)]) {
-            [self.delegate gx_hotBrandBaseView:self DidSelectItemAtModel:cellModel];
-        }
+    
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandView:didSelectItemAtIndexPath:AtModel:)]) {
+        [self.dataSource gx_hotBrandView:self didSelectItemAtIndexPath:indexPath AtModel:cellModel];
     }
+    
 }
 - (void)updateWithDataArray:(NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *)dataArray;
 {
