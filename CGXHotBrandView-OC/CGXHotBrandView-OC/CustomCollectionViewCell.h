@@ -11,7 +11,7 @@
 #import "CGXHotBrandCycleView.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CustomCollectionViewCell : UICollectionViewCell<CGXHotBrandBaseCellDelegate>
+@interface CustomCollectionViewCell : UICollectionViewCell<CGXHotBrandUpdateCellDelegate>
 @property (nonatomic , strong) UIImageView *hotImageView;
 @end
 

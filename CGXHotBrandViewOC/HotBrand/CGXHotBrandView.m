@@ -188,8 +188,8 @@
     NSMutableArray *sectionArr = self.dataArray[indexPath.section];
     CGXHotBrandModel *cellModel = sectionArr[indexPath.row];
     BOOL isHave = [cell respondsToSelector:@selector(updateWithHotBrandCellModel:Section:Row:)];
-    if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandBaseCellDelegate)]) {
-        [(UICollectionViewCell<CGXHotBrandBaseCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];
+    if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
+        [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];
     }
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandView:cellForItemAtIndexPath:AtCell:AtModel:)]) {
         [self.dataSource gx_hotBrandView:self cellForItemAtIndexPath:indexPath AtCell:cell AtModel:cellModel];

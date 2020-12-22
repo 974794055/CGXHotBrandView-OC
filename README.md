@@ -103,7 +103,7 @@ for (int i = 0; i< 4; i++) {
 - (UINib *)gx_hotBrandCellNibForBaseView:(CGXHotBrandBaseView *)hotView;
 ```
 
-- 4.自定义cell实现`CGXHotBrandBaseCellDelegate`代理方法
+- 4.自定义cell实现`CGXHotBrandUpdateCellDelegate`代理方法
 
 不管列表是UIView还是UIViewController都可以，提高使用灵活性，更便于现有的业务接入。
 ```Objective-C

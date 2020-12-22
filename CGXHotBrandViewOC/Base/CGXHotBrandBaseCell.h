@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class CGXHotBrandModel;
-@protocol CGXHotBrandBaseCellDelegate <NSObject>
+@protocol CGXHotBrandUpdateCellDelegate <NSObject>
 
 @required
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface CGXHotBrandBaseCell : UICollectionViewCell<CGXHotBrandBaseCellDelegate>
+@interface CGXHotBrandBaseCell : UICollectionViewCell<CGXHotBrandUpdateCellDelegate>
 @property (nonatomic , strong) UIImageView *hotImageView;
 
 @property (nonatomic , strong) CGXHotBrandModel *cellModel;

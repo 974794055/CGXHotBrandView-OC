@@ -125,8 +125,8 @@
     int rowInter = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
     CGXHotBrandModel *cellModel = self.dataArray[rowInter];
     BOOL isHave = [cell respondsToSelector:@selector(updateWithHotBrandCellModel:Section:Row:)];
-    if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandBaseCellDelegate)]) {
-        [(UICollectionViewCell<CGXHotBrandBaseCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];
+    if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
+        [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];
     }
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandCycleView:cellForItemAtIndexPath:AtCell:AtModel:)]) {
         [self.dataSource gx_hotBrandCycleView:self cellForItemAtIndexPath:indexPath AtCell:cell AtModel:cellModel];
