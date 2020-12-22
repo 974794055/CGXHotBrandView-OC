@@ -26,5 +26,4 @@
 #import "CGXHotBrandCycleCell.h"
 #import "CGXHotBrandCycleView.h"
 
-
 #endif /* CGXHotBrandViewOC_h */

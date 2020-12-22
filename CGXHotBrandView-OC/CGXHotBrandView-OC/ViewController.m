@@ -82,6 +82,7 @@
     }
 }
 
+
 //- (Class)gx_hotBrandCellClassForBaseView:(CGXHotBrandBaseView *)hotView
 //{
 //    if (hotView.tag == 10002) {

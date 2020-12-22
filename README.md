@@ -18,8 +18,8 @@
 ## 优点：
 - 1、提供更加全面丰富、高度自定义的效果；
 - 2、使用子类化管理cell样式，逻辑更清晰，扩展更简单；
-- 3、高度封装列表容器，使用便捷，完美支持列表的生命周期调用；
-- 4、角标提醒；
+- 3、高度封装列表容器，使用便捷，完美支持列表的生命周期调用； 
+- 4、角标提醒 ； 
 
 ## 效果预览
 ### 效果预览图
@@ -37,6 +37,7 @@ Appstore滚动  |  <img src="https://github.com/974794055/CGXHotBrandView-OC/blo
 ## 安装
 ### 手动
 - Clone代码，把CGXHotBrandViewOC文件夹拖入项目，#import "CGXHotBrandViewOC.h"，就可以使用了；
+
 ### CocoaPods
 ```ruby
 target '<Your Target Name>' do
