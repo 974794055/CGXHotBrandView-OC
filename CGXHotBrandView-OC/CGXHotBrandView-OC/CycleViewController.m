@@ -56,7 +56,7 @@
         }
         hotBrandView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1];
         [self.view addSubview:hotBrandView];
-
+        
         NSMutableArray *dataArray2 = [NSMutableArray array];
         for (int i = 0; i< 15; i++) {
             CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
@@ -66,7 +66,7 @@
         }
         [hotBrandView updateWithDataArray:dataArray2];
     }
-
+    
 }
 - (Class)gx_hotBrandCellClassForBaseView:(CGXHotBrandBaseView *)hotView
 {
@@ -80,7 +80,7 @@
 {
     CustomCollectionViewCell *newcell = (CustomCollectionViewCell *)cell;
     newcell.hotImageView.image = [UIImage imageNamed:hotModel.hotPicStr];
-//    [newcell.hotImageView sd_setImageWithURL:[NSURL URLWithString:hotModel.hotPicStr]];
+    //    [newcell.hotImageView sd_setImageWithURL:[NSURL URLWithString:hotModel.hotPicStr]];
 }
 
 @end

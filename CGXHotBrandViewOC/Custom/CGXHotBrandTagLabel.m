@@ -1,9 +1,9 @@
 //
 //  CGXHotBrandTagLabel.m
-//  QQQQQ
+//  CGXHotBrandView-OC
 //
-//  Created by 曹贵鑫 on 2020/1/30.
-//  Copyright © 2020 曹贵鑫. All rights reserved.
+//  Created by CGX on 2020/12/12.
+//  Copyright © 2020 CGX. All rights reserved.
 //
 
 #import "CGXHotBrandTagLabel.h"
