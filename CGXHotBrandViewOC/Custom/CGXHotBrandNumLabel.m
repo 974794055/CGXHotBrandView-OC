@@ -2,7 +2,8 @@
 //  CGXHotBrandNumLabel.m
 //  CGXHotBrandViewOC
 //
-//  Created by CGX on 2021/1/10.
+//  Created by CGX on 2020/12/12.
+//  Copyright © 2020 CGX. All rights reserved.
 //
 
 #import "CGXHotBrandNumLabel.h"

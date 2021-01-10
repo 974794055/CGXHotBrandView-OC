@@ -2,7 +2,7 @@
 //  ListCollectionViewCell.m
 //  CGXPageCollectionView-OC
 //
-//  Created by CGX on 2020/12/26.
+//  Created by CGX on 2020/12/12.
 //  Copyright © 2020 CGX. All rights reserved.
 //
 

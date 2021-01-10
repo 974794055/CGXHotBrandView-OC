@@ -2,7 +2,8 @@
 //  CGXHotBrandTools.h
 //  CGXHotBrandViewOC
 //
-//  Created by MacMini-1 on 2021/1/4.
+//  Created by CGX on 2020/12/12.
+//  Copyright © 2020 CGX. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

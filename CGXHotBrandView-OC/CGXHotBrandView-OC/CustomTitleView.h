@@ -2,7 +2,8 @@
 //  CustomTitleView.h
 //  CGXHotBrandView-OC
 //
-//  Created by CGX on 2021/1/9.
+//  Created by CGX on 2020/12/12.
+//  Copyright © 2020 CGX. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

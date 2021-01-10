@@ -161,7 +161,7 @@ static BOOL const kDefaultHidesForSinglePage = NO;
             
             [abstractDotView changActiveState:active];
         } else {
-            CGXHotBrandDebugLog(@"Custom Dot View : %@ must implement method 'changeActivityState'", self.dotViewClass);
+            NSLog(@"Custom Dot View : %@ must implement method 'changeActivityState'", self.dotViewClass);
         }
     } else if(self.dotImage && self.currentDotImage) {
         UIImageView *dotImage = (UIImageView *)[self.dots objectAtIndex:index];

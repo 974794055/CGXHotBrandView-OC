@@ -7,7 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 #import "CGXHotBrandPageSquareView.h"
-#import "CGXHotBrandDefines.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CGXHotBrandPageControl : UIControl

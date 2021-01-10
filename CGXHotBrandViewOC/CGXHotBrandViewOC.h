@@ -17,7 +17,6 @@
 #define CGXHotBrandViewOC_h
 
 #import "CGXHotBrandDefines.h"
-
 #import "CGXHotBrandModel.h"
 
 #import "CGXHotBrandBaseCell.h"

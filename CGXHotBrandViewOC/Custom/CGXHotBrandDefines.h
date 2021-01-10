@@ -50,11 +50,5 @@ typedef NS_ENUM(NSInteger, CGXHotBrandPageContolAliment) {
 
 #define CGXHotBrandViewDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
 
-///DEBUG打印日志
-#ifdef DEBUG
-# define CGXHotBrandDebugLog(FORMAT, ...) printf("[%s 行号:%d]:\n%s\n",__FUNCTION__,__LINE__,[[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
-#else
-# define CGXHotBrandDebugLog(FORMAT, ...)
-#endif
 
 #endif /* CGXHotBrandDefines_h */
