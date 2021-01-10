@@ -15,13 +15,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , assign) CGFloat triangleW;
 @property (nonatomic , assign) CGFloat triangleH;
 
-@property (nonatomic , assign) CGFloat cornerRadius;
+/** --边框--- */
+@property (nonatomic, strong) UIColor *tagBorderColor;
+@property (nonatomic, assign) CGFloat tagBorderWidth;
+@property (nonatomic, assign) CGFloat tagBorderRadius;
+
 @property (nonatomic , assign) CGXHotBrandViewShowType showType;
 
 @property (nonatomic, strong)NSString *titleStr;
 @property (nonatomic, strong) UIColor *titleColor;
 @property (nonatomic, strong) UIFont *titleFont;
 
+
+
+/* 角标样式  CGXHotBrandViewShowTypeRounded 有效  默认CGXHotBrandRoundedTypeAll*/
+@property (nonatomic , assign) CGXHotBrandRoundedType roundedType;
 
 @end
 

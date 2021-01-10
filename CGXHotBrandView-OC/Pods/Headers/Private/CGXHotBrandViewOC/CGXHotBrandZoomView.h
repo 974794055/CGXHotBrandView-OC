@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/Zoom/CGXHotBrandZoomView.h

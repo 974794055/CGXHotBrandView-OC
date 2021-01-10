@@ -10,14 +10,17 @@
  QQ号：974794055
  群名称：
  群   号：
- 版本： 0.0.3
+ 版本： 0.0.4
  */
 
 #ifndef CGXHotBrandViewOC_h
 #define CGXHotBrandViewOC_h
 
+#import "CGXHotBrandDefines.h"
+
 #import "CGXHotBrandModel.h"
 
+#import "CGXHotBrandBaseCell.h"
 #import "CGXHotBrandBaseView.h"
 
 #import "CGXHotBrandCell.h"
@@ -25,5 +28,15 @@
 
 #import "CGXHotBrandCycleCell.h"
 #import "CGXHotBrandCycleView.h"
+
+#import "CGXHotBrandCardView.h"
+#import "CGXHotBrandCardCell.h"
+
+#import "CGXHotBrandZoomView.h"
+#import "CGXHotBrandZoomCell.h"
+
+
+#import "CGXHotBrandScrollView.h"
+#import "CGXHotBrandScrollCell.h"
 
 #endif /* CGXHotBrandViewOC_h */

@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CGXHotBrandView.h"
-#import "CGXHotBrandCycleView.h"
+#import <CGXHotBrandViewOC/CGXHotBrandViewOC.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CustomCollectionViewCell : UICollectionViewCell<CGXHotBrandUpdateCellDelegate>

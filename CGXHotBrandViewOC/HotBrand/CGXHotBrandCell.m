@@ -17,6 +17,7 @@
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleleft;
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleRight;
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleBottom;
+
 @property (nonatomic , strong) NSLayoutConstraint *hotImageTop;
 @property (nonatomic , strong) NSLayoutConstraint *hotImageLeft;
 @property (nonatomic , strong) NSLayoutConstraint *hotImageRight;
@@ -46,12 +47,14 @@
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.titleLabel];
     self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     self.tagLabel = [[CGXHotBrandTagLabel alloc] init];
     self.tagLabel.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.tagLabel];
     [self.contentView bringSubviewToFront:self.tagLabel];
     self.tagLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
     
     
     
@@ -65,6 +68,7 @@
     [self.contentView addConstraint:self.hotTitleRight];
     [self.contentView addConstraint:self.hotTitleBottom];
     
+    self.hotImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.hotImageTop = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
     self.hotImageLeft = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
@@ -74,9 +78,6 @@
     [self.contentView addConstraint:self.hotImageLeft];
     [self.contentView addConstraint:self.hotImageRight];
     [self.contentView addConstraint:self.hotImageBottom];
-    
-    self.tagTitleHeight = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:30];
-    [self.titleLabel addConstraint:self.tagTitleHeight];
     
 
     self.tagTitleHeight = [NSLayoutConstraint constraintWithItem:self.tagLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:15];
@@ -128,57 +129,47 @@
     self.titleLabel.text = cellModel.titleStr;
     self.titleLabel.textColor = cellModel.titleColor;
     self.titleLabel.font = cellModel.titleFont;
-
+    self.titleLabel.backgroundColor = cellModel.titleBgColor;
+    self.titleLabel.textAlignment = cellModel.textAlignment;
     self.hotTitleHeight.constant = self.cellModel.titleHeight;
+    self.hotTitleleft.constant = cellModel.titleHLpace;
+    self.hotTitleleft.constant = cellModel.titleHRpace;
     
     self.hotImageTop.constant = cellModel.hotPicSpaceTop;
     self.hotImageLeft.constant = cellModel.hotPicSpace;
     self.hotImageRight.constant = -cellModel.hotPicSpace;
     self.hotImageBottom.constant = cellModel.titleSpaceTop;
-
-    if (!([cellModel.hotPicStr hasPrefix:@"http:"] || [cellModel.hotPicStr hasPrefix:@"https:"])) {
-        UIImage *image = [UIImage imageNamed:cellModel.hotPicStr];
-        if (!image) {
-            image = [UIImage imageWithContentsOfFile:cellModel.hotPicStr];
-        }
-        self.hotImageView.image = image;
-    }
-}
-
-- (void)updateWithSHowType:(CGXHotBrandViewShowType)showType IsAnimation:(BOOL)isAnimation
-{
-    self.showType = showType;
-    self.isAnimation = isAnimation;
-    NSString *text = self.cellModel.tagStr ? self.cellModel.tagStr:@"";
-    NSDictionary *attrs = @{NSFontAttributeName:self.cellModel.tagFont};
+    
+    NSString *text = cellModel.tagStr ? cellModel.tagStr:@"";
+    NSDictionary *attrs = @{NSFontAttributeName:cellModel.tagFont};
     CGSize size = [text boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.contentView.frame), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size;
-    CGFloat width = ceil(size.width) + self.cellModel.tagSpace;
+    CGFloat width = ceil(size.width) + cellModel.tagSpace;
     CGFloat height = ceil(size.height)+2;
+    if (cellModel.showType == CGXHotBrandViewShowTypeJDChat) {
+        height = height + 5;
+    } else if (cellModel.showType == CGXHotBrandViewShowTypeChat) {
+        height = height + 5;
+    }
+    
     self.tagLabel.triangleH = 4;
     self.tagLabel.triangleW = 6;
-    self.tagLabel.titleFont = self.cellModel.tagFont;
-    self.tagLabel.cornerRadius = height / 2.0;
+    self.tagLabel.titleFont = cellModel.tagFont;
+    self.tagLabel.backgroundColor = cellModel.tagBgColor;
+    self.tagLabel.tagBorderRadius = cellModel.tagBorderRadius;
+    self.tagLabel.tagBorderColor = cellModel.tagBorderColor;
+    self.tagLabel.tagBorderWidth = cellModel.tagBorderWidth;
 
-
-    if (showType == CGXHotBrandViewShowTypeJDChat) {
-        height = height + 5;
-    } else if (showType == CGXHotBrandViewShowTypeJDRound) {
-        
-    } else if (showType == CGXHotBrandViewShowTypeChat) {
-        height = height + 5;
-    } else {
-        
-    }
-    self.tagLabel.showType =   showType;
     self.tagTitleWidth.constant = width;
     self.tagTitleHeight.constant = height;
-    self.tagTitleTop.constant = self.cellModel.hotPicSpaceTop;
-    self.tagTitleRight.constant = -5;
-
+    self.tagTitleTop.constant = cellModel.tagVSpace;
+    self.tagTitleRight.constant = -cellModel.tagHSpace;
+    self.tagLabel.showType =  cellModel.showType;
+    self.tagLabel.roundedType =  cellModel.roundedType;
     self.tagLabel.titleStr =  text;
+    [self.tagLabel layoutIfNeeded];
     if (text && text.length > 0 && ![text isEqualToString:@""]) {
         self.tagLabel.hidden = NO;
-        if (isAnimation) {
+        if (cellModel.isAnimation) {
             [self.timer gx_hotFireTimer];
         }else{
             [self.timer gx_hotUnfireTimer];
@@ -187,6 +178,7 @@
         self.tagLabel.hidden = YES;
         [self.timer gx_hotUnfireTimer];
     }
+    
 }
 
 @end

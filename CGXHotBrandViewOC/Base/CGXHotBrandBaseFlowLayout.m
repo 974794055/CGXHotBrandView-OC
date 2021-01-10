@@ -8,6 +8,7 @@
 
 #import "CGXHotBrandBaseFlowLayout.h"
 
+
 @implementation CGXHotBrandBaseFlowLayout
 
 - (instancetype)init {
@@ -20,36 +21,20 @@
 }
 - (void)initializeData
 {
-    self.itemSectionCount = 2;
-    self.itemRowCount = 4;
+  
 }
 - (void)prepareLayout
 {
     [super prepareLayout];
-    NSInteger const numberOfSections = self.collectionView.numberOfSections;
-    for (int i = 0; i < numberOfSections; i++) {
-        // 从collectionView中获取到有多少个item
-        NSInteger itemTotalCount = [self.collectionView numberOfItemsInSection:i];
-        // 遍历出item的attributes,把它添加到管理它的属性数组中去
-        for (int j = 0; j < itemTotalCount; j++) {
-            NSIndexPath *indexpath = [NSIndexPath indexPathForItem:j inSection:i];
-            UICollectionViewLayoutAttributes *attributes = [[self layoutAttributesForItemAtIndexPath:indexpath] copy];
-            [self.attributesArrayM addObject:attributes];
-        }
-    }
 }
 
-/** 返回collectionView视图中所有视图的属性数组 */
-- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
+- (NSArray *)getCopyOfAttributes:(NSArray *)attributes
 {
-    return self.attributesArrayM;
-}
-- (NSMutableArray *)attributesArrayM
-{
-    if (!_attributesArrayM) {
-        _attributesArrayM = [NSMutableArray array];
+    NSMutableArray *copyArr = [NSMutableArray new];
+    for (UICollectionViewLayoutAttributes *attribute in attributes) {
+        [copyArr addObject:[attribute copy]];
     }
-    return _attributesArrayM;
+    return copyArr;
 }
 @end
 
@@ -115,22 +100,5 @@
     }
 }
 
-- (NSInteger)gx_referenceAtSection:(NSInteger)section
-{
-    CGFloat sectionCount = self.itemSectionCount;
-    id <CGXHotBrandBaseFlowLayoutDelegate> delegate  = (id <CGXHotBrandBaseFlowLayoutDelegate>)self.collectionView.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(hotBrand_collectionView:layout:SectionAtIndex:)]) {
-        sectionCount = [delegate hotBrand_collectionView:self.collectionView layout:self SectionAtIndex:section];
-    }
-    return sectionCount;
-}
-- (NSInteger)gx_referenceAtRow:(NSInteger)row
-{
-    CGFloat count = self.itemRowCount;
-    id <CGXHotBrandBaseFlowLayoutDelegate> delegate  = (id <CGXHotBrandBaseFlowLayoutDelegate>)self.collectionView.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(hotBrand_collectionView:layout:RowAtIndex:)]) {
-        count = [delegate hotBrand_collectionView:self.collectionView layout:self RowAtIndex:row];
-    }
-    return count;
-}
+
 @end

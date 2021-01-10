@@ -39,6 +39,22 @@ s.subspec 'Cycle' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/Cycle/**/*.{h,m}'
    ss.dependency 'CGXHotBrandViewOC/Base'
 end
+s.subspec 'Card' do |ss|
+   ss.source_files = 'CGXHotBrandViewOC/Card/**/*.{h,m}'
+   ss.dependency 'CGXHotBrandViewOC/Base'
+end
+s.subspec 'Zoom' do |ss|
+   ss.source_files = 'CGXHotBrandViewOC/Zoom/**/*.{h,m}'
+   ss.dependency 'CGXHotBrandViewOC/Base'
+end
+s.subspec 'Carousel' do |ss|
+   ss.source_files = 'CGXHotBrandViewOC/Carousel/**/*.{h,m}'
+   ss.dependency 'CGXHotBrandViewOC/Base'
+end
+s.subspec 'Scroll' do |ss|
+   ss.source_files = 'CGXHotBrandViewOC/Scroll/**/*.{h,m}'
+   ss.dependency 'CGXHotBrandViewOC/Base'
+end
 
 end
 

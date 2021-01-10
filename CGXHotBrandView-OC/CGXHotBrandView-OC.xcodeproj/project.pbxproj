@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0460C2B425A55B2B007AFAEB /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0460C2B325A55B2B007AFAEB /* BaseViewController.m */; };
 		04AD1F6B258711F600B7544D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1F6A258711F600B7544D /* AppDelegate.m */; };
 		04AD1F71258711F600B7544D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1F70258711F600B7544D /* ViewController.m */; };
 		04AD1F74258711F600B7544D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1F72258711F600B7544D /* Main.storyboard */; };
 		04AD1F76258711FC00B7544D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1F75258711FC00B7544D /* Assets.xcassets */; };
 		04AD1F79258711FC00B7544D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1F77258711FC00B7544D /* LaunchScreen.storyboard */; };
 		04AD1F7C258711FC00B7544D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1F7B258711FC00B7544D /* main.m */; };
-		B5031C6125879EB8002010D0 /* CGXHotBrandViewOC.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B5031C5E25879EB8002010D0 /* CGXHotBrandViewOC.podspec */; };
-		B5031C6225879EB8002010D0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B5031C5F25879EB8002010D0 /* LICENSE */; };
-		B5031C6325879EB8002010D0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B5031C6025879EB8002010D0 /* README.md */; };
+		04BFA24A2599A7B50042801C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 04BFA2472599A7B40042801C /* README.md */; };
+		04BFA24B2599A7B50042801C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 04BFA2482599A7B50042801C /* LICENSE */; };
+		04BFA24C2599A7B50042801C /* CGXHotBrandViewOC.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 04BFA2492599A7B50042801C /* CGXHotBrandViewOC.podspec */; };
+		04BFA28B2599AC340042801C /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BFA28A2599AC340042801C /* CardViewController.m */; };
+		B54A7AE425A20C1300801BD6 /* ZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54A7AE325A20C1300801BD6 /* ZoomViewController.m */; };
+		B55790A225A357130087B030 /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55790A125A357130087B030 /* HotViewController.m */; };
+		B55790A625A3577B0087B030 /* ListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55790A425A3577B0087B030 /* ListCollectionViewCell.m */; };
+		B55790C525A363A50087B030 /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55790C425A363A50087B030 /* ScrollViewController.m */; };
+		B55E334F25A9D492005FB601 /* CustomTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B55E334E25A9D492005FB601 /* CustomTitleView.m */; };
 		B55F82012588F6750018472C /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55F82002588F6750018472C /* CustomCollectionViewCell.m */; };
 		B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDEE75258B8B6E00359A78 /* CycleViewController.m */; };
 		B5EDEE79258B993C00359A78 /* HotImagw.png in Resources */ = {isa = PBXBuildFile; fileRef = B5EDEE78258B993C00359A78 /* HotImagw.png */; };
@@ -23,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0460C2B225A55B2B007AFAEB /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		0460C2B325A55B2B007AFAEB /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		04AD1F66258711F600B7544D /* CGXHotBrandView-OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CGXHotBrandView-OC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AD1F69258711F600B7544D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		04AD1F6A258711F600B7544D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -33,10 +42,22 @@
 		04AD1F78258711FC00B7544D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04AD1F7A258711FC00B7544D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AD1F7B258711FC00B7544D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04BFA2472599A7B40042801C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		04BFA2482599A7B50042801C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		04BFA2492599A7B50042801C /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CGXHotBrandViewOC.podspec; sourceTree = "<group>"; };
+		04BFA2892599AC340042801C /* CardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
+		04BFA28A2599AC340042801C /* CardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
 		866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CGXHotBrandView-OC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5031C5E25879EB8002010D0 /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CGXHotBrandViewOC.podspec; path = ../../../CGXHotBrandViewOC.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B5031C5F25879EB8002010D0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../../LICENSE; sourceTree = "<group>"; };
-		B5031C6025879EB8002010D0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../README.md; sourceTree = "<group>"; };
+		B54A7AE225A20C1300801BD6 /* ZoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZoomViewController.h; sourceTree = "<group>"; };
+		B54A7AE325A20C1300801BD6 /* ZoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZoomViewController.m; sourceTree = "<group>"; };
+		B55790A025A357130087B030 /* HotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotViewController.h; sourceTree = "<group>"; };
+		B55790A125A357130087B030 /* HotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotViewController.m; sourceTree = "<group>"; };
+		B55790A425A3577B0087B030 /* ListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionViewCell.m; sourceTree = "<group>"; };
+		B55790A525A3577B0087B030 /* ListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionViewCell.h; sourceTree = "<group>"; };
+		B55790C325A363A50087B030 /* ScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollViewController.h; sourceTree = "<group>"; };
+		B55790C425A363A50087B030 /* ScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollViewController.m; sourceTree = "<group>"; };
+		B55E334D25A9D492005FB601 /* CustomTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTitleView.h; sourceTree = "<group>"; };
+		B55E334E25A9D492005FB601 /* CustomTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTitleView.m; sourceTree = "<group>"; };
 		B55F81FF2588F6750018472C /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		B55F82002588F6750018472C /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
 		B5DA5E20258A5B100044A0CF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -89,16 +110,30 @@
 		04AD1F68258711F600B7544D /* CGXHotBrandView-OC */ = {
 			isa = PBXGroup;
 			children = (
-				B5031C552587945C002010D0 /* Podspec Metadata */,
+				04BFA2462599A7A80042801C /* Podspec Metadata */,
 				04AD1F69258711F600B7544D /* AppDelegate.h */,
 				04AD1F6A258711F600B7544D /* AppDelegate.m */,
 				04AD1F6F258711F600B7544D /* ViewController.h */,
 				04AD1F70258711F600B7544D /* ViewController.m */,
+				B55790A525A3577B0087B030 /* ListCollectionViewCell.h */,
+				B55790A425A3577B0087B030 /* ListCollectionViewCell.m */,
+				B55790A025A357130087B030 /* HotViewController.h */,
+				B55790A125A357130087B030 /* HotViewController.m */,
 				B5EDEE74258B8B6E00359A78 /* CycleViewController.h */,
 				B5EDEE75258B8B6E00359A78 /* CycleViewController.m */,
+				04BFA2892599AC340042801C /* CardViewController.h */,
+				04BFA28A2599AC340042801C /* CardViewController.m */,
+				B54A7AE225A20C1300801BD6 /* ZoomViewController.h */,
+				B54A7AE325A20C1300801BD6 /* ZoomViewController.m */,
+				B55790C325A363A50087B030 /* ScrollViewController.h */,
+				B55790C425A363A50087B030 /* ScrollViewController.m */,
 				B55F81FF2588F6750018472C /* CustomCollectionViewCell.h */,
 				B55F82002588F6750018472C /* CustomCollectionViewCell.m */,
 				B5DA5E20258A5B100044A0CF /* PrefixHeader.pch */,
+				0460C2B225A55B2B007AFAEB /* BaseViewController.h */,
+				0460C2B325A55B2B007AFAEB /* BaseViewController.m */,
+				B55E334D25A9D492005FB601 /* CustomTitleView.h */,
+				B55E334E25A9D492005FB601 /* CustomTitleView.m */,
 				B5EDEE78258B993C00359A78 /* HotImagw.png */,
 				04AD1F72258711F600B7544D /* Main.storyboard */,
 				04AD1F75258711FC00B7544D /* Assets.xcassets */,
@@ -109,22 +144,22 @@
 			path = "CGXHotBrandView-OC";
 			sourceTree = "<group>";
 		};
+		04BFA2462599A7A80042801C /* Podspec Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				04BFA2492599A7B50042801C /* CGXHotBrandViewOC.podspec */,
+				04BFA2482599A7B50042801C /* LICENSE */,
+				04BFA2472599A7B40042801C /* README.md */,
+			);
+			path = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
 		91A87241E701DCC9D5BF5A38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B5031C552587945C002010D0 /* Podspec Metadata */ = {
-			isa = PBXGroup;
-			children = (
-				B5031C5E25879EB8002010D0 /* CGXHotBrandViewOC.podspec */,
-				B5031C5F25879EB8002010D0 /* LICENSE */,
-				B5031C6025879EB8002010D0 /* README.md */,
-			);
-			path = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,13 +219,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5031C6325879EB8002010D0 /* README.md in Resources */,
+				04BFA24B2599A7B50042801C /* LICENSE in Resources */,
 				04AD1F79258711FC00B7544D /* LaunchScreen.storyboard in Resources */,
 				04AD1F76258711FC00B7544D /* Assets.xcassets in Resources */,
+				04BFA24C2599A7B50042801C /* CGXHotBrandViewOC.podspec in Resources */,
+				04BFA24A2599A7B50042801C /* README.md in Resources */,
 				B5EDEE79258B993C00359A78 /* HotImagw.png in Resources */,
-				B5031C6125879EB8002010D0 /* CGXHotBrandViewOC.podspec in Resources */,
 				04AD1F74258711F600B7544D /* Main.storyboard in Resources */,
-				B5031C6225879EB8002010D0 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,9 +261,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B55E334F25A9D492005FB601 /* CustomTitleView.m in Sources */,
+				B55790A225A357130087B030 /* HotViewController.m in Sources */,
+				0460C2B425A55B2B007AFAEB /* BaseViewController.m in Sources */,
+				B55790A625A3577B0087B030 /* ListCollectionViewCell.m in Sources */,
 				04AD1F71258711F600B7544D /* ViewController.m in Sources */,
+				B55790C525A363A50087B030 /* ScrollViewController.m in Sources */,
+				04BFA28B2599AC340042801C /* CardViewController.m in Sources */,
 				04AD1F6B258711F600B7544D /* AppDelegate.m in Sources */,
 				04AD1F7C258711FC00B7544D /* main.m in Sources */,
+				B54A7AE425A20C1300801BD6 /* ZoomViewController.m in Sources */,
 				B55F82012588F6750018472C /* CustomCollectionViewCell.m in Sources */,
 				B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */,
 			);

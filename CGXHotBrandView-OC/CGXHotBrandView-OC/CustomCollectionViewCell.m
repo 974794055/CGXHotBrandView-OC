@@ -48,8 +48,17 @@
     [self.contentView addConstraint:left];
     [self.contentView addConstraint:right];
     [self.contentView addConstraint:bottom];
-    
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
+
+    if ([cellModel.hotPicStr hasPrefix:@"http:"] || [cellModel.hotPicStr hasPrefix:@"https:"]) {
+        [self.hotImageView sd_setImageWithURL:[NSURL URLWithString:cellModel.hotPicStr] placeholderImage:nil];
+    } else{
+        UIImage *image = [UIImage imageNamed:cellModel.hotPicStr];
+        if (!image) {
+            image = [UIImage imageWithContentsOfFile:cellModel.hotPicStr];
+        }
+        self.hotImageView.image = image;
+    }
 }
+
+
 @end

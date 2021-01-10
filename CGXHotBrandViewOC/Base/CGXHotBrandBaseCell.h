@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CGXHotBrandModel.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class CGXHotBrandModel;
+
 @protocol CGXHotBrandUpdateCellDelegate <NSObject>
 
 @required
@@ -21,15 +23,21 @@ NS_ASSUME_NONNULL_BEGIN
  index:分区所在的下标
  */
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row;
+// 滚动变化
+- (void)cellOffsetOnCollectionView:(UICollectionView *)collectionView;
 
 @end
 
 @interface CGXHotBrandBaseCell : UICollectionViewCell<CGXHotBrandUpdateCellDelegate>
+
 @property (nonatomic , strong) UIImageView *hotImageView;
 
 @property (nonatomic , strong) CGXHotBrandModel *cellModel;
+@property (nonatomic , assign ,readonly) NSInteger section;
+@property (nonatomic , assign ,readonly) NSInteger row;
 
 - (void)initializeViews NS_REQUIRES_SUPER;
+
 
 @end
 

@@ -7,10 +7,10 @@
 //
 
 #import "CGXHotBrandBaseCell.h"
-#import "UIView+CGXHotBrandRounded.h"
 @interface CGXHotBrandBaseCell ()
 
-@property (nonatomic, assign) NSInteger totalInter;
+@property (nonatomic , assign ,readwrite) NSInteger section;
+@property (nonatomic , assign ,readwrite) NSInteger row;
 
 @end
 
@@ -27,11 +27,15 @@
 - (void)initializeViews
 {
     self.contentView.backgroundColor = [UIColor whiteColor];
-    
     self.hotImageView = [[UIImageView alloc] init];
-    self.hotImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.hotImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.hotImageView.layer.masksToBounds = YES;
+    self.hotImageView.clipsToBounds = YES;
+    self.hotImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.contentView addSubview:self.hotImageView];
+    [self.contentView sendSubviewToBack:self.hotImageView];
     self.hotImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    
 }
 - (void)layoutSubviews
 {
@@ -43,12 +47,25 @@
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
 {
     self.cellModel = cellModel;
+    self.section = section;
+    self.row = row;
     self.contentView.backgroundColor = cellModel.itemColor;
     
-    [self.contentView gx_hotBrandRoundedWithRadius:cellModel.borderRadius];
-    [self.contentView gx_hotBrandBorderWithColor:cellModel.borderColor borderWidth:cellModel.borderWidth];
+    if ([cellModel.hotPicStr hasPrefix:@"http:"] || [cellModel.hotPicStr hasPrefix:@"https:"]) {
+        __weak typeof(self) weakSelf = self;
+        if (cellModel.hotBrand_loadImageCallback != nil) {
+            cellModel.hotBrand_loadImageCallback(weakSelf.hotImageView, [NSURL URLWithString:cellModel.hotPicStr]);
+        }
+    } else{
+        UIImage *image = [UIImage imageNamed:cellModel.hotPicStr];
+        if (!image) {
+            image = [UIImage imageWithContentsOfFile:cellModel.hotPicStr];
+        }
+        self.hotImageView.image = image;
+    }
+}
+- (void)cellOffsetOnCollectionView:(UICollectionView *)collectionView
+{
     
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
 }
 @end

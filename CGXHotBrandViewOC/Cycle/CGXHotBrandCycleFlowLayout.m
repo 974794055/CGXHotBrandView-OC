@@ -13,6 +13,36 @@
 {
     [super initializeData];
     self.offsetX = 0.5;
+    self.itemSectionCount = 1;
+    self.itemRowCount = 1;
+}
+- (void)prepareLayout
+{
+    [super prepareLayout];
+    NSInteger const numberOfSections = self.collectionView.numberOfSections;
+    for (int i = 0; i < numberOfSections; i++) {
+        // 从collectionView中获取到有多少个item
+        NSInteger itemTotalCount = [self.collectionView numberOfItemsInSection:i];
+        // 遍历出item的attributes,把它添加到管理它的属性数组中去
+        for (int j = 0; j < itemTotalCount; j++) {
+            NSIndexPath *indexpath = [NSIndexPath indexPathForItem:j inSection:i];
+            UICollectionViewLayoutAttributes *attributes = [[self layoutAttributesForItemAtIndexPath:indexpath] copy];
+            [self.attributesArrayM addObject:attributes];
+        }
+    }
+}
+
+/** 返回collectionView视图中所有视图的属性数组 */
+- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
+{
+    return self.attributesArrayM;
+}
+- (NSMutableArray *)attributesArrayM
+{
+    if (!_attributesArrayM) {
+        _attributesArrayM = [NSMutableArray array];
+    }
+    return _attributesArrayM;
 }
 /** 计算collectionView的滚动范围 */
 - (CGSize)collectionViewContentSize
@@ -30,8 +60,8 @@
         CGFloat itemHeight = sizeItem.height;
         
         id <CGXHotBrandCycleFlowLayoutDelegate> delegate  = (id <CGXHotBrandCycleFlowLayoutDelegate>)self.collectionView.delegate;
-        if (delegate && [delegate respondsToSelector:@selector(hotBrand_collectionView:ItemWidthAtheight:)]) {
-            itemWidth = [delegate hotBrand_collectionView:self.collectionView ItemWidthAtheight:itemHeight];
+        if (delegate && [delegate respondsToSelector:@selector(hotBrandCycleItemWidthAtheight:)]) {
+            itemWidth = [delegate hotBrandCycleItemWidthAtheight:itemHeight];
         }
         // 从collectionView中获取到有多少个item
         NSInteger itemTotalCount = [self.collectionView numberOfItemsInSection:i];
@@ -79,8 +109,8 @@
     CGFloat itemHeight = sizeItem.height;
     
     id <CGXHotBrandCycleFlowLayoutDelegate> delegate  = (id <CGXHotBrandCycleFlowLayoutDelegate>)self.collectionView.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(hotBrand_collectionView:ItemWidthAtheight:)]) {
-        itemWidth = [delegate hotBrand_collectionView:self.collectionView ItemWidthAtheight:itemHeight];
+    if (delegate && [delegate respondsToSelector:@selector(hotBrandCycleItemWidthAtheight:)]) {
+        itemWidth = [delegate hotBrandCycleItemWidthAtheight:itemHeight];
     }
 
     NSInteger item = indexPath.item;
@@ -102,4 +132,24 @@
     attributes.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
     return attributes;
 }
+
+- (NSInteger)gx_referenceAtSection:(NSInteger)section
+{
+    CGFloat sectionCount = self.itemSectionCount;
+    id <CGXHotBrandCycleFlowLayoutDelegate> delegate  = (id <CGXHotBrandCycleFlowLayoutDelegate>)self.collectionView.delegate;
+    if (delegate && [delegate respondsToSelector:@selector(hotBrandCycleSectionAtIndex:)]) {
+        sectionCount = [delegate hotBrandCycleSectionAtIndex:section];
+    }
+    return sectionCount;
+}
+- (NSInteger)gx_referenceAtRow:(NSInteger)row
+{
+    CGFloat count = self.itemRowCount;
+    id <CGXHotBrandCycleFlowLayoutDelegate> delegate  = (id <CGXHotBrandCycleFlowLayoutDelegate>)self.collectionView.delegate;
+    if (delegate && [delegate respondsToSelector:@selector(hotBrandCycleRowAtIndex:)]) {
+        count = [delegate hotBrandCycleRowAtIndex:row];
+    }
+    return count;
+}
+
 @end

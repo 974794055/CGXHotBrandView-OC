@@ -7,53 +7,17 @@
 //
 
 #import "CGXHotBrandView.h"
-
+#import "CGXHotBrandTools.h"
 #import "CGXHotBrandFlowlayout.h"
-#import "CGXHotBrandPageControl.h"
-#import "UIColor+CGXHotBrand.h"
-@interface CGXHotBrandView ()
+@interface CGXHotBrandView ()<CGXHotBrandFlowlayoutHotDelegate>
 
-@property (nonatomic, strong,readwrite) NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *dataArray;
-
-@property (nonatomic, strong) CGXHotBrandPageControl *pageControl;
+@property (nonatomic, strong) NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *dataArray;
 
 @end
 
 @implementation CGXHotBrandView
-- (void)setPagingEnabled:(BOOL)pagingEnabled
-{
-    _pagingEnabled = pagingEnabled;
-    self.collectionView.pagingEnabled = pagingEnabled;
-}
-- (void)setBounces:(BOOL)bounces
-{
-    _bounces = bounces;
-    self.collectionView.bounces = bounces;
-}
-- (void)setPageSelectColor:(UIColor *)pageSelectColor
-{
-    _pageSelectColor = pageSelectColor;
-    self.pageControl.currentPageIndicatorTintColor = pageSelectColor;
-}
-- (void)setPageNormalColor:(UIColor *)pageNormalColor
-{
-    _pageNormalColor = pageNormalColor;
-    self.pageControl.pageIndicatorTintColor = pageNormalColor;
-}
-- (void)setPageHeight:(CGFloat)pageHeight
-{
-    _pageHeight = pageHeight;
-}
-- (void)setIsHavePage:(BOOL)isHavePage
-{
-    _isHavePage = isHavePage;
-    self.pageControl.hidesForSinglePage = !isHavePage;
-}
-- (void)setShowType:(CGXHotBrandViewShowType)showType
-{
-    _showType = showType;
-    [self.collectionView reloadData];
-}
+
+
 - (void)setIsAnimation:(BOOL)isAnimation
 {
     _isAnimation = isAnimation;
@@ -62,56 +26,24 @@
 - (void)initializeData
 {
     [super initializeData];
-    self.pageHeight = 20;
-    self.pageSelectColor = [UIColor redColor];
-    self.pageNormalColor = [UIColor grayColor];
-    self.pagingEnabled = YES;
-    self.bounces = NO;
-    self.isHavePage = YES;
     self.isAnimation = NO;
-    self.showType = CGXHotBrandViewShowTypeRounded;
+    self.itemSectionCount = 2;
+    self.itemRowCount = 4;
+    self.isHavePage = YES;
 }
 - (void)initializeViews
 {
     [super initializeViews];
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     self.collectionView.pagingEnabled = self.pagingEnabled;
-    
-    self.pageControl = [[CGXHotBrandPageControl alloc] init];
-    [self addSubview:self.pageControl];
-    
-    [self reloadData];
-    
-    if (@available(iOS 14.0, *)) {
-        self.pageControl.backgroundStyle = UIPageControlBackgroundStyleMinimal;
-//        self.pageControl.preferredIndicatorImage = [UIImage systemImageNamed:@"sun.max.fill"];//系统图片
-//        self.pageControl.preferredIndicatorImage = [UIImage imageNamed:@"flight"];//自定义图片
-//        [self.pageControl setIndicatorImage:[UIImage systemImageNamed:@"moon.fill"] forPage:0];
-    }
+    [self.collectionView reloadData];
 }
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (self.isHavePage) {
-        self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.frame)-self.pageHeight-self.minimumLineSpacing, CGRectGetWidth(self.frame), self.pageHeight);
-        self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-self.pageHeight-self.minimumLineSpacing);
-    } else{
-        self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
-    }
-    self.pageControl.currentPageIndicatorTintColor = self.pageSelectColor;
-    self.pageControl.pageIndicatorTintColor = self.pageNormalColor;
-    [self.pageControl setTransform:CGAffineTransformMakeScale(1, 1)];
-    self.pageControl.hidesForSinglePage = !self.isHavePage;
-    [self.pageControl setHidden:!self.isHavePage];
-    
-    [self reloadData];
-}
-- (void)reloadData
-{
-    self.collectionView.collectionViewLayout = [self preferredFlowLayout];
-    [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView reloadData];
 }
+
 /*
  自定义layout
  */
@@ -119,9 +51,10 @@
 {
     [super preferredFlowLayout];
     if (self.pagingEnabled == YES) {
-    CGXHotBrandFlowlayout *layout = [[CGXHotBrandFlowlayout alloc] init];
-    layout.itemSectionCount = self.itemSectionCount;
-    layout.itemRowCount = self.itemRowCount;
+        CGXHotBrandFlowlayout *layout = [[CGXHotBrandFlowlayout alloc] init];
+        layout.itemSectionCount = self.itemSectionCount;
+        layout.itemRowCount = self.itemRowCount;
+        layout.hotDelegate = self;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         return layout;
     }else{
@@ -146,6 +79,25 @@
     }
     return _dataArray;
 }
+- (void)setItemRowCount:(NSInteger)itemRowCount
+{
+    _itemRowCount = itemRowCount;
+    NSAssert(itemRowCount>=1, @"数据源类型不对，itemRowCount至少大于等于1");
+}
+- (void)setItemSectionCount:(NSInteger)itemSectionCount
+{
+    _itemSectionCount = itemSectionCount;
+    NSAssert(itemSectionCount>=1, @"数据源类型不对，itemSectionCount至少大于等于1");
+}
+- (NSInteger)hotBrandItemSectionAtIndex:(NSInteger)section
+{
+    return self.itemSectionCount;
+}
+- (NSInteger)hotBrandItemRowAtIndex:(NSInteger)section
+{
+    return self.itemRowCount;
+}
+
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return self.edgeInsets;
 }
@@ -164,62 +116,24 @@
     CGFloat height = (CGRectGetHeight(collectionView.frame) - spaceH-self.minimumLineSpacing*(self.itemSectionCount-1)) / self.itemSectionCount;
     return CGSizeMake(width, height);
 }
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (NSInteger)gx_hotBrandNumberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+    [super gx_hotBrandNumberOfSectionsInCollectionView:collectionView];
     return self.dataArray.count;
 }
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)gx_hotBrandCollectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    [super gx_hotBrandCollectionView:collectionView numberOfItemsInSection:section];
     NSMutableArray *sectionArr = self.dataArray[section];
     return sectionArr.count;
 }
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([self preferredCellClass]) forIndexPath:indexPath];
-    if ([self.delegate respondsToSelector:@selector(gx_hotBrandCellClassForBaseView:)] && [self.delegate gx_hotBrandCellClassForBaseView:self]) {
-        return cell;
-    }else if ([self.delegate respondsToSelector:@selector(gx_hotBrandCellNibForBaseView:)] && [self.delegate gx_hotBrandCellNibForBaseView:self]) {
-        return cell;
-    }
-    return cell;
+    [super gx_hotBrandCollectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
 }
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray *sectionArr = self.dataArray[indexPath.section];
-    CGXHotBrandModel *cellModel = sectionArr[indexPath.row];
-    BOOL isHave = [cell respondsToSelector:@selector(updateWithHotBrandCellModel:Section:Row:)];
-    if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
-        [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];
-    }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandView:cellForItemAtIndexPath:AtCell:AtModel:)]) {
-        [self.dataSource gx_hotBrandView:self cellForItemAtIndexPath:indexPath AtCell:cell AtModel:cellModel];
-    }
-    if ([cell isKindOfClass:[CGXHotBrandCell class]]) {
-        CGXHotBrandCell *cellNe = (CGXHotBrandCell *)cell;
-        [cellNe updateWithSHowType:self.showType IsAnimation:self.isAnimation];
-    }
-}
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSMutableArray *sectionArr = self.dataArray[indexPath.section];
-    CGXHotBrandModel *cellModel = sectionArr[indexPath.row];
-    
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandView:didSelectItemAtIndexPath:AtModel:)]) {
-        [self.dataSource gx_hotBrandView:self didSelectItemAtIndexPath:indexPath AtModel:cellModel];
-    }
-    
-}
-- (void)updateWithDataArray:(NSMutableArray<NSMutableArray<CGXHotBrandModel *> *> *)dataArray;
-{
-    [self.dataArray removeAllObjects];
-    [self.dataArray addObjectsFromArray:dataArray];
-    
-    self.pageControl.numberOfPages = dataArray.count;
-    self.pageControl.currentPage = 0;
-    [self.collectionView reloadData];
-    
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
+    [super gx_hotBrandCollectionView:collectionView didSelectItemAtIndexPath:indexPath];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -227,23 +141,70 @@
     NSInteger itemIndex = [self currentIndex];
     self.pageControl.currentPage = itemIndex;
 }
+- (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray
+{
+    [self.dataArray removeAllObjects];
+    NSMutableArray *listArr = [CGXHotBrandTools splitArray:dataArray withSubSize:self.itemSectionCount*self.itemRowCount];
+    if (self.pagingEnabled) {
+        [self.dataArray addObjectsFromArray:listArr];
+        self.pageControl.numberOfPages = listArr.count;
+        self.pageControl.currentPage = 0;
+        
+    }else{
+        self.pageControl.numberOfPages = listArr.count;
+        self.pageControl.currentPage = 0;
+        [self.dataArray addObject:dataArray];
+    }
+    self.totalInter = listArr.count;
+    [self.collectionView reloadData];
+}
+// 更新某个item
+- (void)updateWithItemModel:(CGXHotBrandModel *)itemModel AtIndexPath:(NSIndexPath *)indexPath
+{
+    for (int i = 0; i<self.dataArray.count; i++) {
+        if (indexPath.section == i) {
+            NSMutableArray *array = [NSMutableArray arrayWithArray:self.dataArray[i]];
+            for (int j = 0; j<array.count; j++) {
+                if (indexPath.row == j) {
+                    [array replaceObjectAtIndex:j withObject:itemModel];
+                    break;;
+                }
+            }
+            [self.dataArray replaceObjectAtIndex:i withObject:array];
+            [UIView animateWithDuration:0 animations:^{
+                [self.collectionView performBatchUpdates:^{
+                    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:i]];
+                    [self.collectionView reloadData];
+                } completion:nil];
+            }];
+            break;
+        }
+    }
+}
+
 - (int)currentIndex
 {
+    [super currentIndex];
     if (self.collectionView.frame.size.width == 0 || self.collectionView.frame.size.height == 0) {
         return 0;
     }
-    int index = (self.collectionView.contentOffset.x + self.collectionView.frame.size.width* 0.5) / self.collectionView.frame.size.width;
+    int index = self.collectionView.contentOffset.x / self.collectionView.frame.size.width;
     return MAX(0, index);
 }
 
-
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (CGXHotBrandModel *)pageIndexWithCurrentCellModelAtIndexPath:(NSIndexPath *)indexPath
+{
+    [super pageIndexWithCurrentCellModelAtIndexPath:indexPath];
+    NSMutableArray *sectionArr = self.dataArray[indexPath.section];
+    CGXHotBrandModel *cellModel = sectionArr[indexPath.row];
+    return cellModel;
 }
-*/
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end

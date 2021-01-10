@@ -13,6 +13,11 @@
 - (void)initializeData
 {
     [super initializeData];
+    self.itemSectionCount = 2;
+    self.itemRowCount = 4;
+}
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return ![self.collectionView isPagingEnabled];
 }
 /** 计算collectionView的滚动范围 */
 - (CGSize)collectionViewContentSize {
@@ -88,6 +93,26 @@
     // 每个item的frame
     attributes.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
     return attributes;
+}
+
+
+- (NSInteger)gx_referenceAtSection:(NSInteger)section
+{
+    CGFloat sectionCount = self.itemSectionCount;
+    id <CGXHotBrandFlowlayoutHotDelegate> delegate  = (id <CGXHotBrandFlowlayoutHotDelegate>)self.collectionView.delegate;
+    if (delegate && [delegate respondsToSelector:@selector(hotBrandItemSectionAtIndex:)]) {
+        sectionCount = [delegate hotBrandItemSectionAtIndex:section];
+    }
+    return sectionCount;
+}
+- (NSInteger)gx_referenceAtRow:(NSInteger)row
+{
+    CGFloat count = self.itemRowCount;
+    id <CGXHotBrandFlowlayoutHotDelegate> delegate  = (id <CGXHotBrandFlowlayoutHotDelegate>)self.collectionView.delegate;
+    if (delegate && [delegate respondsToSelector:@selector(hotBrandItemRowAtIndex:)]) {
+        count = [delegate hotBrandItemRowAtIndex:row];
+    }
+    return count;
 }
 
 @end

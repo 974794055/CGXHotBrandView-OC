@@ -9,19 +9,34 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#import "HotViewController.h"
+#import "CycleViewController.h"
+#import "CardViewController.h"
+#import "ZoomViewController.h"
+#import "ScrollViewController.h"
+
 
 #import "CustomCollectionViewCell.h"
-#define KScreenWidth  [UIScreen mainScreen].bounds.size.width
-#define KScreenHeight [UIScreen mainScreen].bounds.size.height
 
+
+#if __has_include(<CGXHotBrandViewOC/CGXHotBrandViewOC.h>)
 #import <CGXHotBrandViewOC/CGXHotBrandViewOC.h>
-#define KRandom(X)    arc4random_uniform(X)/255.0
+#import "CGXHotBrandViewOC.h"
+#else
+#import "CGXHotBrandViewOC.h"
+#endif
 
-
+#if __has_include(<SDWebImage/UIImageView+WebCache.h>)
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIButton+WebCache.h>
 #import <SDWebImage/SDWebImageDownloader.h>
+#else
+#import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
+#import "SDWebImageDownloader.h"
+#endif
 
+#import "CustomTitleView.h"
 
 //屏幕宽
 #define ScreenWidth   [UIScreen mainScreen].bounds.size.width
@@ -40,6 +55,10 @@
 #define kTabBarHeight  ((kStatusBarHeight>20) ? (49.0f+34.0f) : 49.0f)
 #define kVCHeight (ScreenHeight-kTopHeight-kTabBarHeight)
 #define kSafeVCHeight (kStatusBarHeight>20?(ScreenHeight-kTopHeight-34):(ScreenHeight-kTopHeight))
+
+#define BannerColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define RGB(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/255.0]
+#define RandomColor RGB(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
 
 
 // Include any system framework and library headers here that should be included in all compilation units.

@@ -14,14 +14,6 @@
 
 @property (nonatomic, strong,readwrite) NSMutableArray<CGXHotBrandModel *> *dataArray;
 
-@property (nonatomic, assign) NSInteger totalInter;
-
-/** 定时器 */
-@property (nonatomic, weak) NSTimer *timer;
-
-/** 自动滚动间隔时间,默认0.1s */
-@property (nonatomic, assign) CGFloat autoScrollTimeInterval;
-
 @end
 
 @implementation CGXHotBrandCycleView
@@ -31,10 +23,13 @@
     self.offsetX = 0.5;
     self.totalInter = 11;
     self.widthSpace = 1.0;
-    self.autoScrollTimeInterval = 0.1;
-    self.autoScroll = YES;
     
     self.scrollOffsetX = 10;
+    self.itemSectionCount = 2;
+    self.itemRowCount = 4;
+    self.autoScrollTimeInterval = 0.1;
+    
+    self.isHavePage = NO;
 }
 - (void)initializeViews
 {
@@ -102,51 +97,57 @@
     CGFloat height = (CGRectGetHeight(collectionView.frame) - spaceH-self.minimumLineSpacing*(self.itemSectionCount-1)) / self.itemSectionCount;
     return CGSizeMake(width, height);
 }
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (NSInteger)gx_hotBrandNumberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+    [super gx_hotBrandNumberOfSectionsInCollectionView:collectionView];
     return 1;
 }
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)gx_hotBrandCollectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return  self.dataArray.count * self.totalInter;
+    [super gx_hotBrandCollectionView:collectionView numberOfItemsInSection:section];
+    return   self.dataArray.count * self.totalInter;
 }
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([self preferredCellClass]) forIndexPath:indexPath];
-    if ([self.delegate respondsToSelector:@selector(gx_hotBrandCellClassForBaseView:)] && [self.delegate gx_hotBrandCellClassForBaseView:self]) {
-        return cell;
-    }else if ([self.delegate respondsToSelector:@selector(gx_hotBrandCellNibForBaseView:)] && [self.delegate gx_hotBrandCellNibForBaseView:self]) {
-        return cell;
-    }
-    return cell;
+    [super gx_hotBrandCollectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
+//    CGXHotBrandModel *cellModel = [self pageIndexWithCurrentCellModelAtIndexPath:indexPath];
 }
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    int rowInter = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
-    CGXHotBrandModel *cellModel = self.dataArray[rowInter];
-    BOOL isHave = [cell respondsToSelector:@selector(updateWithHotBrandCellModel:Section:Row:)];
-    if (isHave == YES && [cell conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
-        [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)cell updateWithHotBrandCellModel:cellModel Section:indexPath.section Row:indexPath.row];
-    }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandCycleView:cellForItemAtIndexPath:AtCell:AtModel:)]) {
-        [self.dataSource gx_hotBrandCycleView:self cellForItemAtIndexPath:indexPath AtCell:cell AtModel:cellModel];
-    }
+    [super gx_hotBrandCollectionView:collectionView didSelectItemAtIndexPath:indexPath];
+//    CGXHotBrandModel *cellModel = [self pageIndexWithCurrentCellModelAtIndexPath:indexPath];
 }
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)setItemRowCount:(NSInteger)itemRowCount
 {
-    int rowInter = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
-    CGXHotBrandModel *cellModel = self.dataArray[rowInter];
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(gx_hotBrandCycleView:didSelectItemAtIndexPath:AtModel:)]) {
-        [self.dataSource gx_hotBrandCycleView:self didSelectItemAtIndexPath:indexPath AtModel:cellModel];
-    }
-    
+    _itemRowCount = itemRowCount;
+    NSAssert(itemRowCount>=1, @"数据源类型不对，itemRowCount至少大于等于1");
 }
-- (CGFloat)hotBrand_collectionView:(UICollectionView *)collectionView ItemWidthAtheight:(CGFloat)height
+- (void)setItemSectionCount:(NSInteger)itemSectionCount
+{
+    _itemSectionCount = itemSectionCount;
+    NSAssert(itemSectionCount>=2, @"数据源类型不对，itemSectionCount至少大于等于2");
+}
+- (NSInteger)hotBrandCycleSectionAtIndex:(NSInteger)section
+{
+    return self.itemSectionCount;
+}
+- (NSInteger)hotBrandCycleRowAtIndex:(NSInteger)section
+{
+    return self.itemRowCount;
+}
+- (CGFloat)hotBrandCycleItemWidthAtheight:(CGFloat)height
 {
     if (self.widthSpace > 0) {
         return height * self.widthSpace;
     }
     return height;
+}
+- (CGXHotBrandModel *)pageIndexWithCurrentCellModelAtIndexPath:(NSIndexPath *)indexPath
+{
+    [super pageIndexWithCurrentCellModelAtIndexPath:indexPath];
+    int rowInter = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
+    CGXHotBrandModel *cellModel = self.dataArray[rowInter];
+    return cellModel;
 }
 - (int)pageControlIndexWithCurrentCellIndex:(NSInteger)index
 {
@@ -182,57 +183,16 @@
         [self setupTimer];
     }
 }
-
+- (void)automaticScroll
+{
+    [super automaticScroll];
+    [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x+self.scrollOffsetX, 0) animated:YES];
+}
 - (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray;
 {
     [self.dataArray removeAllObjects];
     [self.dataArray addObjectsFromArray:dataArray];
     [self.collectionView reloadData];
-}
-
-#pragma mark - 定时器
-- (void)setupTimer
-{
-    if (self.timer || self.autoScrollTimeInterval <= 0) {
-        return;
-    }
-    [self invalidateTimer]; // 创建定时器前先停止定时器，不然会出现僵尸定时器，导致轮播频率错误
-    
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollTimeInterval target:self selector:@selector(automaticScroll) userInfo:nil repeats:YES];
-    self.timer = timer;
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-}
-// 停止定时器
-- (void)invalidateTimer
-{
-    if (!self.timer) {
-        return;
-    }
-    [self.timer  invalidate];
-    self.timer  = nil;
-}
-- (void)automaticScroll
-{
-    [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x+self.scrollOffsetX, 0) animated:YES];
-}
--(void)setAutoScroll:(BOOL)autoScroll{
-    _autoScroll = autoScroll;
-    [self invalidateTimer];
-    if (_autoScroll) {
-        [self setupTimer];
-    }
-}
-- (void)setAutoScrollTimeInterval:(CGFloat)autoScrollTimeInterval
-{
-    _autoScrollTimeInterval = autoScrollTimeInterval;
-    [self setAutoScroll:self.autoScroll];
-}
-
-//解决当timer释放后 回调scrollViewDidScroll时访问野指针导致崩溃
-- (void)dealloc {
-    
-    self.collectionView.delegate = nil;
-    self.collectionView.dataSource = nil;
 }
 
 

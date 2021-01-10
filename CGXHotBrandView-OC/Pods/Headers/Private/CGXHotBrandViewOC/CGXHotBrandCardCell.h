@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/Card/CGXHotBrandCardCell.h

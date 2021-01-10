@@ -8,7 +8,7 @@
 
 #import "CycleViewController.h"
 
-@interface CycleViewController ()<CGXHotBrandCustomViewDelegate,CGXHotBrandCycleViewDataSource>
+@interface CycleViewController ()<CGXHotBrandCustomViewDelegate>
 
 
 @end
@@ -18,26 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationController.navigationBar.translucent = NO;
-    self.extendedLayoutIncludesOpaqueBars = NO;
-    if (@available(iOS 11.0, *)) {
-        [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        // Fallback on earlier versions
-    }
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    }
-    
+
     for (int i = 0; i<2; i++) {
         CGXHotBrandCycleView *hotBrandView = [[CGXHotBrandCycleView alloc] init];
         hotBrandView.delegate = self;
-        hotBrandView.dataSource = self;
         hotBrandView.minimumLineSpacing = 10;
         hotBrandView.minimumInteritemSpacing = 10;
         hotBrandView.edgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
@@ -46,7 +30,7 @@
         
         hotBrandView.autoScroll = (i == 0 ? YES : NO);
         hotBrandView.offsetX = 0.5;
-        CGFloat height = (ScreenHeight-kTopHeight-kTabBarHeight-30)/2.0;
+        CGFloat height = (ScreenHeight-kTopHeight-kSafeHeight-30)/2.0;
         if (i == 0) {
             hotBrandView.widthSpace = 1;
             hotBrandView.frame = CGRectMake(0, 10,ScreenWidth , height);
@@ -61,26 +45,39 @@
         for (int i = 0; i< 15; i++) {
             CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
             model.itemColor = [UIColor whiteColor];
-            model.hotPicStr = @"HotIcon";
+            model.hotPicStr = @"HotIcon0";
             [dataArray2 addObject:model];
+            model.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
+                [hotImageView sd_setImageWithURL:hotImageURL];
+            };
         }
         [hotBrandView updateWithDataArray:dataArray2];
     }
     
 }
-- (Class)gx_hotBrandCellClassForBaseView:(CGXHotBrandBaseView *)hotView
+//- (Class)gx_hotBrandCellClassForBaseView:(CGXHotBrandBaseView *)hotView
+//{
+//    return CustomCollectionViewCell.class;
+//}
+/*点击cell*/
+- (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView didSelectItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
-    return CustomCollectionViewCell.class;
+    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
 }
-- (void)gx_hotBrandCycleView:(CGXHotBrandCycleView *)hotView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath AtModel:(nonnull CGXHotBrandModel *)hotModel
+/*滚动结束cell*/
+- (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView ScrollItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
-    NSLog(@"didSelectItemAtIndexPath: %@" , hotModel.hotPicStr);
+    NSLog(@"ScrollItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+
 }
-- (void)gx_hotBrandCycleView:(CGXHotBrandCycleView *)hotView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath AtCell:(nonnull UICollectionViewCell *)cell AtModel:(nonnull CGXHotBrandModel *)hotModel
+/* cell数据交互处理*/
+- (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView cellForItemAtIndexPath:(NSIndexPath *)indexPath AtCell:(UICollectionViewCell *)cell AtModel:(CGXHotBrandModel *)hotModel
 {
-    CustomCollectionViewCell *newcell = (CustomCollectionViewCell *)cell;
-    newcell.hotImageView.image = [UIImage imageNamed:hotModel.hotPicStr];
-    //    [newcell.hotImageView sd_setImageWithURL:[NSURL URLWithString:hotModel.hotPicStr]];
+//    NSLog(@"%@---%@" , hotModel.titleStr,hotModel.dataModel);
+//    CustomCollectionViewCell *newcell = (CustomCollectionViewCell *)cell;
+//    NSLog(@"cellForItemAtIndexPath： %@" , cell);
+//    [newcell.hotImageView sd_setImageWithURL:[NSURL URLWithString:hotModel.hotPicStr]];
+//    newcell.hotImageView.image = [UIImage imageNamed:hotModel.hotPicStr];
 }
 
 @end

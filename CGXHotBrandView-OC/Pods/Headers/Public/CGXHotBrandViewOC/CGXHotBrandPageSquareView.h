@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/PageControl/CGXHotBrandPageSquareView.h

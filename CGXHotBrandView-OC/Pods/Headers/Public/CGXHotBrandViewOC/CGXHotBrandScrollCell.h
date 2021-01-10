@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/Scroll/CGXHotBrandScrollCell.h

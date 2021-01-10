@@ -10,31 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol CGXHotBrandBaseFlowLayoutDelegate <NSObject>
-@optional
-
-- (NSInteger)hotBrand_collectionView:(UICollectionView *)collectionView
-                              layout:(UICollectionViewLayout*)collectionViewLayout
-                      SectionAtIndex:(NSInteger)section;
-- (NSInteger)hotBrand_collectionView:(UICollectionView *)collectionView
-                              layout:(UICollectionViewLayout*)collectionViewLayout
-                          RowAtIndex:(NSInteger)section;
-
-@end
-
 @interface CGXHotBrandBaseFlowLayout : UICollectionViewFlowLayout
 
-@property (nonatomic , weak) id<CGXHotBrandBaseFlowLayoutDelegate>delegate;
-
-/** 多少行 */
-@property (nonatomic, assign) NSInteger itemSectionCount;
-/** 每行展示多少个item */
-@property (nonatomic, assign) NSInteger itemRowCount;
-
-/** 所有item的属性数组 */
-@property (nonatomic, strong) NSMutableArray *attributesArrayM;
-
 - (void)initializeData NS_REQUIRES_SUPER;
+
+
+- (NSArray *)getCopyOfAttributes:(NSArray *)attributes;
 
 @end
 
@@ -58,8 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param indexPath  分区
 - (CGSize)gx_sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 
-- (NSInteger)gx_referenceAtSection:(NSInteger)section;
-- (NSInteger)gx_referenceAtRow:(NSInteger)row;
 
 @end
 

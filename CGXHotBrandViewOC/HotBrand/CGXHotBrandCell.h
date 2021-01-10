@@ -15,9 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong) UILabel *titleLabel;
 @property (nonatomic , strong)CGXHotBrandTagLabel *tagLabel;
 
-
-- (void)updateWithSHowType:(CGXHotBrandViewShowType)showType IsAnimation:(BOOL)isAnimation;
-
 @end
 
 NS_ASSUME_NONNULL_END
