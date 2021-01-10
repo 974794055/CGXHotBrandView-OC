@@ -35,7 +35,6 @@
 #import "CGXHotBrandZoomView.h"
 #import "CGXHotBrandZoomCell.h"
 
-
 #import "CGXHotBrandScrollView.h"
 #import "CGXHotBrandScrollCell.h"
 

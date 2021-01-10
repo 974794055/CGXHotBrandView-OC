@@ -131,3 +131,4 @@ QQ群：
 ## License
 
 CGXHotBrandViewOC is released under the MIT license.
+

@@ -68,6 +68,7 @@
     }
     return [arr copy];
 }
+
 - (void)updateColor
 {
     [self.collectionView reloadData];
