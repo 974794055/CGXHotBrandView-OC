@@ -1,30 +1,28 @@
 PODS:
-  - CGXHotBrandViewOC (0.0.3):
-    - CGXHotBrandViewOC/Base (= 0.0.3)
-    - CGXHotBrandViewOC/Card (= 0.0.3)
-    - CGXHotBrandViewOC/Carousel (= 0.0.3)
-    - CGXHotBrandViewOC/Custom (= 0.0.3)
-    - CGXHotBrandViewOC/Cycle (= 0.0.3)
-    - CGXHotBrandViewOC/HotBrand (= 0.0.3)
-    - CGXHotBrandViewOC/PageControl (= 0.0.3)
-    - CGXHotBrandViewOC/Scroll (= 0.0.3)
-    - CGXHotBrandViewOC/Zoom (= 0.0.3)
-  - CGXHotBrandViewOC/Base (0.0.3):
+  - CGXHotBrandViewOC (0.0.5):
+    - CGXHotBrandViewOC/Base (= 0.0.5)
+    - CGXHotBrandViewOC/Card (= 0.0.5)
+    - CGXHotBrandViewOC/Custom (= 0.0.5)
+    - CGXHotBrandViewOC/Cycle (= 0.0.5)
+    - CGXHotBrandViewOC/HotBrand (= 0.0.5)
+    - CGXHotBrandViewOC/PageControl (= 0.0.5)
+    - CGXHotBrandViewOC/Scroll (= 0.0.5)
+    - CGXHotBrandViewOC/Zoom (= 0.0.5)
+  - CGXHotBrandViewOC/Base (0.0.5):
     - CGXHotBrandViewOC/Custom
-  - CGXHotBrandViewOC/Card (0.0.3):
+    - CGXHotBrandViewOC/PageControl
+  - CGXHotBrandViewOC/Card (0.0.5):
     - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/Carousel (0.0.3):
+  - CGXHotBrandViewOC/Custom (0.0.5)
+  - CGXHotBrandViewOC/Cycle (0.0.5):
     - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/Custom (0.0.3)
-  - CGXHotBrandViewOC/Cycle (0.0.3):
-    - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/HotBrand (0.0.3):
+  - CGXHotBrandViewOC/HotBrand (0.0.5):
     - CGXHotBrandViewOC/Base
     - CGXHotBrandViewOC/PageControl
-  - CGXHotBrandViewOC/PageControl (0.0.3)
-  - CGXHotBrandViewOC/Scroll (0.0.3):
+  - CGXHotBrandViewOC/PageControl (0.0.5)
+  - CGXHotBrandViewOC/Scroll (0.0.5):
     - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/Zoom (0.0.3):
+  - CGXHotBrandViewOC/Zoom (0.0.5):
     - CGXHotBrandViewOC/Base
   - SDWebImage (5.10.2):
     - SDWebImage/Core (= 5.10.2)
@@ -43,7 +41,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CGXHotBrandViewOC: 2401ad731fafcac8054aa2d1f13c6fb972c5d199
+  CGXHotBrandViewOC: 450955144578ca5effe715ba1b43da0324644727
   SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
 
 PODFILE CHECKSUM: 12d4863de68581180da27419bd5ac8c84453181a

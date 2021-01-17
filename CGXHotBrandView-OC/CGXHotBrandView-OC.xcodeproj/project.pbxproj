@@ -25,7 +25,6 @@
 		B55E334F25A9D492005FB601 /* CustomTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B55E334E25A9D492005FB601 /* CustomTitleView.m */; };
 		B55F82012588F6750018472C /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55F82002588F6750018472C /* CustomCollectionViewCell.m */; };
 		B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDEE75258B8B6E00359A78 /* CycleViewController.m */; };
-		B5EDEE79258B993C00359A78 /* HotImagw.png in Resources */ = {isa = PBXBuildFile; fileRef = B5EDEE78258B993C00359A78 /* HotImagw.png */; };
 		B627137E971B883F05749DA6 /* libPods-CGXHotBrandView-OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +62,6 @@
 		B5DA5E20258A5B100044A0CF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B5EDEE74258B8B6E00359A78 /* CycleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CycleViewController.h; sourceTree = "<group>"; };
 		B5EDEE75258B8B6E00359A78 /* CycleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CycleViewController.m; sourceTree = "<group>"; };
-		B5EDEE78258B993C00359A78 /* HotImagw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HotImagw.png; sourceTree = "<group>"; };
 		C7CB7AD86E851CBE37EBCA1C /* Pods-CGXHotBrandView-OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.debug.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.debug.xcconfig"; sourceTree = "<group>"; };
 		DF9AC596FFE1958157B59526 /* Pods-CGXHotBrandView-OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.release.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,12 +127,11 @@
 				B55790C425A363A50087B030 /* ScrollViewController.m */,
 				B55F81FF2588F6750018472C /* CustomCollectionViewCell.h */,
 				B55F82002588F6750018472C /* CustomCollectionViewCell.m */,
-				B5DA5E20258A5B100044A0CF /* PrefixHeader.pch */,
 				0460C2B225A55B2B007AFAEB /* BaseViewController.h */,
 				0460C2B325A55B2B007AFAEB /* BaseViewController.m */,
 				B55E334D25A9D492005FB601 /* CustomTitleView.h */,
 				B55E334E25A9D492005FB601 /* CustomTitleView.m */,
-				B5EDEE78258B993C00359A78 /* HotImagw.png */,
+				B5DA5E20258A5B100044A0CF /* PrefixHeader.pch */,
 				04AD1F72258711F600B7544D /* Main.storyboard */,
 				04AD1F75258711FC00B7544D /* Assets.xcassets */,
 				04AD1F77258711FC00B7544D /* LaunchScreen.storyboard */,
@@ -224,7 +221,6 @@
 				04AD1F76258711FC00B7544D /* Assets.xcassets in Resources */,
 				04BFA24C2599A7B50042801C /* CGXHotBrandViewOC.podspec in Resources */,
 				04BFA24A2599A7B50042801C /* README.md in Resources */,
-				B5EDEE79258B993C00359A78 /* HotImagw.png in Resources */,
 				04AD1F74258711F600B7544D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

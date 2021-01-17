@@ -12,7 +12,6 @@
 #import "CGXHotBrandBaseCell.h"
 #import "CGXHotBrandModel.h"
 
-#import "UIColor+CGXHotBrand.h"
 #import "UIImage+CGXHotBrand.h"
 #import "CGXHotBrandPageSquareView.h"
 @interface CGXHotBrandBaseView ()<UICollectionViewDataSource,UICollectionViewDelegate>
@@ -161,10 +160,10 @@
     [self gx_hotBrandCollectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
     return cell;
 }
-//- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-//{
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
 //    [self gx_hotBrandCollectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
-//}
+}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self gx_hotBrandCollectionView:collectionView didSelectItemAtIndexPath:indexPath];

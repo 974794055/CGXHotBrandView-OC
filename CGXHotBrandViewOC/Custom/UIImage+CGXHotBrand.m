@@ -16,11 +16,11 @@
  *
  *  @return 纯色图片
  */
-+ (UIImage *)gx_imageWithColor:(UIColor *)color
++ (UIImage *)gx_hotBrandImageWithColor:(UIColor *)color
 {
-    return [self gx_imageWithColor:color Size:CGSizeMake(1, 1)];
+    return [self gx_hotBrandImageWithColor:color Size:CGSizeMake(1, 1)];
 }
-+ (UIImage *)gx_imageWithColor:(UIColor *)color Size:(CGSize)size
++ (UIImage *)gx_hotBrandImageWithColor:(UIColor *)color Size:(CGSize)size
 {
     if (!color) {
         color = [[UIColor whiteColor] colorWithAlphaComponent:0];
@@ -38,7 +38,7 @@
     return image;
 }
 
-- (UIImage *)gx_imageWithCornerRadius:(CGFloat)radius
+- (UIImage *)gx_hotBrandImageWithCornerRadius:(CGFloat)radius
 {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0f);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -63,7 +63,7 @@
     return image;
 }
 //高效添加圆角图片
-- (UIImage*)gx_imageWithCornerRadius:(CGFloat)radius andSize:(CGSize)size
+- (UIImage*)gx_hotBrandImageWithCornerRadius:(CGFloat)radius andSize:(CGSize)size
 {
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     
@@ -79,7 +79,7 @@
     return newImage;
 }
 
-+ (UIImage *)gx_imageWithRoundImage:(UIImage *)image
++ (UIImage *)gx_hotBrandImageWithRoundImage:(UIImage *)image
 {
     CGFloat width = image.size.width;
     CGFloat height = image.size.height;
@@ -101,7 +101,7 @@
 }
 
 
-+ (UIImage *)gx_cornerRadiusImageWithColor:(UIColor *)tintColor targetSize:(CGSize)targetSize corners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor
++ (UIImage *)gx_hotBrandRadiusImageWithColor:(UIColor *)tintColor targetSize:(CGSize)targetSize corners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor
 {
     UIGraphicsBeginImageContextWithOptions(targetSize, YES, [UIScreen mainScreen].scale);
     
@@ -135,12 +135,12 @@
     return finalImage;
 }
 
-+ (UIImage *)gx_triangleImageWithSize:(CGSize)size color:(UIColor *)color direction:(TriangleDirection)direction
++ (UIImage *)gx_hotBrandTriangleImageWithSize:(CGSize)size color:(UIColor *)color direction:(TriangleDirection)direction
 {
     size = CGSizeMake(size.width*[UIScreen mainScreen].scale, size.height*[UIScreen mainScreen].scale);
     
     CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
-    UIImage *myImage = [UIImage gx_imageWithColor:color Size:size];
+    UIImage *myImage = [UIImage gx_hotBrandImageWithColor:color Size:size];
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGPoint sPoints[3];//坐标点

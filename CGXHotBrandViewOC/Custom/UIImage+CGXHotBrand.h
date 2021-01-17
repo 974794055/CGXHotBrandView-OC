@@ -22,16 +22,16 @@ typedef NS_ENUM(NSInteger, TriangleDirection) { // 生成三角图片方向
  *  @param color 颜色
  *  @return 纯色图片
  */
-+ (UIImage *)gx_imageWithColor:(UIColor *)color;
-+ (UIImage *)gx_imageWithColor:(UIColor *)color Size:(CGSize)size;
++ (UIImage *)gx_hotBrandImageWithColor:(UIColor *)color;
++ (UIImage *)gx_hotBrandImageWithColor:(UIColor *)color Size:(CGSize)size;
 /** 圆角图片 */
-- (UIImage *)gx_imageWithCornerRadius:(CGFloat)radius;
+- (UIImage *)gx_hotBrandImageWithCornerRadius:(CGFloat)radius;
 
 /** 圆角图片 */
-- (UIImage*)gx_imageWithCornerRadius:(CGFloat)radius andSize:(CGSize)size;
+- (UIImage*)gx_hotBrandImageWithCornerRadius:(CGFloat)radius andSize:(CGSize)size;
 
 /** 圆形图片 */
-+ (UIImage *)gx_imageWithRoundImage:(UIImage *)image;
++ (UIImage *)gx_hotBrandImageWithRoundImage:(UIImage *)image;
 
 /**
  生成带圆角的颜色图片
@@ -41,13 +41,19 @@ typedef NS_ENUM(NSInteger, TriangleDirection) { // 生成三角图片方向
  @param cornerRadius 圆角大小
  @param backgroundColor 背景颜色
  */
-+ (UIImage *)gx_cornerRadiusImageWithColor:(UIColor *)tintColor targetSize:(CGSize)targetSize corners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor;
++ (UIImage *)gx_hotBrandRadiusImageWithColor:(UIColor *)tintColor
+                                targetSize:(CGSize)targetSize
+                                   corners:(UIRectCorner)corners
+                              cornerRadius:(CGFloat)cornerRadius
+                           backgroundColor:(UIColor *)backgroundColor;
 
 /// 生成三角图片
 /// @param size 尺寸
 /// @param color 颜色
 /// @param direction 三角方向
-+ (UIImage *)gx_triangleImageWithSize:(CGSize)size color:(UIColor *)color direction:(TriangleDirection)direction;
++ (UIImage *)gx_hotBrandTriangleImageWithSize:(CGSize)size
+                                color:(UIColor *)color
+                            direction:(TriangleDirection)direction;
 @end
 
 NS_ASSUME_NONNULL_END

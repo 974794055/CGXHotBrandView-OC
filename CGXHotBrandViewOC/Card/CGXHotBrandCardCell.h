@@ -7,14 +7,14 @@
 //
 
 #import "CGXHotBrandBaseCell.h"
-
-
-
+#import "CGXHotBrandTagLabel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CGXHotBrandCardCell : CGXHotBrandBaseCell
 
+@property (nonatomic , strong) UILabel *titleLabel;
+@property (nonatomic , strong) CGXHotBrandTagLabel *tagLabel;
 
 @end
 

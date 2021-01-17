@@ -9,11 +9,6 @@
 
 @interface CGXHotBrandScrollCell ()
 
-@property (nonatomic , strong) NSLayoutConstraint *hotImageTop;
-@property (nonatomic , strong) NSLayoutConstraint *hotImageLeft;
-@property (nonatomic , strong) NSLayoutConstraint *hotImageRight;
-@property (nonatomic , strong) NSLayoutConstraint *hotImageBottom;
-
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleTop;
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleleft;
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleRight;
@@ -35,14 +30,6 @@
     [self.contentView bringSubviewToFront:self.titleLabel];
     self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
-    self.hotImageTop = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
-    self.hotImageLeft = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
-    self.hotImageRight = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
-    self.hotImageBottom = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:30];
-    [self.contentView addConstraint:self.hotImageTop];
-    [self.contentView addConstraint:self.hotImageLeft];
-    [self.contentView addConstraint:self.hotImageRight];
-    [self.contentView addConstraint:self.hotImageBottom];
     
     
     self.hotTitleTop = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];

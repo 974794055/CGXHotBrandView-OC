@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign,readonly) NSInteger currentIndex;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

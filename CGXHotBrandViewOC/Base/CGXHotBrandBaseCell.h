@@ -36,6 +36,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , assign ,readonly) NSInteger section;
 @property (nonatomic , assign ,readonly) NSInteger row;
 
+
+@property (nonatomic , strong) NSLayoutConstraint *hotImageTop;
+@property (nonatomic , strong) NSLayoutConstraint *hotImageLeft;
+@property (nonatomic , strong) NSLayoutConstraint *hotImageRight;
+@property (nonatomic , strong) NSLayoutConstraint *hotImageBottom;
+
 - (void)initializeViews NS_REQUIRES_SUPER;
 
 

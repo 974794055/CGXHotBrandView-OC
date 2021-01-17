@@ -40,9 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign) CGXHotBrandCellPosition   cellPosition;
 
 
-
-
-
+@property(nonatomic,assign,readonly) CGSize currentCellSize;
 
 @end
 

@@ -12,7 +12,7 @@
 }
 //垂直缩放 数值越大缩放越小
 @property(nonatomic,assign) CGFloat wActiveDistance;
-
+@property(nonatomic,assign,readwrite) CGSize currentCellSize;
 @end
 @implementation CGXHotBrandCardFlowLayout
 
@@ -36,12 +36,11 @@
 {
     CGFloat LineSpacing = [self gx_minimumLineSpacingForSectionAtIndex:0];
     CGSize sizeItem = [self gx_sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:0]];
+    self.currentCellSize = sizeItem;
     NSInteger currentInter = round ((ABS(self.collectionView.contentOffset.x))/(sizeItem.width + LineSpacing));
-    
     if (self.cardDelegate && [self.cardDelegate respondsToSelector:@selector(gx_hotBrandAtCurrentInter:)]) {
         [self.cardDelegate gx_hotBrandAtCurrentInter:currentInter];
     }
-    
     NSArray *array = [self getCopyOfAttributes:[super layoutAttributesForElementsInRect:rect]];
     if (!self.itemIsZoom) {
         return array;
@@ -50,21 +49,19 @@
     visibleRect.origin = self.collectionView.contentOffset;
     visibleRect.size = self.collectionView.bounds.size;
     NSMutableArray *marr = [NSMutableArray new];
-//    NSInteger minIndex = 0;
-//    CGFloat minCenterX = [(UICollectionViewLayoutAttributes*)array.firstObject center].x;
-//    for (int i = 0; i<array.count; i++) {
-//        UICollectionViewLayoutAttributes *attributes = array[i];
-//        CGRect cellFrameInSuperview = [self.collectionView convertRect:attributes.frame toView:self.collectionView.superview];
-//        if (cellFrameInSuperview.origin.x>=0&&
-//            cellFrameInSuperview.origin.x<=self.collectionView.frame.size.width) {
-//            if (minCenterX>cellFrameInSuperview.origin.x) {
-//                minCenterX = cellFrameInSuperview.origin.x;
-//                minIndex = i;
-//            }
-//        }
-//    }
-//    CGXHotBrandDebugLog(@"哈哈哈糊诶额：%ld",minIndex);
-    
+    NSInteger minIndex = 0;
+    CGFloat minCenterX = [(UICollectionViewLayoutAttributes*)array.firstObject center].x;
+    for (int i = 0; i<array.count; i++) {
+        UICollectionViewLayoutAttributes *attributes = array[i];
+        CGRect cellFrameInSuperview = [self.collectionView convertRect:attributes.frame toView:self.collectionView.superview];
+        if (cellFrameInSuperview.origin.x>=0&&
+            cellFrameInSuperview.origin.x<=self.collectionView.frame.size.width) {
+            if (minCenterX>cellFrameInSuperview.origin.x) {
+                minCenterX = cellFrameInSuperview.origin.x;
+                minIndex = i;
+            }
+        }
+    }
     for (int i = 0; i<array.count; i++) {
         CGFloat minimumLineSpacing = [self gx_minimumLineSpacingForSectionAtIndex:i];
         CGSize sizeItem = [self gx_sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:i]];
@@ -74,11 +71,22 @@
         if (self.itemContentOffsetX!=0.5) {
             distance = CGRectGetMidX(visibleRect) - (attributes.center.x + (0.5-self.itemContentOffsetX)*visibleRect.size.width);
         }
+        //垂直缩放 数值越大缩放越小
         CGFloat wActiveDistance = visibleRect.size.height > 0 ? visibleRect.size.height:([UIScreen mainScreen].bounds.size.width);
         CGFloat normalizedDistance = fabs(distance / (1.0*wActiveDistance));
         CGFloat zoom = 1 - self.itemScaleFactor * normalizedDistance;
+        
+        CGPoint center = CGPointMake(attributes.center.x, attributes.center.y);
+        if (self.cellPosition == CGXHotBrandCellPositionBottom) {
+   
+            center =  CGPointMake(attributes.center.x, attributes.center.y+attributes.size.height*(1-zoom)/2.0);
+        }else if (self.cellPosition == CGXHotBrandCellPositionTop) {
+            center =  CGPointMake(attributes.center.x, attributes.center.y+attributes.size.height*(1-zoom)/2.0);
+        }else if (self.cellPosition == CGXHotBrandCellPositionCenter) {
+            
+        }
         attributes.transform3D = CATransform3DMakeScale(1.0, zoom, 1.0);
-       
+
         if (self.itemAlpha<1) {
             CGFloat collectionCenter =  self.collectionView.frame.size.width / 2 ;
             CGFloat offset = self.collectionView.contentOffset.x ;
@@ -88,16 +96,6 @@
             CGFloat ratio = (maxDistance - distance1) / maxDistance;
             CGFloat alpha = ratio * (1 - self.itemAlpha) +self.itemAlpha;
             attributes.alpha = alpha;
-        }
-        CGPoint center = CGPointMake(attributes.center.x, attributes.center.y);
-        if (self.cellPosition == CGXHotBrandCellPositionBottom) {
-            center =  CGPointMake(attributes.center.x, attributes.center.y+attributes.size.height*(1-zoom));
-//            attributes.center = center;
-        }else if (self.cellPosition == CGXHotBrandCellPositionTop) {
-            center =  CGPointMake(attributes.center.x, attributes.center.y - attributes.size.height*(1-zoom));
-//            attributes.center = center;
-        }else if (self.cellPosition == CGXHotBrandCellPositionCenter) {
-//            attributes.center = center;
         }
         attributes.center = center;
         [marr addObject:attributes];

@@ -75,8 +75,8 @@
             model.itemColor = [UIColor whiteColor];
             model.hotPicStr = imageArray[arc4random() % (imageArray.count)];
             model.tagStr = (arc4random() % 2 == 0) ? @"秒杀":@"";
-            model.tagSpace = 5;
-            model.tagVSpace = 5;
+            model.tagSpace = 10;
+            model.tagVSpace = 10;
             model.tagHSpace= 5;
             model.tagBorderRadius = 10;
             model.tagBorderColor = [UIColor grayColor];

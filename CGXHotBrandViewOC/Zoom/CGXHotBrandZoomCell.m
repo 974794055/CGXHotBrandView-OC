@@ -8,12 +8,11 @@
 #import "CGXHotBrandZoomCell.h"
 #import "UIView+CGXHotBrandRounded.h"
 #import "CGXHotBrandZoomFlowLayout.h"
-@interface CGXHotBrandZoomCell ()
 
-@property (nonatomic , strong) NSLayoutConstraint *hotImageTop;
-@property (nonatomic , strong) NSLayoutConstraint *hotImageLeft;
-@property (nonatomic , strong) NSLayoutConstraint *hotImageRight;
-@property (nonatomic , strong) NSLayoutConstraint *hotImageBottom;
+
+#define pMaxScale 1.0//最大的拉伸比例
+#define pNormalScale 0.7 //最小的缩放比例
+@interface CGXHotBrandZoomCell ()
 
 @property (nonatomic , strong) NSLayoutConstraint *tagTitleHeight;
 @property (nonatomic , strong) NSLayoutConstraint *tagTitleWidth;
@@ -31,7 +30,9 @@
 @property (nonatomic , strong) NSLayoutConstraint *numTop;
 
 @end
+
 @implementation CGXHotBrandZoomCell
+
 - (void)initializeViews
 {
     [super initializeViews];
@@ -74,14 +75,6 @@
     self.numTop = [NSLayoutConstraint constraintWithItem:self.numLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
     [self.contentView addConstraint:self.numTop];
     
-    self.hotImageTop = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
-    self.hotImageLeft = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
-    self.hotImageRight = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
-    self.hotImageBottom = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:30];
-    [self.contentView addConstraint:self.hotImageTop];
-    [self.contentView addConstraint:self.hotImageLeft];
-    [self.contentView addConstraint:self.hotImageRight];
-    [self.contentView addConstraint:self.hotImageBottom];
     
     self.tagTitleHeight = [NSLayoutConstraint constraintWithItem:self.tagLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:15];
     [self.tagLabel addConstraint:self.tagTitleHeight];
@@ -120,9 +113,6 @@
     self.hotImageLeft.constant =0;
     self.hotImageRight.constant = 0;
     self.hotImageBottom.constant = 0;
-    
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
 }
 
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
@@ -141,27 +131,14 @@
     self.hotTitleHeight.constant = cellModel.titleHeight;
     self.hotTitleleft.constant = cellModel.titleHLpace;
     self.hotTitleRight.constant = -cellModel.titleHRpace;
+    
     NSString *text = cellModel.tagStr ? cellModel.tagStr:@"";
-    NSDictionary *attrs = @{NSFontAttributeName:cellModel.tagFont};
-    CGSize size = [text boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.contentView.frame), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size;
-    CGFloat width = ceil(size.width+cellModel.tagSpace);
-    
-    
-    self.tagTitleWidth.constant = width;
-    self.tagTitleHeight.constant = cellModel.tagHeight;
-    self.tagTitleTop.constant = cellModel.tagVSpace;
-    self.tagTitleRight.constant = -cellModel.tagHSpace;
-    
     self.tagLabel.titleStr =  text;
     self.tagLabel.titleColor = cellModel.tagColor;;
-    self.tagLabel.titleFont = cellModel.tagFont;
     self.tagLabel.backgroundColor = cellModel.tagBgColor;
-    self.tagLabel.tagBorderRadius = cellModel.tagBorderRadius;
     self.tagLabel.tagBorderColor = cellModel.tagBorderColor;
-    self.tagLabel.tagBorderWidth = cellModel.tagBorderWidth;
     self.tagLabel.showType =  cellModel.showType;
     self.tagLabel.roundedType =  cellModel.roundedType;
-    
     if (cellModel.tagStr && cellModel.tagStr.length > 0 && ![cellModel.tagStr isEqualToString:@""]) {
         self.tagLabel.hidden = NO;
     } else{
@@ -169,22 +146,13 @@
     }
     
     self.numLabel.hidden = NO;
-    self.numTop.constant = 0;
-    self.numLeft.constant = cellModel.numHSpace;
-    self.numWidth.constant = cellModel.numWidth;
-    self.numHeight.constant = cellModel.numHeight;
-    self.numLabel.bottomHeight = cellModel.bottomHeight;
-    
     self.numLabel.backgroundColor = cellModel.numBgColor;
     self.numLabel.numStr = [NSString stringWithFormat:@"%ld" , row+1];
-    self.numLabel.numFont = cellModel.numFont;
     self.numLabel.numColor = cellModel.numColor;
     
-    self.numLabel.hidden = NO;
     
+    [self updateWithLabel:1];
     
-    
-    //    self.numLabel.transform = CGAffineTransformMakeScale(1, 1);
     [self.tagLabel layoutIfNeeded];
     [self.numLabel layoutIfNeeded];
 }
@@ -193,42 +161,80 @@
 {
     [super cellOffsetOnCollectionView:collectionView];
     
+    UICollectionViewLayoutAttributes *attributes = [collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:self.row inSection:self.section]];
+    CGRect cellFrameInSuperview = [collectionView convertRect:attributes.frame toView:[collectionView superview]];
+    
     CGXHotBrandZoomFlowLayout *layout = (CGXHotBrandZoomFlowLayout *)collectionView.collectionViewLayout;
     CGSize firstSize = layout.firstCellSize;
-    CGSize itemSize = [layout gx_sizeForItemAtIndexPath:[NSIndexPath indexPathForRow:self.row inSection:self.section]];
+    UIEdgeInsets edgeInsets = [layout gx_insetForSectionAtIndex:self.section];
     
-    CGFloat space = 0.7;
+    CGFloat preferXoffset = firstSize.width / 2 +edgeInsets.left;//距离collectionView左边间距为此值时视图恢复正常大小
     
-    CGFloat firstSizeheight = floor(firstSize.height);
-    CGFloat cellheight = floor(CGRectGetHeight(self.contentView.frame));
-    CGFloat itemSizeheight = floor(itemSize.height);
+    CGFloat itemGaps = 0.0;//item的间距
     
-    if ((cellheight-itemSizeheight)>0) {
-        space = (firstSizeheight-cellheight)/(firstSizeheight-itemSizeheight);
-        if (space<0.7) {
-            space = 1;
+    CGFloat itemXoffset = cellFrameInSuperview.origin.x;
+    
+    CGFloat animationMinOffset = -(cellFrameInSuperview.size.width - (preferXoffset-cellFrameInSuperview.size.width/2-itemGaps));//item子视图开始动画的最小x偏移量
+    
+    CGFloat animationMaxOffset = preferXoffset + cellFrameInSuperview.size.width/2 + itemGaps;//item子视图开始动画的最大x偏移量
+    
+    CGFloat normalOffset = preferXoffset - cellFrameInSuperview.size.width/2;//item子视图为1倍大小时的x方向偏移量
+    
+    CGFloat needScale = 0;
+    if (itemXoffset > animationMinOffset && itemXoffset < animationMaxOffset) {
+        if (itemXoffset<normalOffset) {//开始缩小
+            CGFloat config = normalOffset - animationMinOffset;
+            needScale =(itemXoffset-animationMinOffset)/config*(pMaxScale-pNormalScale)+pNormalScale;
+        }else if (itemXoffset>normalOffset){//开始缩小
+            CGFloat config = animationMaxOffset - normalOffset;
+            needScale =(animationMaxOffset-itemXoffset)/config*(pMaxScale-pNormalScale)+pNormalScale;
+        }else{//恢复正常(最大)
+            needScale = pMaxScale;
         }
+    }else{
+        needScale = pNormalScale;
     }
-    if (collectionView.contentOffset.x==0) {
-        if (layout.currentIndex==self.row) {
-            space = 1;
-        } else{
-            space = 0.7;
-        }
-    }
-
+    
     
     [UIView animateWithDuration:1
                           delay:0
                         options:UIViewAnimationOptionCurveLinear animations:^{
-        self.numLeft.constant = self.cellModel.numHSpace*space;
-        self.numWidth.constant = self.cellModel.numWidth*space;
-        self.numHeight.constant = self.cellModel.numHeight*space;
-        self.numLabel.bottomHeight = self.cellModel.bottomHeight*space;
-        self.numLabel.numFont =  [UIFont systemFontOfSize:self.cellModel.numFont.pointSize*space];
-        
+        [self updateWithLabel:needScale];
     } completion:^(BOOL finished) {
-        
+
     }];
+    
 }
+- (void)updateWithLabel:(CGFloat)needScale
+{
+    self.numTop.constant = 0;
+    self.numLeft.constant = self.cellModel.numHSpace*needScale;
+    self.numWidth.constant = self.cellModel.numWidth*needScale;
+    self.numHeight.constant = self.cellModel.numHeight*needScale;
+    self.numLabel.bottomHeight = self.cellModel.bottomHeight*needScale;
+    self.numLabel.numFont =  [UIFont systemFontOfSize:self.cellModel.numFont.pointSize*needScale];
+    
+    UIFont *font = [UIFont systemFontOfSize:self.cellModel.tagFont.pointSize * needScale];
+    NSString *text = self.cellModel.tagStr ? self.cellModel.tagStr:@"";
+    NSDictionary *attrs = @{NSFontAttributeName:font};
+    CGSize size = [text boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.contentView.frame), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size;
+    CGFloat width = ceil(size.width+self.cellModel.tagSpace);
+    
+    self.tagTitleWidth.constant = width;
+    self.tagTitleHeight.constant = self.cellModel.tagHeight*needScale;
+    self.tagTitleTop.constant = self.cellModel.tagVSpace*needScale;
+    self.tagTitleRight.constant = -self.cellModel.tagHSpace*needScale;
+    
+    self.tagLabel.titleFont = font;
+    self.tagLabel.tagBorderRadius = self.cellModel.tagBorderRadius*needScale;
+    self.tagLabel.tagBorderWidth = self.cellModel.tagBorderWidth*needScale;
+    
+    
+    self.titleLabel.font = [UIFont systemFontOfSize:self.cellModel.titleFont.pointSize * needScale];
+    self.hotTitleHeight.constant = self.cellModel.titleHeight*needScale;
+    self.hotTitleleft.constant = self.cellModel.titleHLpace*needScale;
+    self.hotTitleRight.constant = -self.cellModel.titleHRpace*needScale;
+}
+
+
 @end

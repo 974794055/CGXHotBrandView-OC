@@ -7,7 +7,7 @@
 //
 
 #import "CGXHotBrandModel.h"
-#import "UIColor+CGXHotBrand.h"
+
 @implementation CGXHotBrandModel
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
@@ -60,6 +60,10 @@
         self.numWidth = 30;
         self.bottomHeight = 10;
         self.numHSpace = 5;
+        
+        self.itemBorderColor = [UIColor whiteColor];
+        self.itemBorderWidth = 0;
+        self.itemBorderRadius = 0;
     }
     return self;
 }

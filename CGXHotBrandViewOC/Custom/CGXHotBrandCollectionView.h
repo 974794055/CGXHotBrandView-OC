@@ -12,13 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 @class CGXHotBrandCollectionView;
 
 @protocol CGXHotBrandCollectionViewGestureDelegate <NSObject>
+
 @optional
-- (BOOL)categoryCollectionView:(CGXHotBrandCollectionView *)collectionView
+
+- (BOOL)gx_hotBrandCollectionView:(CGXHotBrandCollectionView *)collectionView
   gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer;
-- (BOOL)categoryCollectionView:(CGXHotBrandCollectionView *)collectionView
+- (BOOL)gx_hotBrandCollectionView:(CGXHotBrandCollectionView *)collectionView
              gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
+
 @end
+
 @interface CGXHotBrandCollectionView : UICollectionView
 
 @property (nonatomic, weak) id<CGXHotBrandCollectionViewGestureDelegate> gestureDelegate;

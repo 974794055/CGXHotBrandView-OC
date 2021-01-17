@@ -101,7 +101,6 @@
 		64AFBF5CE2A9146C011858F97F7BF1CB /* CGXHotBrandPageDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1D549BD843451710D7FF7CA6E1DAE3 /* CGXHotBrandPageDotView.m */; };
 		67FF4A7C664D4CD9DC4074409ABD3C90 /* CGXHotBrandCycleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 058462F4052F8204136D4E77DBB3150A /* CGXHotBrandCycleView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		68F51B1C47032D4C1E214D42B31D4336 /* SDWebImageDownloaderConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = A66292866A086574858A1AD4F2004C19 /* SDWebImageDownloaderConfig.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		68FC0B3710C7CB50221FCC19E4A2A398 /* UIColor+CGXHotBrand.h in Headers */ = {isa = PBXBuildFile; fileRef = EB2F75BAB361C6B8702F2052E79273E4 /* UIColor+CGXHotBrand.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		69C754CBBC23A9D99FF051A2C963CD59 /* UIImage+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A819A16623260808B4735A7A998AFE0 /* UIImage+Metadata.m */; };
 		6A22FA3944743E3967A46D599F7ACBA7 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 091269F0F5D1D7D0E16971839125A777 /* SDWebImagePrefetcher.m */; };
 		6B27BE8C3E5E28F3B309307E87B99329 /* SDAssociatedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BEFB656EFDBC5D5958B15DCD189584 /* SDAssociatedObject.m */; };
@@ -136,7 +135,6 @@
 		9AEFAFE2E9D932E90D8764E1D2D364AB /* CGXHotBrandView.h in Headers */ = {isa = PBXBuildFile; fileRef = B3E4762266F7CE9A004CA96714BE09B7 /* CGXHotBrandView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9B12F156E1BEB77000D4E23081EC1F29 /* SDImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = EA8EFD05FA8C3A6A876F58FE78F8B676 /* SDImageCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9B36EF7583EDEEFC684944DC2A86EE9D /* SDAnimatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 92823208F8A57860C6EF4DE59B8569BE /* SDAnimatedImageView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9B61E913BE329352435BAFA3097B9796 /* UIColor+CGXHotBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C9123F5D7B866BF4EE914929C1E32 /* UIColor+CGXHotBrand.m */; };
 		9B8365733D88EDAC8AAB34412130B375 /* UIView+WebCacheOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 977EEA1AFD80EB1531878CB80C6DCDA3 /* UIView+WebCacheOperation.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9B9B97119B0D72A1E230B0018EEA43DF /* CGXHotBrandBaseFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = F85626AF501DA5338953A2E6D949BF77 /* CGXHotBrandBaseFlowLayout.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9C72C77A4C27BEE0F21A5771ADC5F31E /* CGXHotBrandFlowlayout.h in Headers */ = {isa = PBXBuildFile; fileRef = F62EABF0A8C17DA39D16796116FED38E /* CGXHotBrandFlowlayout.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -259,7 +257,6 @@
 		1A819A16623260808B4735A7A998AFE0 /* UIImage+Metadata.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Metadata.m"; path = "SDWebImage/Core/UIImage+Metadata.m"; sourceTree = "<group>"; };
 		1C9F7EA848B0CF7B33ACD6DC86AF9CDA /* NSImage+Compatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSImage+Compatibility.h"; path = "SDWebImage/Core/NSImage+Compatibility.h"; sourceTree = "<group>"; };
 		1CED6261A3E54669D032AFB4C865CA12 /* CGXHotBrandCycleFlowLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CGXHotBrandCycleFlowLayout.h; path = CGXHotBrandViewOC/Cycle/CGXHotBrandCycleFlowLayout.h; sourceTree = "<group>"; };
-		1D7C9123F5D7B866BF4EE914929C1E32 /* UIColor+CGXHotBrand.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CGXHotBrand.m"; path = "CGXHotBrandViewOC/Custom/UIColor+CGXHotBrand.m"; sourceTree = "<group>"; };
 		1DAB017DD2AE795D0A781D6F2DC5C15A /* SDImageAPNGCoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageAPNGCoder.h; path = SDWebImage/Core/SDImageAPNGCoder.h; sourceTree = "<group>"; };
 		1DB237BAE27C42F0CC35CE5460C96021 /* NSButton+WebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSButton+WebCache.h"; path = "SDWebImage/Core/NSButton+WebCache.h"; sourceTree = "<group>"; };
 		1E4F5AB79E40A6A7EC97CAE239BAB870 /* SDAssociatedObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDAssociatedObject.h; path = SDWebImage/Private/SDAssociatedObject.h; sourceTree = "<group>"; };
@@ -286,7 +283,7 @@
 		35C94D04D5C0E53CFB7E9AC916FA57E9 /* CGXHotBrandScrollFlowLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CGXHotBrandScrollFlowLayout.m; path = CGXHotBrandViewOC/Scroll/CGXHotBrandScrollFlowLayout.m; sourceTree = "<group>"; };
 		360BCAF2F22CFA08388629251B08C9CE /* SDWebImageTransition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageTransition.m; path = SDWebImage/Core/SDWebImageTransition.m; sourceTree = "<group>"; };
 		3A36E6732A35888F60B5F48C4859DC25 /* SDImageHEICCoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageHEICCoder.h; path = SDWebImage/Core/SDImageHEICCoder.h; sourceTree = "<group>"; };
-		3B12D6818394FC53643D0667E33A6642 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		3B12D6818394FC53643D0667E33A6642 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3B87729B211545FA9921B21FABE6E158 /* SDImageCachesManagerOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageCachesManagerOperation.h; path = SDWebImage/Private/SDImageCachesManagerOperation.h; sourceTree = "<group>"; };
 		3BF37332A8DAECA71ADDEB120A486EE4 /* SDFileAttributeHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDFileAttributeHelper.h; path = SDWebImage/Private/SDFileAttributeHelper.h; sourceTree = "<group>"; };
 		3DF57DD34A6FCB69653CBEE3C38FAA0B /* CGXHotBrandViewOC-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CGXHotBrandViewOC-dummy.m"; sourceTree = "<group>"; };
@@ -309,7 +306,7 @@
 		51C71B930F8EC9D8A287146C4694150C /* CGXHotBrandCycleFlowLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CGXHotBrandCycleFlowLayout.m; path = CGXHotBrandViewOC/Cycle/CGXHotBrandCycleFlowLayout.m; sourceTree = "<group>"; };
 		52943CDD91B8E8692AF95BA5F5F32C52 /* SDImageCacheDefine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageCacheDefine.h; path = SDWebImage/Core/SDImageCacheDefine.h; sourceTree = "<group>"; };
 		52FD4D53D0C43B20ED7A97A81CF60BF5 /* SDImageCoderHelper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageCoderHelper.m; path = SDWebImage/Core/SDImageCoderHelper.m; sourceTree = "<group>"; };
-		544A96E6E25CA4B00B7BF54C5BC18C6E /* libCGXHotBrandViewOC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCGXHotBrandViewOC.a; path = libCGXHotBrandViewOC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		544A96E6E25CA4B00B7BF54C5BC18C6E /* libCGXHotBrandViewOC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCGXHotBrandViewOC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		54EAD8268078EC57CDFFBE73D18285C1 /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloaderOperation.m; path = SDWebImage/Core/SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
 		554DE2966989B953F2228FE18C56BF3F /* CGXHotBrandZoomView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CGXHotBrandZoomView.m; path = CGXHotBrandViewOC/Zoom/CGXHotBrandZoomView.m; sourceTree = "<group>"; };
 		56748CACA8C3B1C8014532E256DEAD81 /* SDAnimatedImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDAnimatedImage.h; path = SDWebImage/Core/SDAnimatedImage.h; sourceTree = "<group>"; };
@@ -322,7 +319,7 @@
 		5D54ED5313819D9AE19F83ECEAC14CDD /* UIImage+Transform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Transform.m"; path = "SDWebImage/Core/UIImage+Transform.m"; sourceTree = "<group>"; };
 		5E945C91F800760CD7E9B08DA7EB8A00 /* CGXHotBrandBaseCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CGXHotBrandBaseCell.m; path = CGXHotBrandViewOC/Base/CGXHotBrandBaseCell.m; sourceTree = "<group>"; };
 		63CD7C348991D1E609C53B84D8EE9038 /* SDWebImageCompat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageCompat.m; path = SDWebImage/Core/SDWebImageCompat.m; sourceTree = "<group>"; };
-		64A5477866E6D166FD0E8A32C3A05BBD /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = CGXHotBrandViewOC.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		64A5477866E6D166FD0E8A32C3A05BBD /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = CGXHotBrandViewOC.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		64F70ABDF1F03637BC80C1F712CEFCEB /* UIButton+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+WebCache.m"; path = "SDWebImage/Core/UIButton+WebCache.m"; sourceTree = "<group>"; };
 		6701D440248198DF6316F30E18D4633A /* SDDiskCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDDiskCache.m; path = SDWebImage/Core/SDDiskCache.m; sourceTree = "<group>"; };
 		6724718E79C11CF2D74550E4AA0A8268 /* SDImageFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageFrame.h; path = SDWebImage/Core/SDImageFrame.h; sourceTree = "<group>"; };
@@ -367,7 +364,7 @@
 		992BC947FB62268A15567D3188850D9E /* CGXHotBrandTools.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CGXHotBrandTools.m; path = CGXHotBrandViewOC/Custom/CGXHotBrandTools.m; sourceTree = "<group>"; };
 		9B9D0BBC2C1A7597E6FEA984602D9172 /* CGXHotBrandBaseView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CGXHotBrandBaseView.m; path = CGXHotBrandViewOC/Base/CGXHotBrandBaseView.m; sourceTree = "<group>"; };
 		9C914F47C2FC207DAEC511AD859C567D /* NSImage+Compatibility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSImage+Compatibility.m"; path = "SDWebImage/Core/NSImage+Compatibility.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DD70EA06097F3BF940B97C41A95CF4A /* SDInternalMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDInternalMacros.h; path = SDWebImage/Private/SDInternalMacros.h; sourceTree = "<group>"; };
 		9ED0661739CE45A3850DE6E2B4557B3E /* SDAnimatedImagePlayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDAnimatedImagePlayer.m; path = SDWebImage/Core/SDAnimatedImagePlayer.m; sourceTree = "<group>"; };
 		9FDABE0F6ED19C0C47C2EAD3F7F70C8D /* SDAnimatedImageView+WebCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "SDAnimatedImageView+WebCache.h"; path = "SDWebImage/Core/SDAnimatedImageView+WebCache.h"; sourceTree = "<group>"; };
@@ -386,7 +383,7 @@
 		B019FBBF79FF689DBE928EC8DD969E09 /* CGXHotBrandDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CGXHotBrandDefines.h; path = CGXHotBrandViewOC/Custom/CGXHotBrandDefines.h; sourceTree = "<group>"; };
 		B03FDE66D0FC063D5013023FCDCA2089 /* SDWeakProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWeakProxy.h; path = SDWebImage/Private/SDWeakProxy.h; sourceTree = "<group>"; };
 		B077B1588B73D9210C0BF927AAD57A87 /* SDWebImageError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageError.h; path = SDWebImage/Core/SDWebImageError.h; sourceTree = "<group>"; };
-		B0B214D775196BA7CA8E17E53048A493 /* libSDWebImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSDWebImage.a; path = libSDWebImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B214D775196BA7CA8E17E53048A493 /* libSDWebImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSDWebImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E4762266F7CE9A004CA96714BE09B7 /* CGXHotBrandView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CGXHotBrandView.h; path = CGXHotBrandViewOC/HotBrand/CGXHotBrandView.h; sourceTree = "<group>"; };
 		B5DEFB58951196FE358A9C38EC55CB34 /* UIColor+SDHexString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+SDHexString.m"; path = "SDWebImage/Private/UIColor+SDHexString.m"; sourceTree = "<group>"; };
 		B68678BDDC055BC84A0D65C336F891FB /* CGXHotBrandCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CGXHotBrandCell.m; path = CGXHotBrandViewOC/HotBrand/CGXHotBrandCell.m; sourceTree = "<group>"; };
@@ -408,7 +405,7 @@
 		C466671FE76D8CFC4CAE5BF2958516BD /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloaderOperation.h; path = SDWebImage/Core/SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
 		C545321843AE17E2087859E838E17B2B /* SDWebImageCompat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageCompat.h; path = SDWebImage/Core/SDWebImageCompat.h; sourceTree = "<group>"; };
 		C61B43364814B83E8749EACA5F8D4205 /* CGXHotBrandZoomCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CGXHotBrandZoomCell.m; path = CGXHotBrandViewOC/Zoom/CGXHotBrandZoomCell.m; sourceTree = "<group>"; };
-		C697910056EDFBEE838116522ECDAC2C /* libPods-CGXHotBrandView-OC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-CGXHotBrandView-OC.a"; path = "libPods-CGXHotBrandView-OC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C697910056EDFBEE838116522ECDAC2C /* libPods-CGXHotBrandView-OC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CGXHotBrandView-OC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7472E6FD40799CA9A4D047BCEF0A1EE /* SDWebImageManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageManager.h; path = SDWebImage/Core/SDWebImageManager.h; sourceTree = "<group>"; };
 		CAFD63C65B3DF957DF9FBA60F36C74E6 /* SDImageGraphics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageGraphics.h; path = SDWebImage/Core/SDImageGraphics.h; sourceTree = "<group>"; };
 		CB9B98ADFFB9D06E85F57CDA9B63276D /* SDImageLoader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageLoader.h; path = SDWebImage/Core/SDImageLoader.h; sourceTree = "<group>"; };
@@ -426,7 +423,7 @@
 		D7BF39D8C48F455EF901D1C3FAB1F68E /* SDWebImageOptionsProcessor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageOptionsProcessor.m; path = SDWebImage/Core/SDWebImageOptionsProcessor.m; sourceTree = "<group>"; };
 		D93535BA9963B506709AC7EEC0B07394 /* UIImage+CGXHotBrand.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+CGXHotBrand.m"; path = "CGXHotBrandViewOC/Custom/UIImage+CGXHotBrand.m"; sourceTree = "<group>"; };
 		DAF66151B9CF5E150E385EFA48FCDFBD /* SDAnimatedImageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDAnimatedImageView.m; path = SDWebImage/Core/SDAnimatedImageView.m; sourceTree = "<group>"; };
-		DC49C7E2DEDEDEF990FF065A9B378DB4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		DC49C7E2DEDEDEF990FF065A9B378DB4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DCA3D0FA38CAD902509D23D0F0AFEB51 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloader.h; path = SDWebImage/Core/SDWebImageDownloader.h; sourceTree = "<group>"; };
 		DDCE1E12CCB28D3F92B32528EEBCA12E /* SDWebImageDefine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDefine.h; path = SDWebImage/Core/SDWebImageDefine.h; sourceTree = "<group>"; };
 		DE346C4543DFBCB8584E3544EFC963DE /* SDDisplayLink.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDDisplayLink.h; path = SDWebImage/Private/SDDisplayLink.h; sourceTree = "<group>"; };
@@ -448,7 +445,6 @@
 		E9F879AC92B71AD0039958043B05868A /* CGXHotBrandBlurEffectView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CGXHotBrandBlurEffectView.h; path = CGXHotBrandViewOC/Custom/CGXHotBrandBlurEffectView.h; sourceTree = "<group>"; };
 		EA8EFD05FA8C3A6A876F58FE78F8B676 /* SDImageCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageCache.h; path = SDWebImage/Core/SDImageCache.h; sourceTree = "<group>"; };
 		EAA02A8CA345C9036163578AB0B257F3 /* CGXHotBrandZoomFlowLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CGXHotBrandZoomFlowLayout.h; path = CGXHotBrandViewOC/Zoom/CGXHotBrandZoomFlowLayout.h; sourceTree = "<group>"; };
-		EB2F75BAB361C6B8702F2052E79273E4 /* UIColor+CGXHotBrand.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+CGXHotBrand.h"; path = "CGXHotBrandViewOC/Custom/UIColor+CGXHotBrand.h"; sourceTree = "<group>"; };
 		EDF8CFC25877E9EF3E30979881BB381E /* CGXHotBrandViewOC.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CGXHotBrandViewOC.h; path = CGXHotBrandViewOC/CGXHotBrandViewOC.h; sourceTree = "<group>"; };
 		EEBDBDC1BFE3DBF75B04D09B7C3F4CC1 /* SDAnimatedImageView+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "SDAnimatedImageView+WebCache.m"; path = "SDWebImage/Core/SDAnimatedImageView+WebCache.m"; sourceTree = "<group>"; };
 		F11861D7064D4E813D92B3D763C6FE8C /* SDWebImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImage.h; path = WebImage/SDWebImage.h; sourceTree = "<group>"; };
@@ -691,7 +687,6 @@
 				0963744C892179FC7F408099448F7535 /* Core */,
 				B8D86F76494E8FD7087759B9A8FEB2D5 /* Support Files */,
 			);
-			name = SDWebImage;
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
@@ -876,8 +871,6 @@
 				992BC947FB62268A15567D3188850D9E /* CGXHotBrandTools.m */,
 				59D5815B00FDF9A4B944E3946A52F603 /* NSTimer+CGXHotBrandTimer.h */,
 				723E31E9BAD9462C53C0324848BFE946 /* NSTimer+CGXHotBrandTimer.m */,
-				EB2F75BAB361C6B8702F2052E79273E4 /* UIColor+CGXHotBrand.h */,
-				1D7C9123F5D7B866BF4EE914929C1E32 /* UIColor+CGXHotBrand.m */,
 				DE81F32B3EDD05869B8280940884C6E4 /* UIImage+CGXHotBrand.h */,
 				D93535BA9963B506709AC7EEC0B07394 /* UIImage+CGXHotBrand.m */,
 				49D08FE7B82CE8A8E790288CFBC763F5 /* UIView+CGXHotBrandRounded.h */,
@@ -930,7 +923,6 @@
 				ADDCFA9F3BAE752E1FF04F7786DC444B /* CGXHotBrandZoomFlowLayout.h in Headers */,
 				1E2FB155F89B15D23977AEB9DCE9E2BA /* CGXHotBrandZoomView.h in Headers */,
 				E51A424857A7675CDDB910C700FC4C46 /* NSTimer+CGXHotBrandTimer.h in Headers */,
-				68FC0B3710C7CB50221FCC19E4A2A398 /* UIColor+CGXHotBrand.h in Headers */,
 				C65C5B39869288BBAE57769F9B64840A /* UIImage+CGXHotBrand.h in Headers */,
 				3EE093814E6F569D1391775588C02E5F /* UIView+CGXHotBrandRounded.h in Headers */,
 			);
@@ -1212,7 +1204,6 @@
 				F42099E59B290AD0F5949BA450911D56 /* CGXHotBrandZoomFlowLayout.m in Sources */,
 				6BF59B1036D3B41663F44A3FBDBE1F49 /* CGXHotBrandZoomView.m in Sources */,
 				08B792691426FB9231A3DF9236C4662F /* NSTimer+CGXHotBrandTimer.m in Sources */,
-				9B61E913BE329352435BAFA3097B9796 /* UIColor+CGXHotBrand.m in Sources */,
 				32729D753FF8415382764D9E511A818B /* UIImage+CGXHotBrand.m in Sources */,
 				5ABAF2F319A9581742AC5CD4DFB8C7C6 /* UIView+CGXHotBrandRounded.m in Sources */,
 			);

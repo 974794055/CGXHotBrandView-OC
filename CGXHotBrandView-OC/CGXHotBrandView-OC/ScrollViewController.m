@@ -33,11 +33,16 @@
     for (int i = 0; i< arc4random() % 5+3; i++) {
         CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
         model.titleStr = [NSString stringWithFormat:@" 🔊🐂双十二超级低价大优惠、五折抢购🐑🐑🐑-%d",i];
+        if (self.typeInter==2) {
+        model.titleBgColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        } else{
+            model.titleBgColor = [UIColor whiteColor];
+        }
         model.itemColor = [UIColor colorWithWhite:0.93 alpha:1];
         model.hotPicStr = [NSString stringWithFormat:@"HotIcon%d",i % 5];;
         model.tagStr = (arc4random() % 2 == 0) ? @"秒杀":@"";
         model.tagSpace = 10;
-        model.tagBgColor = [UIColor whiteColor];
+        model.tagBgColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
         if (self.typeInter < 2) {
             model.titleColor =[UIColor blackColor];
             model.textAlignment = NSTextAlignmentCenter;
@@ -45,7 +50,6 @@
             model.titleColor = [UIColor whiteColor];
             model.textAlignment = NSTextAlignmentLeft;
         }
-        model.titleBgColor = [UIColor whiteColor];
         model.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
             [hotImageView sd_setImageWithURL:hotImageURL];
         };

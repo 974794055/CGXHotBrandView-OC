@@ -18,10 +18,10 @@
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleRight;
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleBottom;
 
-@property (nonatomic , strong) NSLayoutConstraint *hotImageTop;
-@property (nonatomic , strong) NSLayoutConstraint *hotImageLeft;
-@property (nonatomic , strong) NSLayoutConstraint *hotImageRight;
-@property (nonatomic , strong) NSLayoutConstraint *hotImageBottom;
+//@property (nonatomic , strong) NSLayoutConstraint *hotImageTop;
+//@property (nonatomic , strong) NSLayoutConstraint *hotImageLeft;
+//@property (nonatomic , strong) NSLayoutConstraint *hotImageRight;
+//@property (nonatomic , strong) NSLayoutConstraint *hotImageBottom;
 
 @property (nonatomic , strong) NSLayoutConstraint *tagTitleHeight;
 @property (nonatomic , strong) NSLayoutConstraint *tagTitleWidth;
@@ -56,7 +56,7 @@
     self.tagLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
     
-    
+    self.hotImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.hotTitleHeight = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:30];
     [self.titleLabel addConstraint:self.hotTitleHeight];
@@ -68,18 +68,6 @@
     [self.contentView addConstraint:self.hotTitleRight];
     [self.contentView addConstraint:self.hotTitleBottom];
     
-    self.hotImageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    self.hotImageTop = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
-    self.hotImageLeft = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
-    self.hotImageRight = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
-    self.hotImageBottom = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.titleLabel attribute:NSLayoutAttributeTop multiplier:1.0 constant:30];
-    [self.contentView addConstraint:self.hotImageTop];
-    [self.contentView addConstraint:self.hotImageLeft];
-    [self.contentView addConstraint:self.hotImageRight];
-    [self.contentView addConstraint:self.hotImageBottom];
-    
-
     self.tagTitleHeight = [NSLayoutConstraint constraintWithItem:self.tagLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:15];
     [self.tagLabel addConstraint:self.tagTitleHeight];
 
@@ -138,7 +126,7 @@
     self.hotImageTop.constant = cellModel.hotPicSpaceTop;
     self.hotImageLeft.constant = cellModel.hotPicSpace;
     self.hotImageRight.constant = -cellModel.hotPicSpace;
-    self.hotImageBottom.constant = cellModel.titleSpaceTop;
+    self.hotImageBottom.constant = -cellModel.titleSpaceTop-self.cellModel.titleSpaceBottom-self.cellModel.titleHeight;
     
     NSString *text = cellModel.tagStr ? cellModel.tagStr:@"";
     NSDictionary *attrs = @{NSFontAttributeName:cellModel.tagFont};

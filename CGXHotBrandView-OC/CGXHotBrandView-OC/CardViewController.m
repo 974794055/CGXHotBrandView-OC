@@ -54,17 +54,18 @@
         y = y + height + 10;
         hotBrandView.itemScaleFactor = 0.3;
         hotBrandView.itemWidthScale = 0.5;
+        hotBrandView.itemSpaceBottom = 20;
+        hotBrandView.itemSpaceTop = 10;
         if (i==0) {
             hotBrandView.cellPosition = CGXHotBrandCellPositionCenter;
             hotBrandView.autoScroll = NO;
             hotBrandView.infiniteLoop = YES;
             hotBrandView.itemSpaceTop = 50;
-            hotBrandView.itemSpaceBottom = 0;
+            hotBrandView.itemSpaceBottom = 20;
         } else if (i==1){
             hotBrandView.cellPosition = CGXHotBrandCellPositionCenter;
             hotBrandView.autoScroll = NO;
             hotBrandView.infiniteLoop = YES;
-            hotBrandView.itemSpaceTop = 0;
             hotBrandView.itemSpaceBottom = 70;
         } else if (i==2){
             hotBrandView.cellPosition = CGXHotBrandCellPositionCenter;
@@ -84,7 +85,6 @@
             hotBrandView.itemWidthScale = 0.8;
             hotBrandView.itemScaleFactor = 0.2;
         }
-        
         hotBrandView.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
             [hotImageView sd_setImageWithURL:hotImageURL];
         };
@@ -92,25 +92,42 @@
         //        hotBrandView.infiniteLoop = NO;
         //        hotBrandView.isHavePage = NO;
         
-        NSMutableArray *dataArray = [NSMutableArray array];
-        for (int i = 0; i< 5; i++) {
-            CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-            model.titleStr = [NSString stringWithFormat:@"猫咪-%d",i];
-            model.itemColor = [UIColor colorWithWhite:0.93 alpha:1];
-            model.hotPicStr = [NSString stringWithFormat:@"HotIcon%d",i % 5];;
-            model.tagStr = (arc4random() % 2 == 0) ? @"秒杀":@"";
-            model.tagSpace = 10;
-            model.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
-                [hotImageView sd_setImageWithURL:hotImageURL];
-            };
-            [dataArray addObject:model];
-        };
+        NSMutableArray *dataArray = [self loadDataArray];
         [hotBrandView updateWithDataArray:dataArray];
-        
-        
-        
     }
     self.mainScrollViewH.contentSize = CGSizeMake(0,10+y);
+}
+- (NSMutableArray *)loadDataArray
+{
+    NSMutableArray *dataArray = [NSMutableArray array];
+    for (int i = 0; i< arc4random() % 10 + 5; i++) {
+        CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
+        model.titleStr = [NSString stringWithFormat:@"猫咪-%d",i];
+        model.itemColor = [UIColor colorWithWhite:0.93 alpha:1];
+        model.hotPicStr = [NSString stringWithFormat:@"HotIcon%d",i % 5];;
+        model.tagStr = (arc4random() % 1 == 0) ? @"秒杀":@"";
+        model.tagSpace = 10;
+        model.tagHSpace = 10;
+        model.tagVSpace = 0;
+        model.tagBorderRadius = 6;
+        model.tagBorderColor = [UIColor grayColor];
+        model.tagBorderWidth = 0;
+        model.tagBgColor = [UIColor redColor];
+        model.titleHLpace = 10;
+        model.titleHRpace = 10;
+        model.showType =  CGXHotBrandViewShowTypeRounded;
+        model.roundedType =CGXHotBrandRoundedTypeBottomLeft | CGXHotBrandRoundedTypeBottomRight;
+        
+        model.itemBorderColor = [UIColor blackColor];
+        model.itemBorderWidth = 1;
+        model.itemBorderRadius = 10;
+        
+        model.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
+            [hotImageView sd_setImageWithURL:hotImageURL];
+        };
+        [dataArray addObject:model];
+    };
+    return dataArray;
 }
 /*上部分View*/
 - (UIView *)gx_hotBrandCardTopView:(CGXHotBrandCardView *)hotView
@@ -125,20 +142,8 @@
     [titleView updateDataTitieArray:self.titilArr];
     titleView.titieSelectBlock = ^(NSInteger integer) {
         weakSelf.currentInter = integer;
-        NSMutableArray *dataArray2 = [NSMutableArray array];
-        for (int i = 0; i< arc4random() % 10+5; i++) {
-            CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-            model.titleStr = [NSString stringWithFormat:@"%@:%d",self.titilArr[self.currentInter],i];
-            model.itemColor = [UIColor colorWithWhite:0.93 alpha:1];
-            model.hotPicStr = [NSString stringWithFormat:@"HotIcon%d",arc4random() % 5];
-            model.tagStr = (arc4random() % 2 == 0) ? @"秒杀":@"";
-            model.tagSpace = 10;
-            model.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
-                [hotImageView sd_setImageWithURL:hotImageURL];
-            };
-            [dataArray2 addObject:model];
-        }
-        [hotView updateWithDataArray:dataArray2];
+        NSMutableArray *dataArray = [weakSelf loadDataArray];
+        [hotView updateWithDataArray:dataArray];
         
     };
     return titleView;
@@ -157,20 +162,8 @@
     [titleView updateDataTitieArray:self.titilArr];
     titleView.titieSelectBlock = ^(NSInteger integer) {
         weakSelf.currentInter = integer;
-        NSMutableArray *dataArray2 = [NSMutableArray array];
-        for (int i = 0; i< arc4random() % 10+5; i++) {
-            CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-            model.titleStr = [NSString stringWithFormat:@"%@:%d",self.titilArr[self.currentInter],i];
-            model.itemColor = [UIColor colorWithWhite:0.93 alpha:1];
-            model.hotPicStr = [NSString stringWithFormat:@"HotIcon%d",arc4random() % 5];
-            model.tagStr = (arc4random() % 2 == 0) ? @"秒杀":@"";
-            model.tagSpace = 10;
-            model.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
-                [hotImageView sd_setImageWithURL:hotImageURL];
-            };
-            [dataArray2 addObject:model];
-        }
-        [hotView updateWithDataArray:dataArray2];
+        NSMutableArray *dataArray = [weakSelf loadDataArray];
+        [hotView updateWithDataArray:dataArray];
     };
     return titleView;
 }

@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 可以调用此方法手动控制滚动到哪一个index */
 - (void)scrollViewScrollToIndex:(NSInteger)index;
 
+// 更新数据源
 - (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray;
 
 

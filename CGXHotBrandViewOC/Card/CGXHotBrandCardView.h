@@ -67,8 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 解决viewWillAppear时出现时轮播图卡在一半的问题，在控制器viewWillAppear时调用此方法 */
 - (void)adjustWhenControllerViewWillAppera;
 
-//- (void)setMinimumLineSpacing:(CGFloat)minimumLineSpacing NS_UNAVAILABLE;
-//- (void)setMinimumInteritemSpacing:(CGFloat)minimumInteritemSpacing NS_UNAVAILABLE;
+
 - (void)setEdgeInsets:(UIEdgeInsets)edgeInsets NS_UNAVAILABLE;
 
 @end

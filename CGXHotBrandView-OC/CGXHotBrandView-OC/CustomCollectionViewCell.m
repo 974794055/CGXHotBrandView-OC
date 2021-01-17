@@ -23,7 +23,6 @@
     self.hotImageView.layer.masksToBounds = YES;
     self.hotImageView.clipsToBounds = YES;
     self.hotImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.hotImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.contentView addSubview:self.hotImageView];
     self.hotImageView.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.hotImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];

@@ -7,7 +7,6 @@
 //
 #import "ViewController.h"
 #import "ListCollectionViewCell.h"
-
 @interface ViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *titleArr;
@@ -213,12 +212,14 @@
         vc.hidesBottomBarWhenPushed = YES;
         vc.typeInter = 2;
         [self.navigationController pushViewController:vc animated:YES];
-    } else{
+    }  else{
         ScrollViewController *vc = [[ScrollViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    
+    
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

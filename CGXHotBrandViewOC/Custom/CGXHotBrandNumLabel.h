@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 下标对应文字字体大小  [UIFont systemFontOfSize:14] */
 @property (nonatomic, strong) UIFont  *numFont;
 @property (nonatomic, assign) CGFloat bottomHeight;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** 图片上间距  默认 10 */
 @property (nonatomic, assign) CGFloat hotPicSpaceTop;
 
+/** 图片加载 */
+@property (nonatomic, copy) void(^hotBrand_loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
+
 // 图片对应的文字显示
 @property (nonatomic, strong) NSString *titleStr;
 /** 轮播文字label颜色  [UIColor blackColor]; */
@@ -51,7 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *tagBorderColor;
 @property (nonatomic, assign) CGFloat tagBorderWidth;
 @property (nonatomic, assign) CGFloat tagBorderRadius;
-
 // 标签文字显示
 @property (nonatomic, strong) NSString *tagStr;
 /** 标签文字颜色  [UIColor whiteColor]; */
@@ -95,7 +97,13 @@ NS_ASSUME_NONNULL_BEGIN
 /** 下标对应文字水边距  默认 10 */
 @property (nonatomic, assign) CGFloat numHSpace;
 
-@property (nonatomic, copy) void(^hotBrand_loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
+
+
+/** --cell边框--- */
+/** 下标对应文字背景颜  [UIColor redColor]; */
+@property (nonatomic, strong) UIColor *itemBorderColor;
+@property (nonatomic, assign) CGFloat itemBorderWidth;
+@property (nonatomic, assign) CGFloat itemBorderRadius;
 
 @end
 

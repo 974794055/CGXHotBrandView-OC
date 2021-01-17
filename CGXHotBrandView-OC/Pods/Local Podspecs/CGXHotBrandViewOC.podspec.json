@@ -1,6 +1,6 @@
 {
   "name": "CGXHotBrandViewOC",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "summary": "CGXHotBrandViewOC是基于UICollectionView封装的热门菜单库",
   "description": "UICollectionView封装的热门菜单库",
   "homepage": "https://github.com/974794055/CGXHotBrandView-OC",
@@ -16,7 +16,7 @@
   },
   "source": {
     "git": "https://github.com/974794055/CGXHotBrandView-OC.git",
-    "tag": "0.0.3"
+    "tag": "0.0.5"
   },
   "requires_arc": true,
   "frameworks": "UIKit",
@@ -36,6 +36,9 @@
       "source_files": "CGXHotBrandViewOC/Base/**/*.{h,m}",
       "dependencies": {
         "CGXHotBrandViewOC/Custom": [
+
+        ],
+        "CGXHotBrandViewOC/PageControl": [
 
         ]
       }
@@ -73,15 +76,6 @@
     {
       "name": "Zoom",
       "source_files": "CGXHotBrandViewOC/Zoom/**/*.{h,m}",
-      "dependencies": {
-        "CGXHotBrandViewOC/Base": [
-
-        ]
-      }
-    },
-    {
-      "name": "Carousel",
-      "source_files": "CGXHotBrandViewOC/Carousel/**/*.{h,m}",
       "dependencies": {
         "CGXHotBrandViewOC/Base": [
 
