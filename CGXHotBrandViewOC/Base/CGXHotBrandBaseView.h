@@ -53,11 +53,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CGXHotBrandBaseView : UIView<UIScrollViewDelegate>
 
-@property (nonatomic, strong) CGXHotBrandCollectionView *collectionView;
+@property (nonatomic, strong,readonly) CGXHotBrandCollectionView *collectionView;
 
 /*界面设置代理*/
 @property (nonatomic , weak) id<CGXHotBrandCustomViewDelegate>delegate;
-
 /** 列间距 */
 @property (nonatomic, assign) CGFloat minimumLineSpacing;
 /** 行间距 */
@@ -67,7 +66,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 加载图片 */
 @property (nonatomic, copy) void(^hotBrand_loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
-
 /** 是否无限循环,默认Yes */
 @property (nonatomic,assign) BOOL infiniteLoop;
 /** 是否自动滚动,默认NO */
@@ -77,7 +75,16 @@ NS_ASSUME_NONNULL_BEGIN
 /* 是否回弹 默认YES*/
 @property (nonatomic , assign) BOOL bounces;
 
-@property (nonatomic, strong) CGXHotBrandPageControl *pageControl;
+
+@property(nonatomic, assign) CGXHotBrandPageStyle dotStyle;
+/**
+ *  Number of pages for control. Default is 0.
+ */
+@property (nonatomic) NSInteger pagesNumber;
+/**
+ *  Current page on which control is active. Default is 0.
+ */
+@property (nonatomic) NSInteger pageCurrent;
 /* 圆点所在高度 默认 20 */
 @property (nonatomic, assign) CGFloat pageHeight;
 ///* 选中的色，默认红色 */
@@ -88,6 +95,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) UIImage *pageSelectImage;
 /* 背景图 */
 @property(nonatomic,strong) UIImage *pageNormalImage;
+/* 圆点延展 */
+@property(nonatomic, assign) CGFloat pageWidthSpace;
+/* 圆点间距 默认 10 */
+@property(nonatomic, assign) CGFloat pageBetween;
+/* 圆点边框默认颜色 */
+@property(nonatomic, strong) UIColor *pageBorderColor;
+/* 圆点边框选择颜色 */
+@property(nonatomic, strong) UIColor *pageBorderSelectColor;
+/*圆点边框宽度 */
+@property(nonatomic, assign) CGFloat pageBorderWidth;
 /* 原点大小 默认 CGSizeMake(10, 10) */
 @property (nonatomic, assign) CGSize pageSize;
 /* 是否分页 默认YES*/
@@ -98,14 +115,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat pageBottomOffset;
 /** 分页控件距离轮播图的右边间距（在默认间距基础上）的偏移量 */
 @property (nonatomic, assign) CGFloat pageHorizontalOffset;
-
 /** 是否在只有一张图时隐藏pagecontrol，默认为YES */
 @property(nonatomic,assign) BOOL hidesPage;
 /* 圆点对齐方式 默认剧中*/
-@property(nonatomic,assign) CGXHotBrandPageContolAliment pageContolAliment;
-
-
-
+@property(nonatomic,assign) CGXHotBrandPageAliment pageContolAliment;
 /** 滚动手势禁用（文字轮播较实用） */
 - (void)disableScrollGesture;
 

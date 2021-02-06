@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CGXHotBrandCell : CGXHotBrandBaseCell
 
 @property (nonatomic , strong) UILabel *titleLabel;
-@property (nonatomic , strong)CGXHotBrandTagLabel *tagLabel;
+@property (nonatomic , strong) CGXHotBrandTagLabel *tagLabel;
 
 @end
 

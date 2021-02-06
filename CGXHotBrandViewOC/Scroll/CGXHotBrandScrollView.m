@@ -2,7 +2,8 @@
 //  CGXHotBrandScrollView.m
 //  CGXHotBrandView-OC
 //
-//  Created by CGX on 2021/1/4.
+//  Created by CGX on 2020/12/12.
+//  Copyright © 2020 CGX. All rights reserved.
 //
 
 #import "CGXHotBrandScrollView.h"
@@ -31,8 +32,6 @@
 - (void)initializeData
 {
     [super initializeData];
-    
-    self.pageControl.hidesPage = !self.isHavePage;
     
     self.isHaveSpaceBottom = NO;
     self.edgeInsets = UIEdgeInsetsMake(0, 0, self.isHaveSpaceBottom ? self.pageHeight:0, 0);
@@ -79,11 +78,12 @@
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:position animated:NO];
         if (!self.marquee) {
             int rowInter = [self pageControlIndexWithCurrentCellIndex:targetIndex];
-            self.pageControl.currentPage = rowInter;
+            self.pageCurrent = rowInter;
         }
     }
     if (self.scrollType == CGXHotBrandScrollTypeOnlyTitle || self.marquee) {
-        self.pageControl.hidesPage = YES;
+        self.hidesPage = YES;
+        self.isHavePage = NO;
         self.collectionView.scrollEnabled = NO;
     }
 }
@@ -155,7 +155,7 @@
     } else{
         self.totalInter =  self.infiniteLoop?self.dataArray.count*self.groudInter:self.dataArray.count;
     }
-    self.pageControl.numberOfPages = dataArray.count;
+    self.pagesNumber = dataArray.count;
     
     
     [self.collectionView reloadData];
@@ -163,13 +163,7 @@
     [self layoutIfNeeded];
 }
 
-- (CGXHotBrandModel *)pageIndexWithCurrentCellModelAtIndexPath:(NSIndexPath *)indexPath
-{
-    [super pageIndexWithCurrentCellModelAtIndexPath:indexPath];
-    int rowInter = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
-    CGXHotBrandModel *cellModel = self.dataArray[rowInter];
-    return cellModel;
-}
+
 
 #pragma mark - UIScrollViewDelegate
 
@@ -179,7 +173,7 @@
     if (!self.marquee) {
         int itemIndex = [self currentIndex];
         int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
-        self.pageControl.currentPage = indexOnPageControl;
+        self.pageCurrent = indexOnPageControl;
     }
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -344,7 +338,13 @@
     }
     return MAX(0, index);
 }
-
+- (CGXHotBrandModel *)pageIndexWithCurrentCellModelAtIndexPath:(NSIndexPath *)indexPath
+{
+    [super pageIndexWithCurrentCellModelAtIndexPath:indexPath];
+    int rowInter = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
+    CGXHotBrandModel *cellModel = self.dataArray[rowInter];
+    return cellModel;
+}
 - (int)pageControlIndexWithCurrentCellIndex:(NSInteger)index
 {
     return (int)index % self.dataArray.count;

@@ -14,7 +14,6 @@ typedef NS_ENUM(NSInteger, CGXHotBrandViewShowType) {
     CGXHotBrandViewShowTypeJDChat = 1,//气泡
     CGXHotBrandViewShowTypeChat = 2// 聊天气泡样式
 };
-
 typedef NS_OPTIONS (NSUInteger, CGXHotBrandRoundedType) {
     CGXHotBrandRoundedTypeTopLeft     = UIRectCornerTopLeft, // 左上角
     CGXHotBrandRoundedTypeTopRight    = UIRectCornerTopRight, // 右上角
@@ -22,8 +21,6 @@ typedef NS_OPTIONS (NSUInteger, CGXHotBrandRoundedType) {
     CGXHotBrandRoundedTypeBottomRight = UIRectCornerBottomRight, // 右下角
     CGXHotBrandRoundedTypeAll  = UIRectCornerAllCorners// 全部四个角
 };
-
-
 /*
  *cell卡片对齐动画的位置
  */
@@ -38,15 +35,23 @@ typedef NS_ENUM(NSInteger, CGXHotBrandScrollType) {
     CGXHotBrandScrollTypeOnlyTitle, //顶部
     CGXHotBrandScrollTypeImageTitle
 };
-
 /*
  *圆点对齐方式
  */
-typedef NS_ENUM(NSInteger, CGXHotBrandPageContolAliment) {
-    CGXHotBrandPageContolAlimentCenter  = 0, //居中 默认
-    CGXHotBrandPageContolAlimentLeft    = 1, //左对齐
-    CGXHotBrandPageContolAlimentRight   = 2, //右对齐
+typedef NS_ENUM(NSInteger, CGXHotBrandPageAliment) {
+    CGXHotBrandPageAlimentCenter  = 0, //居中 默认
+    CGXHotBrandPageAlimentLeft    = 1, //左对齐
+    CGXHotBrandPageAlimentRight   = 2, //右对齐
 };
+/*
+ *圆点样式
+ */
+typedef NS_ENUM(NSInteger, CGXHotBrandPageStyle) {
+    CGXHotBrandPageModelSystem,//系统样式 默认
+    CGXHotBrandPageModelImage, //带有数字样式
+    CGXHotBrandPageModelNumber //带有数字样式
+};
+
 
 #define CGXHotBrandViewDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
 

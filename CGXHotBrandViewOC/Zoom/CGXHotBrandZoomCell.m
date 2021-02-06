@@ -160,42 +160,8 @@
 - (void)cellOffsetOnCollectionView:(UICollectionView *)collectionView
 {
     [super cellOffsetOnCollectionView:collectionView];
-    
-    UICollectionViewLayoutAttributes *attributes = [collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:self.row inSection:self.section]];
-    CGRect cellFrameInSuperview = [collectionView convertRect:attributes.frame toView:[collectionView superview]];
-    
     CGXHotBrandZoomFlowLayout *layout = (CGXHotBrandZoomFlowLayout *)collectionView.collectionViewLayout;
-    CGSize firstSize = layout.firstCellSize;
-    UIEdgeInsets edgeInsets = [layout gx_insetForSectionAtIndex:self.section];
-    
-    CGFloat preferXoffset = firstSize.width / 2 +edgeInsets.left;//距离collectionView左边间距为此值时视图恢复正常大小
-    
-    CGFloat itemGaps = 0.0;//item的间距
-    
-    CGFloat itemXoffset = cellFrameInSuperview.origin.x;
-    
-    CGFloat animationMinOffset = -(cellFrameInSuperview.size.width - (preferXoffset-cellFrameInSuperview.size.width/2-itemGaps));//item子视图开始动画的最小x偏移量
-    
-    CGFloat animationMaxOffset = preferXoffset + cellFrameInSuperview.size.width/2 + itemGaps;//item子视图开始动画的最大x偏移量
-    
-    CGFloat normalOffset = preferXoffset - cellFrameInSuperview.size.width/2;//item子视图为1倍大小时的x方向偏移量
-    
-    CGFloat needScale = 0;
-    if (itemXoffset > animationMinOffset && itemXoffset < animationMaxOffset) {
-        if (itemXoffset<normalOffset) {//开始缩小
-            CGFloat config = normalOffset - animationMinOffset;
-            needScale =(itemXoffset-animationMinOffset)/config*(pMaxScale-pNormalScale)+pNormalScale;
-        }else if (itemXoffset>normalOffset){//开始缩小
-            CGFloat config = animationMaxOffset - normalOffset;
-            needScale =(animationMaxOffset-itemXoffset)/config*(pMaxScale-pNormalScale)+pNormalScale;
-        }else{//恢复正常(最大)
-            needScale = pMaxScale;
-        }
-    }else{
-        needScale = pNormalScale;
-    }
-    
-    
+    CGFloat needScale = [layout cellOffsetAtIndex:self.row];
     [UIView animateWithDuration:1
                           delay:0
                         options:UIViewAnimationOptionCurveLinear animations:^{

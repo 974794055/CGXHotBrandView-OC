@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/Slider/CGXHotBrandSliderView.h

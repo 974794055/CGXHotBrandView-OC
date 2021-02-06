@@ -1,32 +1,26 @@
 //
 //  CGXHotBrandPageSquareView.m
-//  CGXHotBrandViewOC
+//  CGXHotBrandView-OC
 //
-//  Created by CGX on 2021/1/5.
+//  Created by CGX on 2020/12/12.
+//  Copyright © 2020 CGX. All rights reserved.
 //
 
 #import "CGXHotBrandPageSquareView.h"
 static const NSTimeInterval timeInterval = 0.5f;
 
 @interface CGXHotBrandPageSquareView ()
-/**
- *  the dot's color you customize not in current page.
- */
-@property(nonatomic, strong) UIColor *dotColor;
 
-/**
- *  the dot's color you customize int current page.
- */
-@property(nonatomic, strong) UIColor *currentDotColor;
+
 @end
 @implementation CGXHotBrandPageSquareView
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        [self initialization];
+        [self initializeData];
     }
-    
     return self;
 }
 
@@ -35,7 +29,7 @@ static const NSTimeInterval timeInterval = 0.5f;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self initialization];
+        [self initializeData];
     }
     return self;
 }
@@ -45,19 +39,19 @@ static const NSTimeInterval timeInterval = 0.5f;
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self initialization];
+        [self initializeData];
     }
     
     return self;
 }
-
-- (void)initialization
+- (void)initializeData
 {
-    self.dotColor = [UIColor whiteColor];
-    self.currentDotColor = [UIColor grayColor];
-    self.backgroundColor    = self.dotColor;
+    self.backgroundColor    = [UIColor whiteColor];
 }
-
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+}
 #pragma mark - implement method
 - (void)changActiveState:(BOOL)active
 {
@@ -71,7 +65,7 @@ static const NSTimeInterval timeInterval = 0.5f;
 - (void)animateToActiveState
 {
     [UIView animateWithDuration:timeInterval animations:^{
-        self.backgroundColor = self.currentDotColor;
+        self.backgroundColor = self.dotModel.dotCurrentColor;
         self.transform = CGAffineTransformMakeScale(1.0, 1.0);
     } completion:nil];
 }
@@ -79,22 +73,22 @@ static const NSTimeInterval timeInterval = 0.5f;
 - (void)animateToInactiveState
 {
     [UIView animateWithDuration:timeInterval animations:^{
-        self.backgroundColor = self.dotColor;
+        self.backgroundColor = self.dotModel.dotColor;
         self.transform = CGAffineTransformIdentity;
     } completion:nil];
 }
 
-- (void)setDotColor:(UIColor *)dotColor
+
+- (void)updateWithModel:(CGXHotBrandPageModel *)model ActiveState:(BOOL)active DotInter:(NSInteger)dotInter
 {
-    _dotColor = dotColor;
-    self.backgroundColor = dotColor;
+    self.dotModel = model;
+    if (active) {
+        self.backgroundColor = model.dotCurrentColor;
+    } else{
+        self.backgroundColor = model.dotColor;
+    }
 }
 
-- (void)setCurrentDotColor:(UIColor *)currentDotColor
-{
-    _currentDotColor = currentDotColor;
-    self.backgroundColor = currentDotColor;
-}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

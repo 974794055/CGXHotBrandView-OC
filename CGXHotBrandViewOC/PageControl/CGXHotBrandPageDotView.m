@@ -1,13 +1,19 @@
 //
 //  CGXHotBrandPageDotView.m
-//  CGXHotBrandViewOC
+//  CGXHotBrandView-OC
 //
-//  Created by CGX on 2021/1/5.
+//  Created by CGX on 2020/12/12.
+//  Copyright © 2020 CGX. All rights reserved.
 //
 
 #import "CGXHotBrandPageDotView.h"
 
+@interface CGXHotBrandPageDotView ()
+
+@end
+
 @implementation CGXHotBrandPageDotView
+
 - (id)init
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
@@ -23,12 +29,9 @@
                                  userInfo:nil];
 }
 
-- (void)setDotColor:(UIColor *)dotColor
-{
-    
-}
 
-- (void)setCurrentDotColor:(UIColor *)currentDotColor
+
+- (void)updateWithModel:(CGXHotBrandPageModel *)model ActiveState:(BOOL)active DotInter:(NSInteger)dotInter
 {
     
 }

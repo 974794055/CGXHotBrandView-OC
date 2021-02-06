@@ -32,6 +32,11 @@
         [self addSubview:mainScrollViewH];
         mainScrollViewH.translatesAutoresizingMaskIntoConstraints = NO;
         mainScrollViewH.contentSize = CGSizeMake(frame.size.width, frame.size.height);
+        
+        self.lineView = [[UIView alloc] init];
+        self.lineView.backgroundColor = [UIColor redColor];
+        [mainScrollViewH addSubview:self.lineView];
+        [mainScrollViewH bringSubviewToFront:self.lineView];
     }
     return self;
 }
@@ -49,18 +54,6 @@
     [self addConstraint:right];
     [self addConstraint:bottom];
     
-}
-- (NSMutableArray<NSString *> *)titleArray
-{
-    if (!_titleArray) {
-        _titleArray = [NSMutableArray array];
-    }
-    return _titleArray;
-}
-- (void)updateDataTitieArray:(NSMutableArray<NSString *> *)titleArray
-{
-    [self.titleArray removeAllObjects];
-    [self.titleArray addObjectsFromArray:titleArray];
     CGFloat x = 10;
     for (int i = 0; i<self.titleArray.count; i++) {
         NSString *str = self.titleArray[i];
@@ -76,10 +69,7 @@
         btn1.frame = CGRectMake(x, 0, width, 50);
         x = x + width;
         if (i==0) {
-            self.lineView = [[UIView alloc] init];
-            self.lineView.backgroundColor = [UIColor whiteColor];
-            [mainScrollViewH addSubview:self.lineView];
-            [mainScrollViewH bringSubviewToFront:self.lineView];
+            
             self.lineView.frame = CGRectMake(CGRectGetMinX(btn1.frame)+(CGRectGetWidth(btn1.frame)-20)/2.0, 40, 20, 3);
         }
         if (i==0) {
@@ -89,6 +79,18 @@
     CGFloat scrollViewWidth = CGRectGetMaxX(mainScrollViewH.subviews.lastObject.frame);
     mainScrollViewH.contentSize = CGSizeMake(scrollViewWidth+10,50);
     
+}
+- (NSMutableArray<NSString *> *)titleArray
+{
+    if (!_titleArray) {
+        _titleArray = [NSMutableArray array];
+    }
+    return _titleArray;
+}
+- (void)updateDataTitieArray:(NSMutableArray<NSString *> *)titleArray
+{
+    [self.titleArray removeAllObjects];
+    [self.titleArray addObjectsFromArray:titleArray];
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }

@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/Cover/CGXHotBrandCoverCell.h

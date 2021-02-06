@@ -29,7 +29,7 @@
 {
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.hotImageView = [[UIImageView alloc] init];
-    self.hotImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.hotImageView.contentMode = UIViewContentModeScaleToFill;
     self.hotImageView.layer.masksToBounds = YES;
     self.hotImageView.clipsToBounds = YES;
     [self.contentView addSubview:self.hotImageView];
@@ -82,4 +82,5 @@
 {
     
 }
+
 @end

@@ -27,7 +27,6 @@
         hotBrandView.edgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
         hotBrandView.itemRowCount = 5;
         hotBrandView.itemSectionCount = 3;
-        
         hotBrandView.autoScroll = (i == 0 ? YES : NO);
         hotBrandView.offsetX = 0.5;
         CGFloat height = (ScreenHeight-kTopHeight-kSafeHeight-30)/2.0;

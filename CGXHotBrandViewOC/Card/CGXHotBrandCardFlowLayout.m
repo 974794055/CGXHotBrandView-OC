@@ -7,12 +7,16 @@
 //
 
 #import "CGXHotBrandCardFlowLayout.h"
-@interface CGXHotBrandCardFlowLayout(){
-    CGSize factItemSize;
-}
+
+#define pNormalScale 0.8//最小的缩放比例
+#define pMaxScale 1.0//最大的拉伸比例
+
+@interface CGXHotBrandCardFlowLayout()
+
 //垂直缩放 数值越大缩放越小
 @property(nonatomic,assign) CGFloat wActiveDistance;
-@property(nonatomic,assign,readwrite) CGSize currentCellSize;
+@property(nonatomic,assign) CGSize currentCellSize;
+
 @end
 @implementation CGXHotBrandCardFlowLayout
 
@@ -45,23 +49,11 @@
     if (!self.itemIsZoom) {
         return array;
     }
+    
     CGRect  visibleRect = CGRectZero;
     visibleRect.origin = self.collectionView.contentOffset;
     visibleRect.size = self.collectionView.bounds.size;
     NSMutableArray *marr = [NSMutableArray new];
-    NSInteger minIndex = 0;
-    CGFloat minCenterX = [(UICollectionViewLayoutAttributes*)array.firstObject center].x;
-    for (int i = 0; i<array.count; i++) {
-        UICollectionViewLayoutAttributes *attributes = array[i];
-        CGRect cellFrameInSuperview = [self.collectionView convertRect:attributes.frame toView:self.collectionView.superview];
-        if (cellFrameInSuperview.origin.x>=0&&
-            cellFrameInSuperview.origin.x<=self.collectionView.frame.size.width) {
-            if (minCenterX>cellFrameInSuperview.origin.x) {
-                minCenterX = cellFrameInSuperview.origin.x;
-                minIndex = i;
-            }
-        }
-    }
     for (int i = 0; i<array.count; i++) {
         CGFloat minimumLineSpacing = [self gx_minimumLineSpacingForSectionAtIndex:i];
         CGSize sizeItem = [self gx_sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:i]];
@@ -81,12 +73,11 @@
    
             center =  CGPointMake(attributes.center.x, attributes.center.y+attributes.size.height*(1-zoom)/2.0);
         }else if (self.cellPosition == CGXHotBrandCellPositionTop) {
-            center =  CGPointMake(attributes.center.x, attributes.center.y+attributes.size.height*(1-zoom)/2.0);
+            center =  CGPointMake(attributes.center.x, attributes.center.y-attributes.size.height*(1-zoom)/2.0);
         }else if (self.cellPosition == CGXHotBrandCellPositionCenter) {
             
         }
         attributes.transform3D = CATransform3DMakeScale(1.0, zoom, 1.0);
-
         if (self.itemAlpha<1) {
             CGFloat collectionCenter =  self.collectionView.frame.size.width / 2 ;
             CGFloat offset = self.collectionView.contentOffset.x ;
@@ -176,4 +167,43 @@
     return proposedContentOffset;
 }
 
+
+// 滚动时cell的缩放放大比例
+- (CGFloat)cellOffsetAtIndex:(NSInteger)index
+{
+    UICollectionViewLayoutAttributes *attributes = [self.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    CGRect cellFrameInSuperview = [self.collectionView convertRect:attributes.frame toView:[self.collectionView superview]];
+    
+    CGSize firstSize = self.currentCellSize;
+    UIEdgeInsets edgeInsets = [self gx_insetForSectionAtIndex:0];
+    
+    
+    CGFloat preferXoffset = firstSize.width / 2 +edgeInsets.left;//距离collectionView左边间距为此值时视图恢复正常大小
+    
+    CGFloat itemGaps = 0.0;//item的间距
+    
+    CGFloat itemXoffset = cellFrameInSuperview.origin.x;
+    
+    CGFloat animationMinOffset = -(cellFrameInSuperview.size.width - (preferXoffset-cellFrameInSuperview.size.width/2-itemGaps));//item子视图开始动画的最小x偏移量
+    
+    CGFloat animationMaxOffset = preferXoffset + cellFrameInSuperview.size.width/2 + itemGaps;//item子视图开始动画的最大x偏移量
+    
+    CGFloat normalOffset = preferXoffset - cellFrameInSuperview.size.width/2;//item子视图为1倍大小时的x方向偏移量
+    
+    CGFloat needScale = 0;
+    if (itemXoffset > animationMinOffset && itemXoffset < animationMaxOffset) {
+        if (itemXoffset<normalOffset) {//开始缩小
+            CGFloat config = normalOffset - animationMinOffset;
+            needScale =(itemXoffset-animationMinOffset)/config*(pMaxScale-pNormalScale)+pNormalScale;
+        }else if (itemXoffset>normalOffset){//开始缩小
+            CGFloat config = animationMaxOffset - normalOffset;
+            needScale =(animationMaxOffset-itemXoffset)/config*(pMaxScale-pNormalScale)+pNormalScale;
+        }else{//恢复正常(最大)
+            needScale = pMaxScale;
+        }
+    }else{
+        needScale = pNormalScale;
+    }
+    return needScale;
+}
 @end

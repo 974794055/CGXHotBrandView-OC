@@ -14,10 +14,11 @@
 #import "CardViewController.h"
 #import "ZoomViewController.h"
 #import "ScrollViewController.h"
-
-
+#import "RotaryViewController.h"
+#import "SliderViewController.h"
 #import "CustomCollectionViewCell.h"
 
+#import "CoverViewController.h"
 
 #if __has_include(<CGXHotBrandViewOC/CGXHotBrandViewOC.h>)
 #import <CGXHotBrandViewOC/CGXHotBrandViewOC.h>

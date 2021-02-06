@@ -43,8 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 //背景毛玻璃效果透明度 默认1
 @property(assign,nonatomic) CGFloat itemEffectAlpha;
 
-//左侧是否显示item 默认不显示
-@property(assign,nonatomic) CGFloat isHaveLeftItem;
+
+//是否点击放大 NO
+@property(assign,nonatomic) BOOL isCenter;
 
 // 更新数据源
 - (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray;
@@ -53,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)setAutoScroll:(BOOL)autoScroll NS_UNAVAILABLE;
+- (void)setIsHavePage:(BOOL)isHavePage NS_UNAVAILABLE;
 
 @end
 

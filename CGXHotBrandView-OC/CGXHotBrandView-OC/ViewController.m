@@ -28,6 +28,9 @@
                       @"纯图片轮播图",
                       @"纯文字轮播图",
                       @"图片文字轮播图",
+                      @"旋转",
+                      @"滑块",
+                      @"中心置顶",
                       nil];
     [self creatCollectionView];
     
@@ -212,13 +215,22 @@
         vc.hidesBottomBarWhenPushed = YES;
         vc.typeInter = 2;
         [self.navigationController pushViewController:vc animated:YES];
-    }  else{
-        ScrollViewController *vc = [[ScrollViewController alloc] init];
+    } else if (indexPath.row==7){
+        RotaryViewController *vc = [[RotaryViewController alloc] init];
+        vc.title = titleStr;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row==8){
+        SliderViewController *vc = [[SliderViewController alloc] init];
+        vc.title = titleStr;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        CoverViewController *vc = [[CoverViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
     
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

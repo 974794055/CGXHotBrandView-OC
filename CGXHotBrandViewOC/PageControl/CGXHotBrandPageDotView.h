@@ -1,31 +1,18 @@
 //
 //  CGXHotBrandPageDotView.h
-//  CGXHotBrandViewOC
+//  CGXHotBrandView-OC
 //
-//  Created by CGX on 2021/1/5.
+//  Created by CGX on 2020/12/12.
+//  Copyright © 2020 CGX. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CGXHotBrandPageModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CGXHotBrandPageDotView : UIView
-/**
- *  if change the custom dot view's color, you should implement this method in subcalss
- *
- *  @param  dotColor    dot color not in current page
- *
- */
-- (void)setDotColor:(UIColor *)dotColor;
 
-/**
- *  if change the custom dot view's color, you should implement this method in subcalss
- *
- *  @param  currentDotColor    dot color in current page
- *
- */
-- (void)setCurrentDotColor:(UIColor *)currentDotColor;
-
+@property(nonatomic, strong) CGXHotBrandPageModel *dotModel;
 /**
  *  A method call let view know which state appearance it should take. Active meaning it's current page. Inactive not the current page.
  *  You can customize dot view and change annimation must implement this method to do something
@@ -34,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 - (void)changActiveState:(BOOL)active;
+
+
+- (void)updateWithModel:(CGXHotBrandPageModel *)model ActiveState:(BOOL)active DotInter:(NSInteger)dotInter;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,1 +1,0 @@
-../../../../../CGXHotBrandViewOC/Custom/UIColor+CGXHotBrand.h

@@ -20,6 +20,11 @@
 @property (nonatomic, weak) NSTimer *timer;
 
 @property (nonatomic, assign,readwrite) NSInteger groudInter;
+
+@property (nonatomic, strong) CGXHotBrandPageControl *pageControl;
+
+@property (nonatomic, strong,readwrite) CGXHotBrandCollectionView *collectionView;
+
 @end
 
 @implementation CGXHotBrandBaseView
@@ -70,28 +75,28 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    [self.collectionView setNeedsLayout];
+    [self.collectionView layoutIfNeeded];
+    
     self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     if (self.isHavePage) {
         NSInteger itemIndex = [self currentIndex];
         if (itemIndex < self.totalInter) {
             self.pageControl.currentPage = itemIndex;
         }
-        
         CGSize pointSize = [self.pageControl sizeForNumberOfPages:self.pageControl.numberOfPages];
-        
-        if (self.pageContolAliment == CGXHotBrandPageContolAlimentRight) {
+        if (self.pageContolAliment == CGXHotBrandPageAlimentRight) {
             self.pageControl.frame = CGRectMake(CGRectGetWidth(self.frame)-self.pageHorizontalOffset-pointSize.width, CGRectGetHeight(self.frame)-self.pageHeight-self.pageBottomOffset, pointSize.width, self.pageHeight);
-        } else if (self.pageContolAliment == CGXHotBrandPageContolAlimentLeft){
+        } else if (self.pageContolAliment == CGXHotBrandPageAlimentLeft){
             self.pageControl.frame = CGRectMake(self.pageHorizontalOffset, CGRectGetHeight(self.frame)-self.pageHeight-self.pageBottomOffset, pointSize.width, self.pageHeight);
         } else{
             self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.frame)-self.pageHeight-self.pageBottomOffset, CGRectGetWidth(self.frame), self.pageHeight);
         }
         self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-self.pageHeight);
-        
     } else{
-        self.pageControl.hidesPage = YES;
         self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     }
+    self.pageControl.hidesPage = !self.isHavePage;
     [self.collectionView reloadData];
 }
 
@@ -195,7 +200,7 @@
 - (void)setPageSelectColor:(UIColor *)pageSelectColor
 {
     _pageSelectColor = pageSelectColor;
-    self.pageControl.currentDotColor = pageSelectColor;
+    self.pageControl.dotCurrentColor = pageSelectColor;
 }
 - (void)setPageNormalColor:(UIColor *)pageNormalColor
 {
@@ -205,7 +210,7 @@
 - (void)setPageSelectImage:(UIImage *)pageSelectImage
 {
     _pageSelectImage = pageSelectImage;
-    self.pageControl.currentDotImage = pageSelectImage;
+    self.pageControl.dotImage = pageSelectImage;
 }
 - (void)setPageNormalImage:(UIImage *)pageNormalImage
 {
@@ -230,7 +235,7 @@
 {
     _hidesPage = hidesPage;
 }
-- (void)setPageContolAliment:(CGXHotBrandPageContolAliment)pageContolAliment
+- (void)setPageContolAliment:(CGXHotBrandPageAliment)pageContolAliment
 {
     _pageContolAliment = pageContolAliment;
 }
@@ -265,6 +270,31 @@
 {
     _autoScrollTimeInterval = autoScrollTimeInterval;
     [self setAutoScroll:self.autoScroll];
+}
+- (void)setPageBetween:(CGFloat)pageBetween
+{
+    _pageBetween = pageBetween;
+    self.pageControl.dotBetween = pageBetween;
+}
+- (void)setPageWidthSpace:(CGFloat)pageWidthSpace
+{
+    _pageWidthSpace= pageWidthSpace;
+    self.pageControl.dotWidthSpace = pageWidthSpace;
+}
+- (void)setPageBorderColor:(UIColor *)pageBorderColor
+{
+    _pageBorderColor = pageBorderColor;
+    self.pageControl.dotBorderColor = pageBorderColor;
+}
+- (void)setPageBorderSelectColor:(UIColor *)pageBorderSelectColor
+{
+    _pageBorderSelectColor = pageBorderSelectColor;
+    self.pageControl.dotBorderSelectColor = pageBorderSelectColor;
+}
+- (void)setPageBorderWidth:(CGFloat)pageBorderWidth
+{
+    _pageBorderWidth = pageBorderWidth;
+    self.pageControl.dotBorderWidth = pageBorderWidth;
 }
 #pragma mark - 定时器
 - (void)setupTimer
@@ -322,7 +352,13 @@
     self.hidesPage = YES;
     self.pageBottomOffset = 0;
     self.pageHorizontalOffset = 0;
-    self.pageContolAliment = CGXHotBrandPageContolAlimentCenter;
+    self.pageContolAliment = CGXHotBrandPageAlimentCenter;
+    
+    self.pageWidthSpace = 0;
+    self.pageBetween = 0;
+    self.pageBorderColor = self.pageNormalColor;
+    self.pageBorderSelectColor = self.pageSelectColor;
+    self.pageBorderWidth = 0;
 
     
 }
@@ -342,7 +378,7 @@
     if (self.pageSelectColor) {
         self.pageSelectColor = self.pageSelectColor;
     }
-    self.pageControl.dotViewClass = [CGXHotBrandPageSquareView class];
+    self.pageControl.dotStyle = self.dotStyle;
     [self.collectionView reloadData];
 }
 /*
@@ -383,7 +419,6 @@
     if ([cell respondsToSelector:@selector(cellOffsetOnCollectionView:)] && [cell conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
         [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)cell cellOffsetOnCollectionView:collectionView];
     }
-    
     if (self.hotBrand_loadImageCallback != nil) {
         cellModel.hotBrand_loadImageCallback = weakSelf.hotBrand_loadImageCallback;
     }
@@ -398,7 +433,16 @@
         [self.delegate gx_hotBrandBaseView:self didSelectItemAtIndexPath:indexPath AtModel:cellModel];
     }
 }
-
+- (void)setPagesNumber:(NSInteger)pagesNumber
+{
+    _pagesNumber = pagesNumber;
+    self.pageControl.numberOfPages = pagesNumber;
+}
+- (void)setPageCurrent:(NSInteger)pageCurrent
+{
+    _pageCurrent = pageCurrent;
+    self.pageControl.currentPage = pageCurrent;
+}
 - (int)currentIndex
 {
     if (self.collectionView.frame.size.width == 0 || self.collectionView.frame.size.height == 0) {

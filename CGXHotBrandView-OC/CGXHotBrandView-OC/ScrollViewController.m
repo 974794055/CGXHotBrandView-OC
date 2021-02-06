@@ -74,11 +74,11 @@
             y = y + height;
             hotBrandView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
             if (i % 3 == 0) {
-                hotBrandView.pageContolAliment = CGXHotBrandPageContolAlimentCenter;
+                hotBrandView.pageContolAliment = CGXHotBrandPageAlimentCenter;
             } else if (i % 3 == 1) {
-                hotBrandView.pageContolAliment = CGXHotBrandPageContolAlimentLeft;
+                hotBrandView.pageContolAliment = CGXHotBrandPageAlimentLeft;
             } else{
-                hotBrandView.pageContolAliment = CGXHotBrandPageContolAlimentRight;
+                hotBrandView.pageContolAliment = CGXHotBrandPageAlimentRight;
             }
             if (i<2) {
                 hotBrandView.isHaveSpaceBottom = YES;
@@ -92,7 +92,7 @@
             hotBrandView.scrollDirection = UICollectionViewScrollDirectionVertical;
         } else {
             hotBrandView.scrollType = CGXHotBrandScrollTypeImageTitle;
-            hotBrandView.pageContolAliment = CGXHotBrandPageContolAlimentRight;
+            hotBrandView.pageContolAliment = CGXHotBrandPageAlimentRight;
             hotBrandView.frame = CGRectMake(0, y,ScreenWidth , height);
             y = y + height;
             hotBrandView.scrollDirection = UICollectionViewScrollDirectionHorizontal;

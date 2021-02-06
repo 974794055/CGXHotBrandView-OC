@@ -50,7 +50,7 @@
         hotBrandView.itemClickCenter = YES;
         CGFloat height = 300;
         hotBrandView.frame = CGRectMake(0, y, ScreenWidth, height);
-        
+//        hotBrandView.isHavePage = NO;
         y = y + height + 10;
         hotBrandView.itemScaleFactor = 0.3;
         hotBrandView.itemWidthScale = 0.5;

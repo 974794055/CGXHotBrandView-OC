@@ -34,8 +34,6 @@ item的高
 @property (nonatomic, assign) NSInteger itemSectionCount;
 /** 每行展示多少个item */
 @property (nonatomic, assign) NSInteger itemRowCount;
-/** 所有item的属性数组 */
-@property (nonatomic, strong) NSMutableArray *attributesArrayM;
 /* 比例 0.0 ～ 1.0 之间 两端无效 默认0.5 */
 @property (nonatomic, assign) CGFloat offsetX; //
 

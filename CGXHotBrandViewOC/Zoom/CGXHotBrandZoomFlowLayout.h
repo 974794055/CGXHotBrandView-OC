@@ -26,9 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<FirstCellZoomInLayoutTwoDelegate> delegate;
 
-@property(nonatomic,assign,readonly) CGSize firstCellSize;
-
-@property(nonatomic,assign,readonly) NSInteger currentIndex;
+// 滚动时cell的缩放放大比例
+- (CGFloat)cellOffsetAtIndex:(NSInteger)index;
 
 
 @end

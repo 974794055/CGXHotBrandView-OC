@@ -64,7 +64,7 @@
 {
     [super initializeViews];
     
-    self.pageControl.hidesPage = !self.isHavePage;
+    self.hidesPage = !self.isHavePage;
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     self.effectView = [[CGXHotBrandBlurEffectView alloc] init];
     [self addSubview:self.effectView];
@@ -308,7 +308,7 @@
     } else{
         self.totalInter =  self.infiniteLoop?self.dataArray.count*self.groudInter:self.dataArray.count;
     }
-    self.pageControl.numberOfPages = dataArray.count;
+    self.pagesNumber = dataArray.count;
     [self.collectionView reloadData];
 }
 // 更新某个item
@@ -365,7 +365,7 @@
     if (self.isHavePage) {
         int itemIndex = [self currentIndex];
         int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
-        self.pageControl.currentPage = indexOnPageControl;
+        self.pageCurrent = indexOnPageControl;
     }
 }
 
@@ -431,7 +431,7 @@
     }
     if (self.isHavePage) {
         int rowInter = [self pageControlIndexWithCurrentCellIndex:current];
-        self.pageControl.currentPage = rowInter;
+        self.pageCurrent = rowInter;
     }
 }
 //itemContentOffsetX

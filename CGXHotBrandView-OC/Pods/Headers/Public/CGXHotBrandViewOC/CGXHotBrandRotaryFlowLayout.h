@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/Rotary/CGXHotBrandRotaryFlowLayout.h

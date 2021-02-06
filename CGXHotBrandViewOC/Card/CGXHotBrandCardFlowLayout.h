@@ -40,7 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign) CGXHotBrandCellPosition   cellPosition;
 
 
-@property(nonatomic,assign,readonly) CGSize currentCellSize;
+// 滚动时cell的缩放放大比例
+- (CGFloat)cellOffsetAtIndex:(NSInteger)index;
 
 @end
 

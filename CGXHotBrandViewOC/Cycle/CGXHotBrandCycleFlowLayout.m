@@ -7,7 +7,13 @@
 //
 
 #import "CGXHotBrandCycleFlowLayout.h"
+@interface CGXHotBrandCycleFlowLayout()
 
+/** 所有item的属性数组 */
+@property (nonatomic, strong) NSMutableArray *attributesArrayM;
+
+
+@end
 @implementation CGXHotBrandCycleFlowLayout
 - (void)initializeData
 {

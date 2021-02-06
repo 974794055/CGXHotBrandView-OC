@@ -6,21 +6,21 @@
 //  Copyright © 2020 CGX. All rights reserved.
 //
 #import <UIKit/UIKit.h>
-#import "CGXHotBrandPageSquareView.h"
-
+#import "CGXHotBrandPageModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CGXHotBrandPageControl : UIControl
 
-@property(nonatomic, strong) Class __nullable dotViewClass;
+@property(nonatomic, assign) CGXHotBrandPageStyle dotStyle;
+
 /**
  *  UIImage to represent a dot, if custom dot view not extends CGXHotBrandPageDotView and has set dotImage.
  */
 @property(nonatomic, strong) UIImage *dotImage;
 /**
- *  UIImage to represent a dot as current page, if custom dot view not extends CGXHotBrandPageDotView and has set currentDotImage.
+ *  UIImage to represent a dot as current page, if custom dot view not extends CGXHotBrandPageDotView and has set dotCurrentImage.
  */
-@property(nonatomic, strong) UIImage *currentDotImage;
+@property(nonatomic, strong) UIImage *dotCurrentImage;
 /**
  *  Set dot view Color. Default is WhiteColor.
  */
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Set current dot view Color. Default is GrayColor.
  */
-@property(nonatomic, strong) UIColor *currentDotColor;
+@property(nonatomic, strong) UIColor *dotCurrentColor;
 /**
  *  Set dot size. Default is (8, 8).
  */
@@ -38,11 +38,22 @@ NS_ASSUME_NONNULL_BEGIN
  *  Set dot width add. Default is 0.
  */
 @property(nonatomic, assign) CGFloat dotWidthSpace;
-
 /**
  *  Set gap between dot and dot. Default is 8.
  */
-@property(nonatomic, assign) double gapBetweenDots;
+@property(nonatomic, assign) double dotBetween;
+/**
+ *  Set dotborderColor add. Default is 0.
+ */
+@property(nonatomic, strong) UIColor *dotBorderColor;
+/**
+ *  Set dotborderColor add. Default is 0.
+ */
+@property(nonatomic, strong) UIColor *dotBorderSelectColor;
+/**
+ *  Set dot borderWidth add. Default is 0.
+ */
+@property(nonatomic, assign) CGFloat dotBorderWidth;
 /**
  *  Number of pages for control. Default is 0.
  */

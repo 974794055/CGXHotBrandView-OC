@@ -10,10 +10,12 @@
 #import "CGXHotBrandZoomFlowLayout.h"
 #import "CGXHotBrandZoomCell.h"
 #import "CGXHotBrandBlurEffectView.h"
+
+#define pMaxScale 1.0//最大的拉伸比例
+#define pNormalScale 0.7 //最小的缩放比例
+
 @interface CGXHotBrandZoomView()<FirstCellZoomInLayoutTwoDelegate>
-{
-    BOOL beganDragging;
-}
+
 @property(strong,nonatomic,readwrite)NSMutableArray<CGXHotBrandModel *> *dataArray;
 
 @property(nonatomic,assign) NSInteger currentSelectInter;
@@ -49,7 +51,7 @@
     
     self.bounces = YES;
     self.infiniteLoop = NO;
-    
+    self.isCenter = NO;
 }
 - (void)initializeViews
 {
@@ -100,10 +102,11 @@
     self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     [self.collectionView reloadData];
     
+    __weak typeof(self) weakSelf = self;
     //在滑动过程中获取当前显示的所有cell, 调用偏移量的计算方法
     [[self.collectionView visibleCells] enumerateObjectsUsingBlock:^(UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj respondsToSelector:@selector(cellOffsetOnCollectionView:)] && [obj conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
-            [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)obj cellOffsetOnCollectionView:self.collectionView];
+            [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)obj cellOffsetOnCollectionView:weakSelf.collectionView];
         }
     }];
 }
@@ -146,7 +149,7 @@
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     
-    return self.edgeInsets;
+    return UIEdgeInsetsMake(self.edgeInsets.top, self.edgeInsets.left, self.edgeInsets.bottom, 0);
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGSize size = [self gx_hotBrandSizeForFirstCell];
@@ -189,19 +192,17 @@
 - (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [super gx_hotBrandCollectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
-//    CGXHotBrandModel *cellModel = [self pageIndexWithCurrentCellModelAtIndexPath:indexPath];
 }
 - (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [super gx_hotBrandCollectionView:collectionView didSelectItemAtIndexPath:indexPath];
-    
-            [self scrolToPath:indexPath animated:YES];
+
+    if (self.isCenter) {
+    [self scrolToPath:indexPath animated:YES];
+    }
 }
 
-//开始拖动
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    beganDragging = YES;
-}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (!self.dataArray.count) return; // 解决清除timer时偶尔会出现的问题
@@ -216,27 +217,13 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(gx_hotBrandBaseView:ScrollAtPoint:)]) {
         [self.delegate gx_hotBrandBaseView:self ScrollAtPoint:self.collectionView];
     }
-    
+    __weak typeof(self) weakSelf = self;
     //在滑动过程中获取当前显示的所有cell, 调用偏移量的计算方法
     [[self.collectionView visibleCells] enumerateObjectsUsingBlock:^(UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj respondsToSelector:@selector(cellOffsetOnCollectionView:)] && [obj conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
-            [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)obj cellOffsetOnCollectionView:self.collectionView];
+            [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)obj cellOffsetOnCollectionView:weakSelf.collectionView];
         }
     }];
-}
-//拖动结束
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    beganDragging = NO;
-}
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    [self scrollViewDidEndScrollingAnimation:self.collectionView];
-    [self gx_hotBrandZoomScrollEndAtIndex:self.currentSelectInter];
-}
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-{
-    [self gx_hotBrandZoomScrollEndAtIndex:self.currentSelectInter];
 }
 
 - (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray
@@ -276,16 +263,17 @@
 //滚动处理
 - (void)scrolToPath:(NSIndexPath*)path animated:(BOOL)animated
 {
-    self.currentSelectInter = path.row;
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:path.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
-
-    if (path.row > 0) {
-        UICollectionViewLayoutAttributes*attributes = [self.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:path.row-1 inSection:0]];
-        
-        [self.collectionView setContentOffset:CGPointMake(CGRectGetMaxX(attributes.frame), 0) animated:animated];
+    if (self.currentSelectInter != path.row) {
+        self.currentSelectInter = path.row;
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:path.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+        UICollectionViewLayoutAttributes*attributes = [self.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+        CGFloat finalPointX = (attributes.size.width+ self.minimumLineSpacing)*path.row;
+        [self.collectionView setContentOffset:CGPointMake(finalPointX, 0) animated:animated];
     }
-
 }
+
+
+
 - (CGXHotBrandModel *)pageIndexWithCurrentCellModelAtIndexPath:(NSIndexPath *)indexPath
 {
     [super pageIndexWithCurrentCellModelAtIndexPath:indexPath];
@@ -306,4 +294,6 @@
 {
     return (int)index % self.dataArray.count;
 }
+
+
 @end

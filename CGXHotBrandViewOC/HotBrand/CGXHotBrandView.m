@@ -139,7 +139,7 @@
 {
     if (!self.dataArray.count) return;
     NSInteger itemIndex = [self currentIndex];
-    self.pageControl.currentPage = itemIndex;
+    self.pageCurrent = itemIndex;
 }
 - (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray
 {
@@ -147,12 +147,12 @@
     NSMutableArray *listArr = [CGXHotBrandTools splitArray:dataArray withSubSize:self.itemSectionCount*self.itemRowCount];
     if (self.pagingEnabled) {
         [self.dataArray addObjectsFromArray:listArr];
-        self.pageControl.numberOfPages = listArr.count;
-        self.pageControl.currentPage = 0;
+        self.pagesNumber = listArr.count;
+        self.pageCurrent = 0;
         
     }else{
-        self.pageControl.numberOfPages = listArr.count;
-        self.pageControl.currentPage = 0;
+        self.pagesNumber = listArr.count;
+        self.pageCurrent = 0;
         [self.dataArray addObject:dataArray];
     }
     self.totalInter = listArr.count;

@@ -1,6 +1,6 @@
 {
   "name": "CGXHotBrandViewOC",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "summary": "CGXHotBrandViewOC是基于UICollectionView封装的热门菜单库",
   "description": "UICollectionView封装的热门菜单库",
   "homepage": "https://github.com/974794055/CGXHotBrandView-OC",
@@ -16,7 +16,7 @@
   },
   "source": {
     "git": "https://github.com/974794055/CGXHotBrandView-OC.git",
-    "tag": "0.0.5"
+    "tag": "0.0.6"
   },
   "requires_arc": true,
   "frameworks": "UIKit",
@@ -85,6 +85,33 @@
     {
       "name": "Scroll",
       "source_files": "CGXHotBrandViewOC/Scroll/**/*.{h,m}",
+      "dependencies": {
+        "CGXHotBrandViewOC/Base": [
+
+        ]
+      }
+    },
+    {
+      "name": "Rotary",
+      "source_files": "CGXHotBrandViewOC/Rotary/**/*.{h,m}",
+      "dependencies": {
+        "CGXHotBrandViewOC/Base": [
+
+        ]
+      }
+    },
+    {
+      "name": "Slider",
+      "source_files": "CGXHotBrandViewOC/Slider/**/*.{h,m}",
+      "dependencies": {
+        "CGXHotBrandViewOC/Base": [
+
+        ]
+      }
+    },
+    {
+      "name": "Cover",
+      "source_files": "CGXHotBrandViewOC/Cover/**/*.{h,m}",
       "dependencies": {
         "CGXHotBrandViewOC/Base": [
 

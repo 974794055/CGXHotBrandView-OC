@@ -24,6 +24,9 @@
 		B55790C525A363A50087B030 /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55790C425A363A50087B030 /* ScrollViewController.m */; };
 		B55E334F25A9D492005FB601 /* CustomTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B55E334E25A9D492005FB601 /* CustomTitleView.m */; };
 		B55F82012588F6750018472C /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B55F82002588F6750018472C /* CustomCollectionViewCell.m */; };
+		B5ADD2E325B5D0E700978B53 /* RotaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADD2E225B5D0E600978B53 /* RotaryViewController.m */; };
+		B5ADD2F425B5D2CB00978B53 /* SliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADD2F325B5D2CB00978B53 /* SliderViewController.m */; };
+		B5C8A60525CC26680058E488 /* CoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C8A60425CC26680058E488 /* CoverViewController.m */; };
 		B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDEE75258B8B6E00359A78 /* CycleViewController.m */; };
 		B627137E971B883F05749DA6 /* libPods-CGXHotBrandView-OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */; };
 /* End PBXBuildFile section */
@@ -59,6 +62,12 @@
 		B55E334E25A9D492005FB601 /* CustomTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTitleView.m; sourceTree = "<group>"; };
 		B55F81FF2588F6750018472C /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		B55F82002588F6750018472C /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
+		B5ADD2E125B5D0E600978B53 /* RotaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotaryViewController.h; sourceTree = "<group>"; };
+		B5ADD2E225B5D0E600978B53 /* RotaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotaryViewController.m; sourceTree = "<group>"; };
+		B5ADD2F225B5D2CB00978B53 /* SliderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SliderViewController.h; sourceTree = "<group>"; };
+		B5ADD2F325B5D2CB00978B53 /* SliderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SliderViewController.m; sourceTree = "<group>"; };
+		B5C8A60325CC26680058E488 /* CoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverViewController.h; sourceTree = "<group>"; };
+		B5C8A60425CC26680058E488 /* CoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverViewController.m; sourceTree = "<group>"; };
 		B5DA5E20258A5B100044A0CF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B5EDEE74258B8B6E00359A78 /* CycleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CycleViewController.h; sourceTree = "<group>"; };
 		B5EDEE75258B8B6E00359A78 /* CycleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CycleViewController.m; sourceTree = "<group>"; };
@@ -125,6 +134,12 @@
 				B54A7AE325A20C1300801BD6 /* ZoomViewController.m */,
 				B55790C325A363A50087B030 /* ScrollViewController.h */,
 				B55790C425A363A50087B030 /* ScrollViewController.m */,
+				B5ADD2E125B5D0E600978B53 /* RotaryViewController.h */,
+				B5ADD2E225B5D0E600978B53 /* RotaryViewController.m */,
+				B5ADD2F225B5D2CB00978B53 /* SliderViewController.h */,
+				B5ADD2F325B5D2CB00978B53 /* SliderViewController.m */,
+				B5C8A60325CC26680058E488 /* CoverViewController.h */,
+				B5C8A60425CC26680058E488 /* CoverViewController.m */,
 				B55F81FF2588F6750018472C /* CustomCollectionViewCell.h */,
 				B55F82002588F6750018472C /* CustomCollectionViewCell.m */,
 				0460C2B225A55B2B007AFAEB /* BaseViewController.h */,
@@ -258,9 +273,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B55E334F25A9D492005FB601 /* CustomTitleView.m in Sources */,
+				B5ADD2F425B5D2CB00978B53 /* SliderViewController.m in Sources */,
 				B55790A225A357130087B030 /* HotViewController.m in Sources */,
 				0460C2B425A55B2B007AFAEB /* BaseViewController.m in Sources */,
+				B5ADD2E325B5D0E700978B53 /* RotaryViewController.m in Sources */,
 				B55790A625A3577B0087B030 /* ListCollectionViewCell.m in Sources */,
+				B5C8A60525CC26680058E488 /* CoverViewController.m in Sources */,
 				04AD1F71258711F600B7544D /* ViewController.m in Sources */,
 				B55790C525A363A50087B030 /* ScrollViewController.m in Sources */,
 				04BFA28B2599AC340042801C /* CardViewController.m in Sources */,
