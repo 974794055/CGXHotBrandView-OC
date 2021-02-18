@@ -61,7 +61,6 @@
     
     self.collectionView.pagingEnabled = !self.marquee;
     
-    
     if (self.collectionView.contentOffset.x == 0 &&  self.totalInter>0 && self.dataArray.count > 0) {
         int targetIndex = 0;
         if (self.infiniteLoop) {
@@ -69,13 +68,7 @@
         }else{
             targetIndex = 0;
         }
-        UICollectionViewScrollPosition position = self.scrollDirection;
-        if (self.scrollDirection == UICollectionViewScrollPositionCenteredHorizontally) {
-            position = UICollectionViewScrollPositionCenteredHorizontally;
-        } else{
-            position = UICollectionViewScrollPositionCenteredVertically;
-        }
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:position animated:NO];
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:self.scrollDirection  animated:NO];
         if (!self.marquee) {
             int rowInter = [self pageControlIndexWithCurrentCellIndex:targetIndex];
             self.pageCurrent = rowInter;
@@ -87,6 +80,7 @@
         self.collectionView.scrollEnabled = NO;
     }
 }
+
 /*
  自定义layout
  */
@@ -95,6 +89,8 @@
     [super preferredFlowLayout];
     CGXHotBrandScrollFlowLayout *layout = [[CGXHotBrandScrollFlowLayout alloc] init];
     layout.scrollDirection = self.scrollDirection;
+    layout.minimumLineSpacing = self.minimumLineSpacing;
+    layout.minimumInteritemSpacing = self.minimumInteritemSpacing;
     return layout;
 }
 /**
@@ -120,20 +116,21 @@
     return self.minimumLineSpacing;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
     return self.minimumInteritemSpacing;
 }
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
     return self.edgeInsets;
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     return CGSizeMake(CGRectGetWidth(collectionView.frame)-self.edgeInsets.left-self.edgeInsets.right ,floor(CGRectGetHeight(collectionView.frame)-self.edgeInsets.top-self.edgeInsets.bottom));
 }
 - (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [super gx_hotBrandCollectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
-    //    CGXHotBrandModel *cellModel = [self pageIndexWithCurrentCellModelAtIndexPath:indexPath];
     if ([cell isKindOfClass:[CGXHotBrandScrollCell class]]) {
         CGXHotBrandScrollCell *scrollCell = (CGXHotBrandScrollCell *)cell;
         scrollCell.scrollType = self.scrollType;
@@ -156,7 +153,6 @@
         self.totalInter =  self.infiniteLoop?self.dataArray.count*self.groudInter:self.dataArray.count;
     }
     self.pagesNumber = dataArray.count;
-    
     
     [self.collectionView reloadData];
     [self setNeedsLayout];
@@ -274,20 +270,14 @@
 }
 - (void)scrollToIndex:(int)targetIndex
 {
-    UICollectionViewScrollPosition position = self.scrollDirection;
-    if (self.scrollDirection == UICollectionViewScrollPositionCenteredHorizontally) {
-        position = UICollectionViewScrollPositionCenteredHorizontally;
-    } else{
-        position = UICollectionViewScrollPositionCenteredVertically;
-    }
     if (targetIndex >= self.totalInter) {
         if (self.infiniteLoop) {
             targetIndex = self.totalInter * 0.5;
-                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:position animated:NO];
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:self.scrollDirection animated:NO];
         }
         return;
     }
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:position animated:YES];
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:self.scrollDirection animated:YES];
 }
 - (void)scrollViewScrollToIndex:(NSInteger)index
 {

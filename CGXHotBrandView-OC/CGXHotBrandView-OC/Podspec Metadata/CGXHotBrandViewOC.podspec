@@ -60,6 +60,7 @@ s.subspec 'Cover' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/Cover/**/*.{h,m}'
    ss.dependency 'CGXHotBrandViewOC/Base'
 end
+
 end
 
 

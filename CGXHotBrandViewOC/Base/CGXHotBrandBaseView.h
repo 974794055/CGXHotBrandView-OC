@@ -63,7 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat minimumInteritemSpacing;
 /** collectionView的内边距 */
 @property (nonatomic, assign) UIEdgeInsets edgeInsets;
-
 /** 加载图片 */
 @property (nonatomic, copy) void(^hotBrand_loadImageCallback)(UIImageView *hotImageView, NSURL *hotImageURL);
 /** 是否无限循环,默认Yes */

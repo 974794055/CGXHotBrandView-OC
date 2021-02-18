@@ -21,7 +21,7 @@
     for (int i = 0; i<2; i++) {
         CGXHotBrandRotaryView *hotBrandView = [[CGXHotBrandRotaryView alloc] init];
         hotBrandView.delegate = self;
-        hotBrandView.itemScaleFactor = 0.5;
+        hotBrandView.itemScaleFactor = 0.4;
         CGFloat height = (ScreenHeight-kTopHeight-kSafeHeight-30)/3.0;
         if (i == 0) {
             hotBrandView.frame = CGRectMake(0, 10,ScreenWidth , height);
@@ -55,12 +55,12 @@
 /*点击cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath AtModel:(nonnull CGXHotBrandModel *)hotModel
 {
-    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
 }
 /*滚动结束cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView ScrollEndItemAtIndexPath:(nonnull NSIndexPath *)indexPath AtModel:(nonnull CGXHotBrandModel *)hotModel
 {
-    NSLog(@"ScrollItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+    NSLog(@"ScrollItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
     hotView.backgroundColor = RandomColor;
 }
 

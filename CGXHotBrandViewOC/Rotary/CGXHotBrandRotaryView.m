@@ -37,7 +37,7 @@
     self.minimumLineSpacing = 0;
     self.minimumInteritemSpacing = 0;
     self.edgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.infiniteLoop = NO;
+    self.infiniteLoop = YES;
     self.itemScaleFactor = 0.7;
     self.visibleCount = 5;
 }
@@ -79,10 +79,6 @@
     layout.minimumLineSpacing = self.minimumLineSpacing;
     layout.sectionInset = self.edgeInsets;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.carouselAnim = HJCarouselAnimLinear;
-//    layout.carouselAnim = HJCarouselAnimRotary;
-    layout.carouselAnim = HJCarouselAnimCarousel;
-//    layout.carouselAnim = HJCarouselAnimCoverFlow;
     layout.visibleCount = self.visibleCount;
     layout.carouselDelegate = self;
     return layout;
@@ -160,24 +156,24 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(gx_hotBrandBaseView:ScrollAtPoint:)]) {
-//        [self.delegate gx_hotBrandBaseView:self ScrollAtPoint:self.collectionView];
-//    }
-//    //在滑动过程中获取当前显示的所有cell, 调用偏移量的计算方法
-//    [[self.collectionView visibleCells] enumerateObjectsUsingBlock:^(UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if ([obj respondsToSelector:@selector(cellOffsetOnCollectionView:)] && [obj conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
-//            [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)obj cellOffsetOnCollectionView:self.collectionView];
-//        }
-//    }];
-    //    if (self.infiniteLoop) {
-    //    CGFloat itemWidth = CGRectGetWidth(self.frame)*self.itemScaleFactor;
-    //    CGPoint point = CGPointMake(0+(self.totalInter/2*itemWidth*self.itemScaleFactor),self.collectionView.contentOffset.y);
-    //    if (scrollView.contentOffset.x<300) {
-    //        [self.collectionView setContentOffset:point animated:NO];
-    //    }else if (scrollView.contentOffset.x>(self.totalInter*itemWidth)-500){
-    //        [self.collectionView setContentOffset:point animated:NO];
-    //    }
-    //    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(gx_hotBrandBaseView:ScrollAtPoint:)]) {
+        [self.delegate gx_hotBrandBaseView:self ScrollAtPoint:self.collectionView];
+    }
+    //在滑动过程中获取当前显示的所有cell, 调用偏移量的计算方法
+    [[self.collectionView visibleCells] enumerateObjectsUsingBlock:^(UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj respondsToSelector:@selector(cellOffsetOnCollectionView:)] && [obj conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
+            [(UICollectionViewCell<CGXHotBrandUpdateCellDelegate> *)obj cellOffsetOnCollectionView:self.collectionView];
+        }
+    }];
+    if (self.infiniteLoop) {
+        CGFloat itemWidth = CGRectGetWidth(self.frame)*self.itemScaleFactor;
+        CGPoint point = CGPointMake(0+(self.totalInter/2*itemWidth*self.itemScaleFactor),self.collectionView.contentOffset.y);
+        if (scrollView.contentOffset.x<300) {
+            [self.collectionView setContentOffset:point animated:NO];
+        }else if (scrollView.contentOffset.x>(self.totalInter*itemWidth)-500){
+            [self.collectionView setContentOffset:point animated:NO];
+        }
+    }
 }
 
 /**
@@ -189,14 +185,10 @@
     CGFloat itemWidth = CGRectGetWidth(self.frame)*self.itemScaleFactor;
     CGPoint point = CGPointMake(0+(self.totalInter/2*itemWidth),self.collectionView.contentOffset.y);
     [self.collectionView setContentOffset:point animated:NO];
-
     CGPoint collectionViewPoint = self.collectionView.contentOffset;
-
     CGFloat index = roundf((self.collectionView.contentOffset.x+ CGRectGetWidth(self.collectionView.frame) / 2 - itemWidth / 2) /itemWidth);
     collectionViewPoint.x = itemWidth * index + itemWidth / 2 - CGRectGetWidth(self.collectionView.frame) / 2;
-
     [self.collectionView setContentOffset:collectionViewPoint animated:YES];
-    
     self.currentSelectInter = index;
     [self gx_hotBrandAtCurrentInter:self.currentSelectInter];
 }

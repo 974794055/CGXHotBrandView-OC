@@ -7,6 +7,7 @@
 //
 #import "ViewController.h"
 #import "ListCollectionViewCell.h"
+
 @interface ViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *titleArr;
@@ -25,24 +26,20 @@
                       @"仿爱奇艺错位Banner",
                       @"中心点放大",
                       @"仿爱奇艺首个放大",
+                      @"中心置顶放大",
                       @"纯图片轮播图",
                       @"纯文字轮播图",
                       @"图片文字轮播图",
                       @"旋转",
                       @"滑块",
-                      @"中心置顶",
                       nil];
     [self creatCollectionView];
-    
-    
     
     NSMutableArray *rowArray = [NSMutableArray array];
     for (int j = 0; j< 34; j++) {
         CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
         [rowArray addObject:model];
     }
-    
-    
 }
 - (NSArray *)splitArray:(NSArray *)array withSubSize:(NSInteger)subSize{
     //  数组将被拆分成指定长度数组的个数
@@ -150,7 +147,6 @@
     ListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([ListCollectionViewCell class]) forIndexPath:indexPath];
     cell.titleLabel.text = self.titleArr[indexPath.row];
     return cell;
-    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -175,63 +171,60 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *titleStr = self.titleArr[indexPath.row];
-    if (indexPath.row==0) {
+    if ([titleStr isEqualToString:@"热门菜单Banner"]) {
         HotViewController *vc = [[HotViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row==1){
+    } else if ([titleStr isEqualToString:@"仿爱奇艺错位Banner"]){
         CycleViewController *vc = [[CycleViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row==2){
+    } else if ([titleStr isEqualToString:@"中心点放大"]){
         CardViewController *vc = [[CardViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-        
-    } else if (indexPath.row==3){
+    } else if ([titleStr isEqualToString:@"仿爱奇艺首个放大"]){
         ZoomViewController *vc = [[ZoomViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-        
-    } else if (indexPath.row==4){
+    } else if ([titleStr isEqualToString:@"中心置顶放大"]){
+        CoverViewController *vc = [[CoverViewController alloc] init];
+        vc.title = titleStr;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([titleStr isEqualToString:@"纯图片轮播图"]){
         ScrollViewController *vc = [[ScrollViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         vc.typeInter = 0;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row==5){
+    } else if ([titleStr isEqualToString:@"纯文字轮播图"]){
         ScrollViewController *vc = [[ScrollViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         vc.typeInter = 1;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row==6){
+    } else if ([titleStr isEqualToString:@"图片文字轮播图"]){
         ScrollViewController *vc = [[ScrollViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         vc.typeInter = 2;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row==7){
+    } else if ([titleStr isEqualToString:@"旋转"]){
         RotaryViewController *vc = [[RotaryViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row==8){
+    } else if ([titleStr isEqualToString:@"滑块"]){
         SliderViewController *vc = [[SliderViewController alloc] init];
         vc.title = titleStr;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    } else {
-        CoverViewController *vc = [[CoverViewController alloc] init];
-        vc.title = titleStr;
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

@@ -11,7 +11,7 @@
 #import "CGXHotBrandBaseFlowLayout.h"
 #import "CGXHotBrandBaseCell.h"
 #import "CGXHotBrandModel.h"
-
+#import "CGXHotBrandTools.h"
 #import "UIImage+CGXHotBrand.h"
 #import "CGXHotBrandPageSquareView.h"
 @interface CGXHotBrandBaseView ()<UICollectionViewDataSource,UICollectionViewDelegate>
@@ -79,10 +79,10 @@
     [self.collectionView layoutIfNeeded];
     
     self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+    self.collectionView.contentSize = CGSizeMake(self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
     if (self.isHavePage) {
-        NSInteger itemIndex = [self currentIndex];
-        if (itemIndex < self.totalInter) {
-            self.pageControl.currentPage = itemIndex;
+        if (self.pageCurrent < self.totalInter) {
+            self.pageControl.currentPage = self.pageCurrent;
         }
         CGSize pointSize = [self.pageControl sizeForNumberOfPages:self.pageControl.numberOfPages];
         if (self.pageContolAliment == CGXHotBrandPageAlimentRight) {
@@ -379,6 +379,8 @@
         self.pageSelectColor = self.pageSelectColor;
     }
     self.pageControl.dotStyle = self.dotStyle;
+    [CGXHotBrandTools getTopViewController:self].automaticallyAdjustsScrollViewInsets = NO;
+    
     [self.collectionView reloadData];
 }
 /*

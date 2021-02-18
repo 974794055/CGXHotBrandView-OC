@@ -9,9 +9,9 @@
 #import "UIView+CGXHotBrandRounded.h"
 #import "CGXHotBrandZoomFlowLayout.h"
 
-
 #define pMaxScale 1.0//最大的拉伸比例
 #define pNormalScale 0.7 //最小的缩放比例
+
 @interface CGXHotBrandZoomCell ()
 
 @property (nonatomic , strong) NSLayoutConstraint *tagTitleHeight;
@@ -37,7 +37,6 @@
 {
     [super initializeViews];
     
-    
     self.titleLabel  =[[UILabel alloc] init];
     self.titleLabel.textColor = [UIColor blackColor];
     self.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -61,7 +60,6 @@
     self.numLabel.layer.masksToBounds = YES;
     self.numLabel.clipsToBounds = YES;
     self.numLabel.hidden = YES;
-    
     
     self.numHeight = [NSLayoutConstraint constraintWithItem:self.numLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:30];
     [self.numLabel addConstraint:self.numHeight];
@@ -94,7 +92,7 @@
     
     self.hotTitleleft = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
     self.hotTitleRight = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
-    self.hotTitleBottom = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-self.cellModel.titleSpaceBottom];
+    self.hotTitleBottom = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-self.cellModel.titleModel.spaceBottom];
     [self.contentView addConstraint:self.hotTitleleft];
     [self.contentView addConstraint:self.hotTitleRight];
     [self.contentView addConstraint:self.hotTitleBottom];
@@ -105,14 +103,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
     [self.contentView setNeedsLayout];
     [self.contentView layoutIfNeeded];
-    
-    self.hotImageTop.constant = 0;
-    self.hotImageLeft.constant =0;
-    self.hotImageRight.constant = 0;
-    self.hotImageBottom.constant = 0;
 }
 
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
@@ -124,31 +116,31 @@
     self.hotImageRight.constant = 0;
     self.hotImageBottom.constant = 0;
     
-    self.titleLabel.text = cellModel.titleStr;
-    self.titleLabel.textColor = cellModel.titleColor;
-    self.titleLabel.font = cellModel.titleFont;
-    self.titleLabel.textAlignment = cellModel.textAlignment;
+    self.titleLabel.text = cellModel.titleModel.text;
+    self.titleLabel.textColor = cellModel.titleModel.color;
+    self.titleLabel.font = cellModel.titleModel.font;
+    self.titleLabel.textAlignment = cellModel.titleModel.textAlignment;
     self.hotTitleHeight.constant = cellModel.titleHeight;
-    self.hotTitleleft.constant = cellModel.titleHLpace;
-    self.hotTitleRight.constant = -cellModel.titleHRpace;
+    self.hotTitleleft.constant = cellModel.titleModel.spaceLeft;
+    self.hotTitleRight.constant = -cellModel.titleModel.spaceRight;
     
-    NSString *text = cellModel.tagStr ? cellModel.tagStr:@"";
+    NSString *text = cellModel.tagModel.text ? cellModel.tagModel.text:@"";
     self.tagLabel.titleStr =  text;
-    self.tagLabel.titleColor = cellModel.tagColor;;
-    self.tagLabel.backgroundColor = cellModel.tagBgColor;
-    self.tagLabel.tagBorderColor = cellModel.tagBorderColor;
+    self.tagLabel.titleColor = cellModel.tagModel.color;;
+    self.tagLabel.backgroundColor = cellModel.tagModel.bgColor;
+    self.tagLabel.tagBorderColor = cellModel.tagModel.borderColor;
     self.tagLabel.showType =  cellModel.showType;
     self.tagLabel.roundedType =  cellModel.roundedType;
-    if (cellModel.tagStr && cellModel.tagStr.length > 0 && ![cellModel.tagStr isEqualToString:@""]) {
+    if (cellModel.tagModel.text && cellModel.tagModel.text.length > 0 && ![cellModel.tagModel.text isEqualToString:@""]) {
         self.tagLabel.hidden = NO;
     } else{
         self.tagLabel.hidden = YES;
     }
     
     self.numLabel.hidden = NO;
-    self.numLabel.backgroundColor = cellModel.numBgColor;
+    self.numLabel.backgroundColor = cellModel.numModel.bgColor;
     self.numLabel.numStr = [NSString stringWithFormat:@"%ld" , row+1];
-    self.numLabel.numColor = cellModel.numColor;
+    self.numLabel.numColor = cellModel.numModel.color;
     
     
     [self updateWithLabel:1];
@@ -174,32 +166,32 @@
 - (void)updateWithLabel:(CGFloat)needScale
 {
     self.numTop.constant = 0;
-    self.numLeft.constant = self.cellModel.numHSpace*needScale;
+    self.numLeft.constant = self.cellModel.numModel.spaceLeft*needScale;
     self.numWidth.constant = self.cellModel.numWidth*needScale;
     self.numHeight.constant = self.cellModel.numHeight*needScale;
     self.numLabel.bottomHeight = self.cellModel.bottomHeight*needScale;
-    self.numLabel.numFont =  [UIFont systemFontOfSize:self.cellModel.numFont.pointSize*needScale];
+    self.numLabel.numFont =  [UIFont systemFontOfSize:self.cellModel.numModel.font.pointSize*needScale];
     
-    UIFont *font = [UIFont systemFontOfSize:self.cellModel.tagFont.pointSize * needScale];
-    NSString *text = self.cellModel.tagStr ? self.cellModel.tagStr:@"";
+    UIFont *font = [UIFont systemFontOfSize:self.cellModel.tagModel.font.pointSize * needScale];
+    NSString *text = self.cellModel.tagModel.text ? self.cellModel.tagModel.text:@"";
     NSDictionary *attrs = @{NSFontAttributeName:font};
     CGSize size = [text boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.contentView.frame), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size;
-    CGFloat width = ceil(size.width+self.cellModel.tagSpace);
+    CGFloat width = ceil(size.width+self.cellModel.tagModel.space);
     
     self.tagTitleWidth.constant = width;
     self.tagTitleHeight.constant = self.cellModel.tagHeight*needScale;
-    self.tagTitleTop.constant = self.cellModel.tagVSpace*needScale;
-    self.tagTitleRight.constant = -self.cellModel.tagHSpace*needScale;
+    self.tagTitleTop.constant = self.cellModel.tagModel.spaceTop*needScale;
+    self.tagTitleRight.constant = -self.cellModel.tagModel.spaceRight*needScale;
     
     self.tagLabel.titleFont = font;
-    self.tagLabel.tagBorderRadius = self.cellModel.tagBorderRadius*needScale;
-    self.tagLabel.tagBorderWidth = self.cellModel.tagBorderWidth*needScale;
+    self.tagLabel.tagBorderRadius = self.cellModel.tagModel.borderRadius*needScale;
+    self.tagLabel.tagBorderWidth = self.cellModel.tagModel.borderWidth*needScale;
     
     
-    self.titleLabel.font = [UIFont systemFontOfSize:self.cellModel.titleFont.pointSize * needScale];
+    self.titleLabel.font = [UIFont systemFontOfSize:self.cellModel.titleModel.font.pointSize * needScale];
     self.hotTitleHeight.constant = self.cellModel.titleHeight*needScale;
-    self.hotTitleleft.constant = self.cellModel.titleHLpace*needScale;
-    self.hotTitleRight.constant = -self.cellModel.titleHRpace*needScale;
+    self.hotTitleleft.constant = self.cellModel.titleModel.spaceLeft*needScale;
+    self.hotTitleRight.constant = -self.cellModel.titleModel.spaceRight*needScale;
 }
 
 

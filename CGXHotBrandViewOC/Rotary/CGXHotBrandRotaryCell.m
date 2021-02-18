@@ -18,28 +18,17 @@
 - (void)initializeViews
 {
     [super initializeViews];
-
-    
-     
 }
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
     [self.contentView setNeedsLayout];
     [self.contentView layoutIfNeeded];
-    
-    self.hotImageTop.constant = 0;
-    self.hotImageLeft.constant =0;
-    self.hotImageRight.constant = 0;
-    self.hotImageBottom.constant = 0;
-
 }
 
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
 {
     [super updateWithHotBrandCellModel:cellModel Section:section Row:row];
-
     self.hotImageTop.constant = 0;
     self.hotImageLeft.constant =0;
     self.hotImageRight.constant = 0;

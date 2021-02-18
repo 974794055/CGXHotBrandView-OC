@@ -102,19 +102,19 @@
     NSMutableArray *dataArray = [NSMutableArray array];
     for (int i = 0; i< arc4random() % 10 + 5; i++) {
         CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-        model.titleStr = [NSString stringWithFormat:@"猫咪-%d",i];
+        model.titleModel.text = [NSString stringWithFormat:@"猫咪-%d",i];
         model.itemColor = [UIColor colorWithWhite:0.93 alpha:1];
         model.hotPicStr = [NSString stringWithFormat:@"HotIcon%d",i % 5];;
-        model.tagStr = (arc4random() % 1 == 0) ? @"秒杀":@"";
-        model.tagSpace = 10;
-        model.tagHSpace = 10;
-        model.tagVSpace = 0;
-        model.tagBorderRadius = 6;
-        model.tagBorderColor = [UIColor grayColor];
-        model.tagBorderWidth = 0;
-        model.tagBgColor = [UIColor redColor];
-        model.titleHLpace = 10;
-        model.titleHRpace = 10;
+        model.tagModel.text = (arc4random() % 1 == 0) ? @"秒杀":@"";
+
+//        model.tagHSpace = 10;
+//        model.tagVSpace = 0;
+        model.tagModel.borderRadius = 6;
+        model.tagModel.borderColor = [UIColor grayColor];
+        model.tagModel.borderWidth = 0;
+        model.tagModel.bgColor = [UIColor redColor];
+        model.titleModel.spaceLeft = 10;
+        model.titleModel.spaceRight = 10;
         model.showType =  CGXHotBrandViewShowTypeRounded;
         model.roundedType =CGXHotBrandRoundedTypeBottomLeft | CGXHotBrandRoundedTypeBottomRight;
         
@@ -188,12 +188,12 @@
 /*点击cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView didSelectItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
-    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
 }
 /*滚动结束cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView ScrollItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
-    NSLog(@"ScrollItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+    NSLog(@"ScrollItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
     
 }
 /* cell数据交互处理*/

@@ -17,13 +17,13 @@
 - (void)initializeData
 {
     [super initializeData];
+    self.visibleItemsCount = 5;
+    self.minScale = 0.7;
 }
 
 - (void)prepareLayout
 {
     [super prepareLayout];
-    self.visibleItemsCount = 4;
-    self.minScale = 0.7;
 }
 
 

@@ -23,6 +23,15 @@
 - (void)prepareLayout
 {
     [super prepareLayout];
+    if ([self.collectionView numberOfSections] == 0) {
+        return;
+    }
+    if ([self.collectionView numberOfItemsInSection:0] == 0) {
+        return;
+    }
+    if (self.collectionView.bounds.size.width ==0 || self.collectionView.bounds.size.height==0) {
+        return;
+    }
 }
 // 当bounds发生变化的时候是否应该重新进行布局
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
@@ -38,7 +47,8 @@
     CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.bounds.size.width * 0.5;
     // 在这个方法中, 我们只要根据当前的滚动, 对每个cell, 进行对应的缩放就可以了
     // 1. 获取所有的attributes对象
-    NSArray *arrayAttrs = [[super layoutAttributesForElementsInRect:rect] mutableCopy];
+    NSArray *original = [super layoutAttributesForElementsInRect:rect];
+    NSArray *arrayAttrs =  [[NSArray alloc]initWithArray:original copyItems:YES];
 //    CGSize itemSize = self.itemSize;
     // 2. 循环遍历这些attributes对象, 对每个对象进行缩放
     for (UICollectionViewLayoutAttributes *attr in arrayAttrs) {
@@ -47,14 +57,6 @@
         CGFloat cell_centerX = attr.center.x;
         // 计算这两个中心点的x值的偏移（距离）
         CGFloat absOffset = ABS(cell_centerX - centerX);
-        // 如何根据这个距离计算缩放比?
-        // 距离越大,缩放比应该越小。距离越小缩放比越大。缩放比最大是1.当两个中心点的x值相等的时候（重合），此时缩放比就是1.
-        // 缩放系数
-//        CGFloat factor = 0.001;
-//        // 记录缩放比
-//        CGFloat scale = 1 / (1 + distance * factor);
-//        attr.size = CGSizeMake(itemSize.width / itemSize.height * self.collectionView.bounds.size.height, self.collectionView.bounds.size.height);
-
         CGFloat heightZoom = (self.collectionView.bounds.size.height-itemSize.height)/self.collectionView.bounds.size.height;
         CGFloat scale = 1;
         CGFloat distance = itemSize.width;
@@ -83,7 +85,8 @@
     // 计算出了可视区域
     CGRect visibleRect = CGRectMake(visibleX, visibleY, visibleW, visibleH);
     // 3. 获取可视区域之内的所有的cell的attribute对象
-    NSArray *arrayAttrs = [super layoutAttributesForElementsInRect:visibleRect];
+    NSArray *original = [super layoutAttributesForElementsInRect:visibleRect];
+    NSArray *arrayAttrs =  [[NSArray alloc]initWithArray:original copyItems:YES];
     // 4. 用每个cell的中心点和centerX进行比较, 最终比较出一个距离最短的值
     // 假设第0个元素是最小的
     NSInteger min_idx = 0;
@@ -108,7 +111,7 @@
 // 滚动时cell的缩放放大比例
 - (CGFloat)cellOffsetAtIndex:(NSInteger)index
 {
-    UICollectionViewLayoutAttributes *attributes = [self.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    UICollectionViewLayoutAttributes *attributes = [[self.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]] copy];
     CGRect cellFrameInSuperview = [self.collectionView convertRect:attributes.frame toView:[self.collectionView superview]];
     CGSize itemSize = [self gx_sizeForItemAtIndexPath:[NSIndexPath indexPathForRow:attributes.indexPath.row inSection:0]];
     CGSize firstSize = itemSize;

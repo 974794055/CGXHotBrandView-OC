@@ -64,20 +64,20 @@
     NSMutableArray *dataArray2 = [NSMutableArray array];
     for (int i = 0; i< arc4random() % 1+5; i++) {
         CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-        model.titleStr = [NSString stringWithFormat:@"%@:%d",self.titilArr[self.currentInter],i];;
+        model.titleModel.text = [NSString stringWithFormat:@"%@:%d",self.titilArr[self.currentInter],i];;
         model.itemColor = [UIColor colorWithWhite:0.93 alpha:1];
         model.hotPicStr = model.hotPicStr = [NSString stringWithFormat:@"HotIcon%d",i % 5];
-        model.tagStr = (arc4random() % 1 == 0) ? @"秒杀":@"";
-        model.textAlignment = NSTextAlignmentRight;
-        model.tagSpace = 15;
-        model.tagBorderRadius = 6;
-        model.tagBorderColor = [UIColor grayColor];
-        model.tagBorderWidth = 0;
-        model.tagBgColor = [UIColor redColor];
+        model.tagModel.text = (arc4random() % 1 == 0) ? @"秒杀":@"";
+        model.titleModel.textAlignment = NSTextAlignmentRight;
+
+        model.tagModel.borderRadius = 6;
+        model.tagModel.borderColor = [UIColor grayColor];
+        model.tagModel.borderWidth = 0;
+        model.tagModel.bgColor = [UIColor redColor];
         model.showType =  CGXHotBrandViewShowTypeRounded;
         model.roundedType =CGXHotBrandRoundedTypeBottomLeft | CGXHotBrandRoundedTypeBottomRight;
-        model.titleHLpace = 10;
-        model.titleHRpace = 10;
+        model.titleModel.spaceLeft = 10;
+        model.titleModel.spaceRight = 10;
         
         
         model.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
@@ -130,7 +130,7 @@
     if (hotView.tag != 10000) {
         return;
     }
-    self.titleLabe1.text = itemModel.titleStr;
+    self.titleLabe1.text = itemModel.titleModel.text;
 }
 - (Class)gx_hotBrandCellClassForBaseView:(CGXHotBrandBaseView *)hotView
 {
@@ -142,19 +142,19 @@
 /*点击cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView didSelectItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
-    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
 }
 /*滚动结束cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView ScrollItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
-    NSLog(@"ScrollItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+    NSLog(@"ScrollItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
 
 }
 /* cell数据交互处理*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView cellForItemAtIndexPath:(NSIndexPath *)indexPath AtCell:(UICollectionViewCell *)cell AtModel:(CGXHotBrandModel *)hotModel
 {
     if (hotView.tag != 10000) {
-        NSLog(@"%@---%@" , hotModel.titleStr,hotModel.dataModel);
+        NSLog(@"%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
     }
    
 //    CustomCollectionViewCell *newcell = (CustomCollectionViewCell *)cell;

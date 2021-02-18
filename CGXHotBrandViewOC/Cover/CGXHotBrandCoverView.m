@@ -16,7 +16,8 @@
 @property(strong,nonatomic)NSMutableArray<CGXHotBrandModel *> *dataArray;
 
 @property(nonatomic,assign) NSInteger currentSelectInter;
-
+//宽度比例 0.1~1.0之间。 适当设置 default 1:3
+@property(nonatomic,assign) CGFloat itemWidthScale;
 @end
 
 @implementation CGXHotBrandCoverView
@@ -57,13 +58,17 @@
     [self.collectionView reloadData];
     if (self.dataArray.count>0) {
         int iiiiii = (int)self.totalInter*0.5;
+        if (iiiiii>1) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:iiiiii-1 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        }
         self.currentSelectInter = iiiiii;
         [self.collectionView performBatchUpdates:^{
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentSelectInter inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentSelectInter inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
             [self gx_hotBrandAtCurrentInter:self.currentSelectInter];
         } completion:^(BOOL finished) {
-            
+            [self.collectionView reloadData];
         }];
+        [self gx_hotBrandScrollViewEnd];
     }
 }
 - (void)setItemWidthScale:(CGFloat)itemWidthScale
@@ -139,32 +144,23 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    [self gx_hotBrandScrollViewEnd];
+}
+- (void)gx_hotBrandScrollViewEnd
+{
     // 坐标系转换获得collectionView上面的位于中心的cell
     CGPoint pointInView = [self convertPoint:self.collectionView.center toView:self.collectionView];
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:pointInView];
     NSInteger index = indexPath.row;
-    if ([self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index-2 inSection:0]]) {
-        CGXHotBrandCoverCell *cell = (CGXHotBrandCoverCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index-2 inSection:0]];
-        [self.collectionView bringSubviewToFront:cell];
-    }
-    if ([self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index+2 inSection:0]]) {
-        CGXHotBrandCoverCell *cell = (CGXHotBrandCoverCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index+2 inSection:0]];
-        [self.collectionView bringSubviewToFront:cell];
-    }
-    if ([self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index-1 inSection:0]]) {
-        CGXHotBrandCoverCell *cell = (CGXHotBrandCoverCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index-1 inSection:0]];
-        [self.collectionView bringSubviewToFront:cell];
-    }
-    if ([self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index+1 inSection:0]]) {
-        CGXHotBrandCoverCell *cell = (CGXHotBrandCoverCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index+1 inSection:0]];
-        [self.collectionView bringSubviewToFront:cell];
-    }
-    if ([self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]]) {
-        CGXHotBrandCoverCell *cell = (CGXHotBrandCoverCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-        [self.collectionView bringSubviewToFront:cell];
+    NSArray *arr = [NSArray arrayWithObjects:@(index-2),@(index+2),@(index-1),@(index+1), @(index),nil];
+    for (int i = 0; i<arr.count; i++) {
+        NSInteger intextt = [arr[i] integerValue];
+        if (intextt < self.totalInter &&[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:intextt inSection:0]]) {
+            CGXHotBrandCoverCell *cell = (CGXHotBrandCoverCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:intextt inSection:0]];
+            [self.collectionView bringSubviewToFront:cell];
+        }
     }
     self.currentSelectInter = index;
-    
     //在滑动过程中获取当前显示的所有cell, 调用偏移量的计算方法
     [[self.collectionView visibleCells] enumerateObjectsUsingBlock:^(UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj respondsToSelector:@selector(cellOffsetOnCollectionView:)] && [obj conformsToProtocol:@protocol(CGXHotBrandUpdateCellDelegate)]) {
@@ -172,6 +168,7 @@
         }
     }];
 }
+
 - (void)gx_hotBrandAtCurrentInter:(NSInteger)currentInter
 {
     self.currentSelectInter = currentInter;
@@ -197,6 +194,9 @@
         self.totalInter =  self.infiniteLoop?self.dataArray.count*self.groudInter:self.dataArray.count;
     }
     [self.collectionView reloadData];
+    
+
+    [self setNeedsLayout];
 }
 // 更新某个item
 - (void)updateWithItemModel:(CGXHotBrandModel *)itemModel AtIndexPath:(NSIndexPath *)indexPath

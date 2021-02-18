@@ -11,10 +11,9 @@
 
 @interface CGXHotBrandCoverView : CGXHotBrandBaseView
 
-//宽度比例 0.1~1.0之间。 适当设置 default 1:3
-@property(nonatomic,assign) CGFloat itemHeightScale;
+
 //高度比例  0.5～1.0之间 适当设置 default 0.9
-@property(nonatomic,assign) CGFloat itemWidthScale;
+@property(nonatomic,assign) CGFloat itemHeightScale;
 
 - (void)updateWithDataArray:(NSMutableArray<CGXHotBrandModel *> *)dataArray;
 // 更新某个item

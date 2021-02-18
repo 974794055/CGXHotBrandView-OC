@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/Custom/CGXHotBrandTextModel.h

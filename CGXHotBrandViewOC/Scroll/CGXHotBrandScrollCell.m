@@ -68,10 +68,10 @@
         {
             self.titleLabel.hidden = NO;
             self.hotTitleTop.constant = 0;
-            self.hotTitleleft.constant = self.cellModel.titleHLpace;
-            self.hotTitleRight.constant = -self.cellModel.titleHRpace;
+            self.hotTitleleft.constant = self.cellModel.titleModel.spaceLeft;
+            self.hotTitleRight.constant = -self.cellModel.titleModel.spaceRight;
             self.hotTitleBottom.constant = 0;
-            self.titleLabel.backgroundColor = self.cellModel.titleBgColor;
+            self.titleLabel.backgroundColor = self.cellModel.titleModel.bgColor;
         }
             break;
         case CGXHotBrandScrollTypeImageTitle:
@@ -85,15 +85,15 @@
             self.hotImageBottom.constant = 0;
             
             
-            NSString *text = self.cellModel.titleStr ? self.cellModel.titleStr:@"";
-            NSDictionary *attrs = @{NSFontAttributeName:self.cellModel.tagFont};
+            NSString *text = self.cellModel.titleModel.text ? self.cellModel.titleModel.text:@"";
+            NSDictionary *attrs = @{NSFontAttributeName:self.cellModel.tagModel.font};
             CGSize size = [text boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.contentView.frame), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size;
             
             self.hotTitleTop.constant = CGRectGetHeight(self.contentView.frame) - size.height-20;
-            self.hotTitleleft.constant = self.cellModel.titleHLpace;
-            self.hotTitleRight.constant = -self.cellModel.titleHRpace;
+            self.hotTitleleft.constant = self.cellModel.titleModel.spaceLeft;
+            self.hotTitleRight.constant = -self.cellModel.titleModel.spaceRight;
             self.hotTitleBottom.constant = 0;
-            self.titleLabel.backgroundColor = [self.cellModel.titleBgColor colorWithAlphaComponent:0.5];
+            self.titleLabel.backgroundColor = [self.cellModel.titleModel.bgColor colorWithAlphaComponent:0.5];
         }
             break;
         default:
@@ -104,11 +104,11 @@
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
 {
     [super updateWithHotBrandCellModel:cellModel Section:section Row:row];
-    self.titleLabel.text = cellModel.titleStr;
-    self.titleLabel.textAlignment = cellModel.textAlignment;
-    self.titleLabel.textColor = cellModel.titleColor;
-    self.titleLabel.font = cellModel.titleFont;
-    self.titleLabel.numberOfLines = cellModel.numberOfLines;
+    self.titleLabel.text = cellModel.titleModel.text;
+    self.titleLabel.textAlignment = cellModel.titleModel.textAlignment;
+    self.titleLabel.textColor = cellModel.titleModel.color;
+    self.titleLabel.font = cellModel.titleModel.font;
+    self.titleLabel.numberOfLines = cellModel.titleModel.numberOfLines;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }

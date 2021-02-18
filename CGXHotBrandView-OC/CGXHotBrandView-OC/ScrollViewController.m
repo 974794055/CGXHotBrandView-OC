@@ -32,23 +32,23 @@
     NSMutableArray *dataArray = [NSMutableArray array];
     for (int i = 0; i< arc4random() % 5+3; i++) {
         CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-        model.titleStr = [NSString stringWithFormat:@" 🔊🐂双十二超级低价大优惠、五折抢购🐑🐑🐑-%d",i];
+        model.titleModel.text = [NSString stringWithFormat:@" 🔊🐂双十二超级低价大优惠、五折抢购🐑🐑🐑-%d",i];
         if (self.typeInter==2) {
-        model.titleBgColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        model.titleModel.bgColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
         } else{
-            model.titleBgColor = [UIColor whiteColor];
+            model.titleModel.bgColor = [UIColor whiteColor];
         }
         model.itemColor = [UIColor colorWithWhite:0.93 alpha:1];
         model.hotPicStr = [NSString stringWithFormat:@"HotIcon%d",i % 5];;
-        model.tagStr = (arc4random() % 2 == 0) ? @"秒杀":@"";
-        model.tagSpace = 10;
-        model.tagBgColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        model.tagModel.text = (arc4random() % 2 == 0) ? @"秒杀":@"";
+
+        model.tagModel.bgColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
         if (self.typeInter < 2) {
-            model.titleColor =[UIColor blackColor];
-            model.textAlignment = NSTextAlignmentCenter;
+            model.titleModel.color =[UIColor blackColor];
+            model.titleModel.textAlignment = NSTextAlignmentCenter;
         }else{
-            model.titleColor = [UIColor whiteColor];
-            model.textAlignment = NSTextAlignmentLeft;
+            model.titleModel.color = [UIColor whiteColor];
+            model.titleModel.textAlignment = NSTextAlignmentLeft;
         }
         model.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
             [hotImageView sd_setImageWithURL:hotImageURL];
@@ -58,7 +58,7 @@
     
     
     NSInteger inter = 7;
-    CGFloat height = (ScreenHeight-kTopHeight-kSafeHeight-40)/4;
+    CGFloat height = floor((ScreenHeight-kTopHeight-kSafeHeight-40)/4.0);
     CGFloat y = 10;
     for (int i = 0; i<inter; i++) {
         CGXHotBrandScrollView *hotBrandView = [[CGXHotBrandScrollView alloc] init];
@@ -125,7 +125,7 @@
 /*点击cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView didSelectItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
-    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
 }
 /*滚动结束cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView ScrollItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel

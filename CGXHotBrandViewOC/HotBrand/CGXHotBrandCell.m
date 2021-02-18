@@ -18,11 +18,6 @@
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleRight;
 @property (nonatomic , strong) NSLayoutConstraint *hotTitleBottom;
 
-//@property (nonatomic , strong) NSLayoutConstraint *hotImageTop;
-//@property (nonatomic , strong) NSLayoutConstraint *hotImageLeft;
-//@property (nonatomic , strong) NSLayoutConstraint *hotImageRight;
-//@property (nonatomic , strong) NSLayoutConstraint *hotImageBottom;
-
 @property (nonatomic , strong) NSLayoutConstraint *tagTitleHeight;
 @property (nonatomic , strong) NSLayoutConstraint *tagTitleWidth;
 @property (nonatomic , strong) NSLayoutConstraint *tagTitleRight;
@@ -63,7 +58,7 @@
 
     self.hotTitleleft = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
     self.hotTitleRight = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
-    self.hotTitleBottom = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-self.cellModel.titleSpaceBottom];
+    self.hotTitleBottom = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-self.cellModel.titleModel.spaceBottom];
     [self.contentView addConstraint:self.hotTitleleft];
     [self.contentView addConstraint:self.hotTitleRight];
     [self.contentView addConstraint:self.hotTitleBottom];
@@ -114,24 +109,24 @@
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
 {
     [super updateWithHotBrandCellModel:cellModel Section:section Row:row];
-    self.titleLabel.text = cellModel.titleStr;
-    self.titleLabel.textColor = cellModel.titleColor;
-    self.titleLabel.font = cellModel.titleFont;
-    self.titleLabel.backgroundColor = cellModel.titleBgColor;
-    self.titleLabel.textAlignment = cellModel.textAlignment;
+    self.titleLabel.text = cellModel.titleModel.text;
+    self.titleLabel.textColor = cellModel.titleModel.color;
+    self.titleLabel.font = cellModel.titleModel.font;
+    self.titleLabel.backgroundColor = cellModel.titleModel.bgColor;
+    self.titleLabel.textAlignment = cellModel.titleModel.textAlignment;
     self.hotTitleHeight.constant = self.cellModel.titleHeight;
-    self.hotTitleleft.constant = cellModel.titleHLpace;
-    self.hotTitleleft.constant = cellModel.titleHRpace;
+    self.hotTitleleft.constant = cellModel.titleModel.spaceLeft;
+    self.hotTitleleft.constant = cellModel.titleModel.spaceRight;
     
     self.hotImageTop.constant = cellModel.hotPicSpaceTop;
     self.hotImageLeft.constant = cellModel.hotPicSpace;
     self.hotImageRight.constant = -cellModel.hotPicSpace;
-    self.hotImageBottom.constant = -cellModel.titleSpaceTop-self.cellModel.titleSpaceBottom-self.cellModel.titleHeight;
+    self.hotImageBottom.constant = -cellModel.titleModel.spaceTop-self.cellModel.titleModel.spaceBottom-self.cellModel.titleHeight;
     
-    NSString *text = cellModel.tagStr ? cellModel.tagStr:@"";
-    NSDictionary *attrs = @{NSFontAttributeName:cellModel.tagFont};
+    NSString *text = cellModel.tagModel.text ? cellModel.tagModel.text:@"";
+    NSDictionary *attrs = @{NSFontAttributeName:cellModel.tagModel.font};
     CGSize size = [text boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.contentView.frame), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size;
-    CGFloat width = ceil(size.width) + cellModel.tagSpace;
+    CGFloat width = ceil(size.width + cellModel.tagModel.space);
     CGFloat height = ceil(size.height)+2;
     if (cellModel.showType == CGXHotBrandViewShowTypeJDChat) {
         height = height + 5;
@@ -141,16 +136,16 @@
     
     self.tagLabel.triangleH = 4;
     self.tagLabel.triangleW = 6;
-    self.tagLabel.titleFont = cellModel.tagFont;
-    self.tagLabel.backgroundColor = cellModel.tagBgColor;
-    self.tagLabel.tagBorderRadius = cellModel.tagBorderRadius;
-    self.tagLabel.tagBorderColor = cellModel.tagBorderColor;
-    self.tagLabel.tagBorderWidth = cellModel.tagBorderWidth;
+    self.tagLabel.titleFont = cellModel.tagModel.font;
+    self.tagLabel.backgroundColor = cellModel.tagModel.bgColor;
+    self.tagLabel.tagBorderRadius = cellModel.tagModel.borderRadius;
+    self.tagLabel.tagBorderColor = cellModel.tagModel.borderColor;
+    self.tagLabel.tagBorderWidth = cellModel.tagModel.borderWidth;
 
     self.tagTitleWidth.constant = width;
     self.tagTitleHeight.constant = height;
-    self.tagTitleTop.constant = cellModel.tagVSpace;
-    self.tagTitleRight.constant = -cellModel.tagHSpace;
+    self.tagTitleTop.constant = cellModel.tagModel.spaceTop;
+    self.tagTitleRight.constant = -cellModel.tagModel.spaceRight;
     self.tagLabel.showType =  cellModel.showType;
     self.tagLabel.roundedType =  cellModel.roundedType;
     self.tagLabel.titleStr =  text;

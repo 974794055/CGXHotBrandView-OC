@@ -23,6 +23,6 @@
 - (void)setEdgeInsets:(UIEdgeInsets)edgeInsets NS_UNAVAILABLE;
 - (void)setMinimumLineSpacing:(CGFloat)minimumLineSpacing NS_UNAVAILABLE;
 - (void)setMinimumInteritemSpacing:(CGFloat)minimumInteritemSpacing NS_UNAVAILABLE;
-
+- (void)setAutoScroll:(BOOL)autoScroll NS_UNAVAILABLE;
 
 @end

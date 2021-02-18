@@ -21,20 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-typedef NS_ENUM(NSUInteger, HJCarouselAnim) {
-    HJCarouselAnimLinear,
-    HJCarouselAnimRotary,
-    HJCarouselAnimCarousel,
-    HJCarouselAnimCoverFlow,
-};
 
 @interface CGXHotBrandRotaryFlowLayout : CGXHotBrandBaseFlowLayout
 
 @property (nonatomic , weak) id<CGXHotBrandRotaryFlowLayoutDelegate>carouselDelegate;
 
-@property (nonatomic , assign)  HJCarouselAnim carouselAnim;
-
 @property (nonatomic) NSInteger visibleCount;
+
+// 滚动时cell的缩放放大比例
+- (CGFloat)cellOffsetAtIndex:(NSInteger)index;
 
 @end
 

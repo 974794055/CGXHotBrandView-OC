@@ -33,7 +33,12 @@
 - (void)prepareLayout
 {
     [super prepareLayout];
-    
+    if ([self.collectionView numberOfSections] == 0) {
+        return;
+    }
+    if ([self.collectionView numberOfItemsInSection:0] == 0) {
+        return;
+    }
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect

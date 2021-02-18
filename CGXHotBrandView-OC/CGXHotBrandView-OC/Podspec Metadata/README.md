@@ -12,7 +12,6 @@
 - 群   号：
 - 版本： 0.0.6
 
-
 ## 功能：    
 - 仿淘宝、京东等主流APP热门菜单切换的滚动视图
 
@@ -88,7 +87,7 @@ for (int i = 0; i< 4; i++) {
     NSMutableArray *rowArray = [NSMutableArray array];
     for (int j = 0; j< hotBrandView.itemSectionCount*hotBrandView.itemRowCount; j++) {
         CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-        model.titleStr = [NSString stringWithFormat:@"猫咪%d-%d",i,j];
+        model.titleModel.text = [NSString stringWithFormat:@"猫咪%d-%d",i,j];
         model.itemColor = [UIColor whiteColor];
         model.hotPicStr = @"HotIcon0";
         [rowArray addObject:model];

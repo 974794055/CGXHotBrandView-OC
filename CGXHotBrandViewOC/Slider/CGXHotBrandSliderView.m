@@ -45,18 +45,18 @@
     [super layoutSubviews];
     
     if (self.isHavePage) {
-        self.collectionView.frame = CGRectMake(15, 0, CGRectGetWidth(self.frame)-30, CGRectGetHeight(self.frame)-self.pageHeight);
+        self.collectionView.frame = CGRectMake(self.edgeInsets.left, 0, CGRectGetWidth(self.frame)-self.edgeInsets.left-self.edgeInsets.right, CGRectGetHeight(self.frame)-self.pageHeight);
     } else{
-        self.collectionView.frame = CGRectMake(15, 0, CGRectGetWidth(self.frame)-30, CGRectGetHeight(self.frame));
+        self.collectionView.frame = CGRectMake(self.edgeInsets.left, 0, CGRectGetWidth(self.frame)-self.edgeInsets.left-self.edgeInsets.right, CGRectGetHeight(self.frame));
     }
-    self.collectionView.collectionViewLayout = self.collectionView.collectionViewLayout = [self preferredFlowLayout];
+    CGXHotBrandSliderFlowLayout *layout = (CGXHotBrandSliderFlowLayout *)[self preferredFlowLayout];
+    layout.visibleItemsCount = self.visibleItemsCount;
+    layout.minScale = self.minScale;
+    self.collectionView.collectionViewLayout = layout;
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView reloadData];
-    if(self.collectionView.contentOffset.x == 0 && self.totalInter > 0)
-    {
-        NSInteger targeIndex = 0;
-        //设置图片默认位置
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:targeIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+    if(self.collectionView.contentOffset.x == 0 && self.totalInter > 0){
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
         self.collectionView.userInteractionEnabled = YES;
     }
 }
@@ -78,10 +78,16 @@
 - (void)setVisibleItemsCount:(NSInteger)visibleItemsCount
 {
     _visibleItemsCount = visibleItemsCount;
+    CGXHotBrandSliderFlowLayout *layout = (CGXHotBrandSliderFlowLayout *)[self preferredFlowLayout];
+    layout.visibleItemsCount = visibleItemsCount;
+    self.collectionView.collectionViewLayout = layout;
 }
 - (void)setMinScale:(CGFloat)minScale
 {
     _minScale = minScale;
+    CGXHotBrandSliderFlowLayout *layout = (CGXHotBrandSliderFlowLayout *)[self preferredFlowLayout];
+    layout.minScale = minScale;
+    self.collectionView.collectionViewLayout = layout;
 }
 /**
  返回自定义cell的class
@@ -135,16 +141,7 @@
     [self.collectionView setContentOffset:CGPointMake(itemIndex * self.collectionView.bounds.size.width,0) animated:YES];
     self.pageCurrent = indexOnPageControl;
 }
-- (int)currentIndex
-{
-    [super currentIndex];
-    if (self.collectionView.frame.size.width == 0 || self.collectionView.frame.size.height == 0) {
-        return 0;
-    }
-    self.currentSelectIndex++;
-    int index = (int)self.currentSelectIndex;
-    return MAX(0, index);
-}
+
 ////#pragma mark - 定时器
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -171,7 +168,6 @@
         self.pageCurrent = indexOnPageControl;
     }
 }
-//
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     self.collectionView.userInteractionEnabled = YES;
@@ -202,12 +198,20 @@
     } else {
         self.collectionView.scrollEnabled = NO;
     }
-    
     self.pagesNumber = dataArray.count;
-    
     [self.collectionView reloadData];
+}
 
-    
+
+- (int)currentIndex
+{
+    [super currentIndex];
+    if (self.collectionView.frame.size.width == 0 || self.collectionView.frame.size.height == 0) {
+        return 0;
+    }
+    self.currentSelectIndex++;
+    int index = (int)self.currentSelectIndex;
+    return MAX(0, index);
 }
 - (CGXHotBrandModel *)pageIndexWithCurrentCellModelAtIndexPath:(NSIndexPath *)indexPath
 {

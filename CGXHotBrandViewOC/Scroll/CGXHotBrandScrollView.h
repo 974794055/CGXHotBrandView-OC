@@ -31,10 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 /* item下间距  默认NO 高度同pageHeight */
 @property(nonatomic,assign) BOOL isHaveSpaceBottom;
 
-
 /** 解决viewWillAppear时出现时轮播图卡在一半的问题，在控制器viewWillAppear时调用此方法 */
 - (void)adjustWhenControllerViewWillAppera;
-
 /** 可以调用此方法手动控制滚动到哪一个index */
 - (void)scrollViewScrollToIndex:(NSInteger)index;
 

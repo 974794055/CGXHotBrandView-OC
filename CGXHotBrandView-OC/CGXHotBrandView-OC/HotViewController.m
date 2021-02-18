@@ -71,17 +71,16 @@
         NSMutableArray *dataArray = [NSMutableArray array];
         for (int j = 0; j< 4*hotBrandView.itemSectionCount*hotBrandView.itemRowCount; j++) {
             CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
-            model.titleStr = [NSString stringWithFormat:@"猫咪--%d",i];
+            model.titleModel.text = [NSString stringWithFormat:@"猫咪--%d",i];
             model.itemColor = [UIColor whiteColor];
             model.hotPicStr = imageArray[arc4random() % (imageArray.count)];
-            model.tagStr = (arc4random() % 2 == 0) ? @"秒杀":@"";
-            model.tagSpace = 10;
-            model.tagVSpace = 10;
-            model.tagHSpace= 5;
-            model.tagBorderRadius = 10;
-            model.tagBorderColor = [UIColor grayColor];
-            model.tagBorderWidth = 0;
-            model.tagBgColor = [UIColor redColor];
+            model.tagModel.text = (arc4random() % 2 == 0) ? @"秒杀":@"";
+            model.tagModel.spaceTop = 10;
+            model.tagModel.spaceLeft = 10;
+            model.tagModel.borderRadius = 6;
+            model.tagModel.borderColor = [UIColor grayColor];
+            model.tagModel.borderWidth = 0;
+            model.tagModel.bgColor = [UIColor redColor];
             model.showType =  i;
             model.roundedType = i<3 ? CGXHotBrandRoundedTypeBottomLeft:CGXHotBrandRoundedTypeAll;
             model.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
@@ -107,16 +106,16 @@
 /*点击cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView didSelectItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
-    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+    NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
     
-    hotModel.titleStr = [NSString stringWithFormat:@"猫咪%u",arc4random() % 10+100];
+    hotModel.titleModel.text = [NSString stringWithFormat:@"猫咪%u",arc4random() % 10+100];
     CGXHotBrandView *hotBrandView = (CGXHotBrandView *)hotView;
     [hotBrandView updateWithItemModel:hotModel AtIndexPath:indexPath];
 }
 /*滚动结束cell*/
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView ScrollItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
-    NSLog(@"ScrollItemAtIndexPath：%@---%@" , hotModel.titleStr,hotModel.dataModel);
+    NSLog(@"ScrollItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
 
 }
 /* cell数据交互处理*/
