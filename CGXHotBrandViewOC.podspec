@@ -21,11 +21,12 @@ s.subspec 'Custom' do |ss|
 end
 s.subspec 'PageControl' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/PageControl/**/*.{h,m}'
+   ss.dependency 'CGXHotBrandViewOC/Custom'
 end
 s.subspec 'Base' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/Base/**/*.{h,m}'
    ss.dependency 'CGXHotBrandViewOC/Custom'
-      ss.dependency 'CGXHotBrandViewOC/PageControl'
+   ss.dependency 'CGXHotBrandViewOC/PageControl'
 end
 s.subspec 'HotBrand' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/HotBrand/**/*.{h,m}'
@@ -60,6 +61,7 @@ s.subspec 'Cover' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/Cover/**/*.{h,m}'
    ss.dependency 'CGXHotBrandViewOC/Base'
 end
+
 end
 
 

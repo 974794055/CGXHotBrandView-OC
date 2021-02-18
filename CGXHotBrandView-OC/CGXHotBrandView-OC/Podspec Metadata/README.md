@@ -54,7 +54,6 @@ end
 ## 结构图
 ## 使用
 ### CGXHotBrandView使用示例
-
 - 1.初始化CGXHotBrandView
 ```Objective-C
 CGXHotBrandView *hotBrandView = [[CGXHotBrandView alloc] init];
@@ -131,4 +130,6 @@ QQ群：
 ## License
 
 CGXHotBrandViewOC is released under the MIT license.
+
+
 
