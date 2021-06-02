@@ -13,7 +13,6 @@
  版本： 0.0.7
  */
 
-
 #ifndef CGXHotBrandViewOC_h
 #define CGXHotBrandViewOC_h
 

@@ -13,10 +13,6 @@
 		04AD1F74258711F600B7544D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1F72258711F600B7544D /* Main.storyboard */; };
 		04AD1F76258711FC00B7544D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1F75258711FC00B7544D /* Assets.xcassets */; };
 		04AD1F79258711FC00B7544D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AD1F77258711FC00B7544D /* LaunchScreen.storyboard */; };
-		04AD1F7C258711FC00B7544D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AD1F7B258711FC00B7544D /* main.m */; };
-		04BFA24A2599A7B50042801C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 04BFA2472599A7B40042801C /* README.md */; };
-		04BFA24B2599A7B50042801C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 04BFA2482599A7B50042801C /* LICENSE */; };
-		04BFA24C2599A7B50042801C /* CGXHotBrandViewOC.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 04BFA2492599A7B50042801C /* CGXHotBrandViewOC.podspec */; };
 		04BFA28B2599AC340042801C /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BFA28A2599AC340042801C /* CardViewController.m */; };
 		B54A7AE425A20C1300801BD6 /* ZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54A7AE325A20C1300801BD6 /* ZoomViewController.m */; };
 		B55790A225A357130087B030 /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55790A125A357130087B030 /* HotViewController.m */; };
@@ -29,6 +25,9 @@
 		B5C8A60525CC26680058E488 /* CoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C8A60425CC26680058E488 /* CoverViewController.m */; };
 		B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDEE75258B8B6E00359A78 /* CycleViewController.m */; };
 		B627137E971B883F05749DA6 /* libPods-CGXHotBrandView-OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */; };
+		E0121F452667D28100594AC9 /* CGXHotBrandViewOC.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E0121F422667D28100594AC9 /* CGXHotBrandViewOC.podspec */; };
+		E0121F462667D28100594AC9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E0121F432667D28100594AC9 /* LICENSE */; };
+		E0121F472667D28100594AC9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E0121F442667D28100594AC9 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,10 +42,6 @@
 		04AD1F75258711FC00B7544D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04AD1F78258711FC00B7544D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04AD1F7A258711FC00B7544D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04AD1F7B258711FC00B7544D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		04BFA2472599A7B40042801C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		04BFA2482599A7B50042801C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		04BFA2492599A7B50042801C /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CGXHotBrandViewOC.podspec; sourceTree = "<group>"; };
 		04BFA2892599AC340042801C /* CardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
 		04BFA28A2599AC340042801C /* CardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
 		866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CGXHotBrandView-OC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +68,9 @@
 		B5EDEE75258B8B6E00359A78 /* CycleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CycleViewController.m; sourceTree = "<group>"; };
 		C7CB7AD86E851CBE37EBCA1C /* Pods-CGXHotBrandView-OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.debug.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.debug.xcconfig"; sourceTree = "<group>"; };
 		DF9AC596FFE1958157B59526 /* Pods-CGXHotBrandView-OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.release.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.release.xcconfig"; sourceTree = "<group>"; };
+		E0121F422667D28100594AC9 /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CGXHotBrandViewOC.podspec; path = ../../../CGXHotBrandViewOC.podspec; sourceTree = "<group>"; };
+		E0121F432667D28100594AC9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../../LICENSE; sourceTree = "<group>"; };
+		E0121F442667D28100594AC9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +149,6 @@
 				04AD1F75258711FC00B7544D /* Assets.xcassets */,
 				04AD1F77258711FC00B7544D /* LaunchScreen.storyboard */,
 				04AD1F7A258711FC00B7544D /* Info.plist */,
-				04AD1F7B258711FC00B7544D /* main.m */,
 			);
 			path = "CGXHotBrandView-OC";
 			sourceTree = "<group>";
@@ -159,9 +156,9 @@
 		04BFA2462599A7A80042801C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				04BFA2492599A7B50042801C /* CGXHotBrandViewOC.podspec */,
-				04BFA2482599A7B50042801C /* LICENSE */,
-				04BFA2472599A7B40042801C /* README.md */,
+				E0121F422667D28100594AC9 /* CGXHotBrandViewOC.podspec */,
+				E0121F432667D28100594AC9 /* LICENSE */,
+				E0121F442667D28100594AC9 /* README.md */,
 			);
 			path = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -231,12 +228,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04BFA24B2599A7B50042801C /* LICENSE in Resources */,
+				E0121F472667D28100594AC9 /* README.md in Resources */,
 				04AD1F79258711FC00B7544D /* LaunchScreen.storyboard in Resources */,
 				04AD1F76258711FC00B7544D /* Assets.xcassets in Resources */,
-				04BFA24C2599A7B50042801C /* CGXHotBrandViewOC.podspec in Resources */,
-				04BFA24A2599A7B50042801C /* README.md in Resources */,
+				E0121F452667D28100594AC9 /* CGXHotBrandViewOC.podspec in Resources */,
 				04AD1F74258711F600B7544D /* Main.storyboard in Resources */,
+				E0121F462667D28100594AC9 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +280,6 @@
 				B55790C525A363A50087B030 /* ScrollViewController.m in Sources */,
 				04BFA28B2599AC340042801C /* CardViewController.m in Sources */,
 				04AD1F6B258711F600B7544D /* AppDelegate.m in Sources */,
-				04AD1F7C258711FC00B7544D /* main.m in Sources */,
 				B54A7AE425A20C1300801BD6 /* ZoomViewController.m in Sources */,
 				B55F82012588F6750018472C /* CustomCollectionViewCell.m in Sources */,
 				B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */,
