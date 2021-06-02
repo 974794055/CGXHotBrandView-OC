@@ -90,7 +90,7 @@
         [self bringSubviewToFront:self.bottomView];
         UIView *bottomView = [self.dataSource gx_hotBrandCardBottomView:self];
         [self.bottomView addSubview:bottomView];
-
+        
     }
 }
 
@@ -211,12 +211,12 @@
 - (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [super gx_hotBrandCollectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
-//    CGXHotBrandModel *cellModel = [self pageIndexWithCurrentCellModelAtIndexPath:indexPath];
+    //    CGXHotBrandModel *cellModel = [self pageIndexWithCurrentCellModelAtIndexPath:indexPath];
 }
 - (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [super gx_hotBrandCollectionView:collectionView didSelectItemAtIndexPath:indexPath];
-//    CGXHotBrandModel *cellModel = [self pageIndexWithCurrentCellModelAtIndexPath:indexPath];
+    //    CGXHotBrandModel *cellModel = [self pageIndexWithCurrentCellModelAtIndexPath:indexPath];
     BOOL center = [self checkCellInCenterCollectionView:collectionView AtIndexPath:indexPath];
     //   UICollectionViewCell *currentCell = (UICollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
     if (self.itemClickCenter) {
@@ -309,7 +309,11 @@
         self.totalInter =  self.infiniteLoop?self.dataArray.count*self.groudInter:self.dataArray.count;
     }
     self.pagesNumber = dataArray.count;
+    self.pageCurrent = 0;
     [self.collectionView reloadData];
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 // 更新某个item
 - (void)updateWithItemModel:(CGXHotBrandModel *)itemModel AtIndexPath:(NSIndexPath *)indexPath

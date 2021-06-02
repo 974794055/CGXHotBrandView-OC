@@ -85,7 +85,7 @@
         [self bringSubviewToFront:self.bottomView];
         UIView *bottomView = [self.dataSource gx_hotBrandZoomBottomView:self];;
         [self.bottomView addSubview:bottomView];
-
+        
     }
 }
 - (void)layoutSubviews
@@ -196,9 +196,9 @@
 - (void)gx_hotBrandCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [super gx_hotBrandCollectionView:collectionView didSelectItemAtIndexPath:indexPath];
-
+    
     if (self.isCenter) {
-    [self scrolToPath:indexPath animated:YES];
+        [self scrolToPath:indexPath animated:YES];
     }
 }
 

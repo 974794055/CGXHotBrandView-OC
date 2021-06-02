@@ -153,7 +153,7 @@
         self.totalInter =  self.infiniteLoop?self.dataArray.count*self.groudInter:self.dataArray.count;
     }
     self.pagesNumber = dataArray.count;
-    
+    self.pageCurrent = 0;
     [self.collectionView reloadData];
     [self setNeedsLayout];
     [self layoutIfNeeded];

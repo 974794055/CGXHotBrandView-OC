@@ -195,8 +195,9 @@
     }
     [self.collectionView reloadData];
     
-
+    
     [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 // 更新某个item
 - (void)updateWithItemModel:(CGXHotBrandModel *)itemModel AtIndexPath:(NSIndexPath *)indexPath

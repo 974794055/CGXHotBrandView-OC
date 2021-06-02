@@ -106,14 +106,14 @@ static BOOL const kDefaultHidesForSinglePage = NO;
     [super layoutSubviews];
     [self updateDotView];
     
-//    NSArray<UIView*> *subViews = self.subviews;
-//    CGFloat mainWidth = self.frame.size.width;
-//    CGFloat mainHeight = self.frame.size.height;
-//    if (@available(iOS 14.0, *)) {
-//        subViews = self.subviews.firstObject.subviews.firstObject.subviews;
-//        mainWidth = self.subviews.firstObject.subviews.firstObject.frame.size.width;
-//        mainHeight = self.subviews.firstObject.subviews.firstObject.frame.size.height;
-//    }
+    //    NSArray<UIView*> *subViews = self.subviews;
+    //    CGFloat mainWidth = self.frame.size.width;
+    //    CGFloat mainHeight = self.frame.size.height;
+    //    if (@available(iOS 14.0, *)) {
+    //        subViews = self.subviews.firstObject.subviews.firstObject.subviews;
+    //        mainWidth = self.subviews.firstObject.subviews.firstObject.frame.size.width;
+    //        mainHeight = self.subviews.firstObject.subviews.firstObject.frame.size.height;
+    //    }
     
 }
 
@@ -166,13 +166,15 @@ static BOOL const kDefaultHidesForSinglePage = NO;
 
 - (void)changeActiveState:(BOOL)active atIndex:(NSInteger)index
 {
-    NSInteger inter = index % self.dots.count;
-    CGXHotBrandPageDotView *dotView = (CGXHotBrandPageDotView *)[self.dots objectAtIndex:inter];
-    if ([dotView respondsToSelector:@selector(changActiveState:)]) {
-        [dotView updateWithModel:self.dotModel ActiveState:active DotInter:index];
-        [dotView changActiveState:active];
-    } else {
-        NSLog(@"Custom Dot View : %@ must implement method 'changeActivityState'", self.dotViewClass);
+    if (index < self.dots.count && self.dots.count > 0) {
+        NSInteger inter = index % self.dots.count;
+        CGXHotBrandPageDotView *dotView = (CGXHotBrandPageDotView *)[self.dots objectAtIndex:inter];
+        if ([dotView respondsToSelector:@selector(changActiveState:)]) {
+            [dotView updateWithModel:self.dotModel ActiveState:active DotInter:index];
+            [dotView changActiveState:active];
+        } else {
+            NSLog(@"Custom Dot View : %@ must implement method 'changeActivityState'", self.dotViewClass);
+        }
     }
 }
 
@@ -181,14 +183,14 @@ static BOOL const kDefaultHidesForSinglePage = NO;
 {
     CGFloat x = self.dotBetween + (self.dotSize.width + self.dotBetween) * index + ( (CGRectGetWidth(self.frame) - [self sizeForNumberOfPages:self.numberOfPages].width) / 2);
     CGFloat y = (CGRectGetHeight(self.frame) - self.dotSize.height) / 2;
-        if (index == self.currentPage) {
-            dot.frame = CGRectMake(x, y, self.dotSize.width+self.dotWidthSpace, self.dotSize.height);
-        } else{
-            if (index > self.currentPage) {
-                x = x + self.dotWidthSpace;
-            }
-            dot.frame = CGRectMake(x, y, self.dotSize.width, self.dotSize.height);
+    if (index == self.currentPage) {
+        dot.frame = CGRectMake(x, y, self.dotSize.width+self.dotWidthSpace, self.dotSize.height);
+    } else{
+        if (index > self.currentPage) {
+            x = x + self.dotWidthSpace;
         }
+        dot.frame = CGRectMake(x, y, self.dotSize.width, self.dotSize.height);
+    }
     dot.layer.cornerRadius = self.dotSize.height / 2.0;
 }
 
@@ -239,43 +241,45 @@ static BOOL const kDefaultHidesForSinglePage = NO;
 
 - (void)changeWithOldIndex:(NSInteger)oldIndex atNewIndex:(NSInteger)newIndex{
     
-    CGXHotBrandPageDotView *oldDotView = (CGXHotBrandPageDotView *)[self.dots objectAtIndex:oldIndex];
-    CGXHotBrandPageDotView *newDotView = (CGXHotBrandPageDotView *)[self.dots objectAtIndex:newIndex];
-    newDotView.layer.borderColor = [self.dotBorderSelectColor CGColor];
-    oldDotView.layer.borderColor = [self.dotBorderColor CGColor];
-    
-    if (self.dotWidthSpace > 0) {//如果当前选中点的宽度与未选中的点宽度不一样，则要改变选中前后两点的frame
-        CGRect oldDotFrame = oldDotView.frame;
-        if (newIndex < oldIndex) {
-            oldDotFrame.origin.x += self.dotWidthSpace;
+    if (oldIndex < self.dots.count && newIndex < self.dots.count) {
+        CGXHotBrandPageDotView *oldDotView = (CGXHotBrandPageDotView *)[self.dots objectAtIndex:oldIndex];
+        CGXHotBrandPageDotView *newDotView = (CGXHotBrandPageDotView *)[self.dots objectAtIndex:newIndex];
+        newDotView.layer.borderColor = [self.dotBorderSelectColor CGColor];
+        oldDotView.layer.borderColor = [self.dotBorderColor CGColor];
+        
+        if (self.dotWidthSpace > 0) {//如果当前选中点的宽度与未选中的点宽度不一样，则要改变选中前后两点的frame
+            CGRect oldDotFrame = oldDotView.frame;
+            if (newIndex < oldIndex) {
+                oldDotFrame.origin.x += self.dotWidthSpace;
+            }
+            oldDotFrame.size.width = self.dotSize.width;
+            CGRect newDotFrame = newDotView.frame;
+            if (newIndex > oldIndex) {
+                newDotFrame.origin.x -= self.dotWidthSpace;
+            }
+            newDotFrame.size.width = self.dotSize.width + self.dotWidthSpace;
+            [UIView animateWithDuration:0.3 animations:^{
+                oldDotView.frame = oldDotFrame;
+                newDotView.frame = newDotFrame;
+            }];
         }
-        oldDotFrame.size.width = self.dotSize.width;
-        CGRect newDotFrame = newDotView.frame;
-        if (newIndex > oldIndex) {
-            newDotFrame.origin.x -= self.dotWidthSpace;
+        if (newIndex - oldIndex > 1) {//点击圆点，中间有跳过的点
+            for (NSInteger i = oldIndex + 1; i<newIndex; i++) {
+                CGXHotBrandPageDotView *imageV = self.dots[i];
+                CGRect frame = imageV.frame;
+                frame.origin.x -= self.dotWidthSpace;
+                frame.size.width = self.dotSize.width;
+                imageV.frame = frame;
+            }
         }
-        newDotFrame.size.width = self.dotSize.width + self.dotWidthSpace;
-        [UIView animateWithDuration:0.3 animations:^{
-            oldDotView.frame = oldDotFrame;
-            newDotView.frame = newDotFrame;
-        }];
-    }
-    if (newIndex - oldIndex > 1) {//点击圆点，中间有跳过的点
-        for (NSInteger i = oldIndex + 1; i<newIndex; i++) {
-            CGXHotBrandPageDotView *imageV = self.dots[i];
-            CGRect frame = imageV.frame;
-            frame.origin.x -= self.dotWidthSpace;
-            frame.size.width = self.dotSize.width;
-            imageV.frame = frame;
-        }
-    }
-    if (newIndex - oldIndex < -1) {//点击圆点，中间有跳过的点
-        for (NSInteger i = newIndex + 1; i< oldIndex; i++) {
-            CGXHotBrandPageDotView *imageV = self.dots[i];
-            CGRect frame = imageV.frame;
-            frame.origin.x += self.dotWidthSpace;
-            frame.size.width = self.dotSize.width;
-            imageV.frame = frame;
+        if (newIndex - oldIndex < -1) {//点击圆点，中间有跳过的点
+            for (NSInteger i = newIndex + 1; i< oldIndex; i++) {
+                CGXHotBrandPageDotView *imageV = self.dots[i];
+                CGRect frame = imageV.frame;
+                frame.origin.x += self.dotWidthSpace;
+                frame.size.width = self.dotSize.width;
+                imageV.frame = frame;
+            }
         }
     }
 }
@@ -327,7 +331,7 @@ static BOOL const kDefaultHidesForSinglePage = NO;
         _dotSize = self.dotImage.size;
     } else if (CGSizeEqualToSize(_dotSize, CGSizeZero)) {
         _dotSize = kDefaultDotSize;
-
+        
         return _dotSize;
     }
     return _dotSize;

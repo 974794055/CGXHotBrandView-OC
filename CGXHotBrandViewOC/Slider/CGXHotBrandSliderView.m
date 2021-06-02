@@ -199,7 +199,11 @@
         self.collectionView.scrollEnabled = NO;
     }
     self.pagesNumber = dataArray.count;
+    self.pageCurrent = 0;
     [self.collectionView reloadData];
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
 
