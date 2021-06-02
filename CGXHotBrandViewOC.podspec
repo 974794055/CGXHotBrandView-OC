@@ -10,7 +10,6 @@ s.platform     = :ios, "8.0"                  #支持的平台和版本号
 s.source       = { :git => "https://github.com/974794055/CGXHotBrandView-OC.git", :tag => s.version }         #存储库的git地址，以及tag值
 s.requires_arc = true #是否支持ARC
 s.frameworks = 'UIKit'
-
 #需要托管的源代码路径
 s.source_files = 'CGXHotBrandViewOC/CGXHotBrandViewOC.h'
 #开源库头文件
