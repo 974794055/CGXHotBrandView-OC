@@ -18,9 +18,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.view.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStyleDone target:self action:@selector(updateColor)];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    
+    UIImage *image = [self imageWithColor:[UIColor whiteColor] Size:CGSizeMake(ScreenWidth, kTopHeight)];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance * appearance = [[UINavigationBarAppearance alloc] init];
+        // 背景色
+        appearance.backgroundColor = [UIColor whiteColor];
+        // 去除导航栏阴影（如果不设置clear，导航栏底下会有一条阴影线）
+        appearance.shadowColor = [UIColor clearColor];
+        // 字体颜色、尺寸等
+        appearance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor]};
+        // 带scroll滑动的页面
+        self.navigationController.navigationBar.scrollEdgeAppearance = appearance;
+        // 常规页面
+        self.navigationController.navigationBar.standardAppearance = appearance;
+    }
+    // iOS 15适配
+    if (@available(iOS 15.0, *)) {
+        [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-200, 0) forBarMetrics:UIBarMetricsDefault];
+        UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+        [appearance setBackgroundColor:[UIColor whiteColor]];
+        // UINavigationBarAppearance 会覆盖原有的导航栏设置，这里需要重新设置返回按钮隐藏，不隐藏可注释或删掉
+        appearance.backButtonAppearance.normal.titlePositionAdjustment = UIOffsetMake(-200, 0);
+        [[UINavigationBar appearance] setScrollEdgeAppearance:appearance];
+        [[UINavigationBar appearance] setStandardAppearance:appearance];
+    }
+    
     self.titleArr =  [NSMutableArray arrayWithObjects:
                       @"热门菜单Banner",
                       @"仿爱奇艺错位Banner",
@@ -41,45 +72,14 @@
         [rowArray addObject:model];
     }
 }
-- (NSArray *)splitArray:(NSArray *)array withSubSize:(NSInteger)subSize{
-    //  数组将被拆分成指定长度数组的个数
-    unsigned long count = array.count % subSize == 0 ? (array.count / subSize) : (array.count / subSize + 1);
-    //  用来保存指定长度数组的可变数组对象
-    NSMutableArray *arr = [[NSMutableArray alloc] init];
-    
-    //利用总个数进行循环，将指定长度的元素加入数组
-    for (int i = 0; i < count; i ++) {
-        //数组下标
-        NSInteger index = i * subSize;
-        //保存拆分的固定长度的数组元素的可变数组
-        NSMutableArray *arr1 = [[NSMutableArray alloc] init];
-        //移除子数组的所有元素
-        [arr1 removeAllObjects];
-        
-        NSInteger j = index;
-        //将数组下标乘以1、2、3，得到拆分时数组的最大下标值，但最大不能超过数组的总大小
-        while (j < subSize*(i + 1) && j < array.count) {
-            [arr1 addObject:[array objectAtIndex:j]];
-            j += 1;
-        }
-        //将子数组添加到保存子数组的数组中
-        [arr addObject:[arr1 copy]];
-    }
-    return [arr copy];
-}
 
-
-- (void)updateColor
-{
-    [self.collectionView reloadData];
-}
 - (void)creatCollectionView
 {
     self.collectionView = ({
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         UICollectionView *mCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) collectionViewLayout:layout];
-        mCollectionView.backgroundColor = [UIColor whiteColor];
+        mCollectionView.backgroundColor = [UIColor clearColor];
         mCollectionView.showsHorizontalScrollIndicator = YES;
         mCollectionView.showsVerticalScrollIndicator = YES;
         mCollectionView.dataSource = self;
@@ -96,7 +96,6 @@
         mCollectionView;
     });
     [self.view addSubview:self.collectionView];
-    
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -147,25 +146,6 @@
     ListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([ListCollectionViewCell class]) forIndexPath:indexPath];
     cell.titleLabel.text = self.titleArr[indexPath.row];
     return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-    maskLayer.frame = CGRectMake(0, 0, CGRectGetWidth(cell.frame), CGRectGetHeight(cell.frame));
-    
-    CAShapeLayer *borderLayer = [CAShapeLayer layer];
-    borderLayer.frame = CGRectMake(0, 0, CGRectGetWidth(cell.frame), CGRectGetHeight(cell.frame));
-    borderLayer.lineWidth = 1.f;
-    borderLayer.strokeColor = [UIColor lightGrayColor].CGColor;
-    borderLayer.fillColor = [UIColor clearColor].CGColor;
-    
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(cell.frame), CGRectGetHeight(cell.frame)) cornerRadius:8];
-    maskLayer.path = bezierPath.CGPath;
-    borderLayer.path = bezierPath.CGPath;
-    
-    [cell.contentView.layer insertSublayer:borderLayer atIndex:0];
-    [cell.contentView.layer setMask:maskLayer];
 }
 #pragma mark - cell的点击事件
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -226,8 +206,22 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+/**
+ *  生成图片
+ *  @return 生成的图片
+ */
+- (UIImage*)imageWithColor:(UIColor*)color Size:(CGSize)size
 {
+    CGRect r= CGRectMake(0.0f, 0.0f, size.width, size.height);
+    UIGraphicsBeginImageContext(r.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, r);
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return img;
 }
 @end

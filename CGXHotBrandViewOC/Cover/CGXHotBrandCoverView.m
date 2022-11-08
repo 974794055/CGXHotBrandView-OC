@@ -195,7 +195,6 @@
     }
     [self.collectionView reloadData];
     
-    
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }

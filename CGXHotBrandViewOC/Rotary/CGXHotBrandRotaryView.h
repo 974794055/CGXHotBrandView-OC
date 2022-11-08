@@ -6,10 +6,10 @@
 //  Copyright © 2020 CGX. All rights reserved.
 //
 
-#import "CGXHotBrandBaseView.h"
+#import "CGXHotBrandIndicatorView.h"
 #import "CGXHotBrandModel.h"
 
-@interface CGXHotBrandRotaryView : CGXHotBrandBaseView
+@interface CGXHotBrandRotaryView : CGXHotBrandIndicatorView
 
 //缩放系数 数值越大缩放越大 default 0.5
 @property(nonatomic,assign) CGFloat itemScaleFactor;

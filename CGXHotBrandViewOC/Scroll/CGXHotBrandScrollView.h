@@ -6,12 +6,12 @@
 //  Copyright © 2020 CGX. All rights reserved.
 //
 
-#import "CGXHotBrandBaseView.h"
+#import "CGXHotBrandIndicatorView.h"
 #import "CGXHotBrandDefines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CGXHotBrandScrollView : CGXHotBrandBaseView
+@interface CGXHotBrandScrollView : CGXHotBrandIndicatorView
 
 @property(strong,nonatomic,readonly)NSMutableArray<CGXHotBrandModel *> *dataArray;
 

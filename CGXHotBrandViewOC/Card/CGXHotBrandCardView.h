@@ -6,7 +6,7 @@
 //  Copyright © 2020 CGX. All rights reserved.
 //
 
-#import "CGXHotBrandBaseView.h"
+#import "CGXHotBrandIndicatorView.h"
 #import "CGXHotBrandCardFlowLayout.h"
 #import "CGXHotBrandModel.h"
 NS_ASSUME_NONNULL_BEGIN
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface CGXHotBrandCardView : CGXHotBrandBaseView
+@interface CGXHotBrandCardView : CGXHotBrandIndicatorView
 
 /*界面设置代理*/
 @property (nonatomic , weak) id<CGXHotBrandCardViewDataSource>dataSource;

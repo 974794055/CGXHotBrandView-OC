@@ -12,7 +12,6 @@
 #import "CGXHotBrandBaseCell.h"
 #import "CGXHotBrandModel.h"
 #import "CGXHotBrandTools.h"
-#import "UIImage+CGXHotBrand.h"
 #import "CGXHotBrandPageSquareView.h"
 @interface CGXHotBrandBaseView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -20,8 +19,6 @@
 @property (nonatomic, weak) NSTimer *timer;
 
 @property (nonatomic, assign,readwrite) NSInteger groudInter;
-
-@property (nonatomic, strong) CGXHotBrandPageControl *pageControl;
 
 @property (nonatomic, strong,readwrite) CGXHotBrandCollectionView *collectionView;
 
@@ -80,50 +77,9 @@
     
     self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     self.collectionView.contentSize = CGSizeMake(self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
-    if (self.isHavePage) {
-        if (self.pageCurrent < self.totalInter) {
-            self.pageControl.currentPage = self.pageCurrent;
-        }
-        CGSize pointSize = [self.pageControl sizeForNumberOfPages:self.pageControl.numberOfPages];
-        if (self.pageContolAliment == CGXHotBrandPageAlimentRight) {
-            self.pageControl.frame = CGRectMake(CGRectGetWidth(self.frame)-self.pageHorizontalOffset-pointSize.width, CGRectGetHeight(self.frame)-self.pageHeight-self.pageBottomOffset, pointSize.width, self.pageHeight);
-        } else if (self.pageContolAliment == CGXHotBrandPageAlimentLeft){
-            self.pageControl.frame = CGRectMake(self.pageHorizontalOffset, CGRectGetHeight(self.frame)-self.pageHeight-self.pageBottomOffset, pointSize.width, self.pageHeight);
-        } else{
-            self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.frame)-self.pageHeight-self.pageBottomOffset, CGRectGetWidth(self.frame), self.pageHeight);
-        }
-        self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-self.pageHeight);
-    } else{
-        self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
-    }
-    self.pageControl.hidesPage = !self.isHavePage;
     [self.collectionView reloadData];
 }
 
-
-- (CGXHotBrandCollectionView *)collectionView {
-    if (!_collectionView) {
-        _collectionView = [[CGXHotBrandCollectionView alloc] initWithFrame:self.bounds collectionViewLayout:[self preferredFlowLayout]];
-        _collectionView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
-        _collectionView.bounces = YES;
-        _collectionView.pagingEnabled = YES;
-        _collectionView.dataSource = self;
-        _collectionView.delegate = self;
-        _collectionView.showsVerticalScrollIndicator = NO;
-        _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView registerClass:[self preferredCellClass] forCellWithReuseIdentifier:NSStringFromClass([self preferredCellClass])];
-        //给collectionView注册头分区的Id
-        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([UICollectionReusableView class])];
-        //给collection注册脚分区的id
-        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([UICollectionReusableView class])];
-        if (@available(iOS 11.0, *)) {
-            _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
-        _collectionView.alwaysBounceVertical = NO;
-        [self addSubview:self.collectionView];
-    }
-    return _collectionView;
-}
 
 - (void)setDelegate:(id<CGXHotBrandCustomViewDelegate>)delegate
 {
@@ -167,7 +123,7 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [self gx_hotBrandCollectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
+    [self gx_hotBrandCollectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -186,58 +142,10 @@
         return view;
     }
 }
-
-- (void)setPagingEnabled:(BOOL)pagingEnabled
-{
-    _pagingEnabled = pagingEnabled;
-    self.collectionView.pagingEnabled = pagingEnabled;
-}
 - (void)setBounces:(BOOL)bounces
 {
     _bounces = bounces;
     self.collectionView.bounces = bounces;
-}
-- (void)setPageSelectColor:(UIColor *)pageSelectColor
-{
-    _pageSelectColor = pageSelectColor;
-    self.pageControl.dotCurrentColor = pageSelectColor;
-}
-- (void)setPageNormalColor:(UIColor *)pageNormalColor
-{
-    _pageNormalColor = pageNormalColor;
-    self.pageControl.dotColor = pageNormalColor;
-}
-- (void)setPageSelectImage:(UIImage *)pageSelectImage
-{
-    _pageSelectImage = pageSelectImage;
-    self.pageControl.dotImage = pageSelectImage;
-}
-- (void)setPageNormalImage:(UIImage *)pageNormalImage
-{
-    _pageNormalImage = pageNormalImage;
-    self.pageControl.dotImage = pageNormalImage;
-}
-- (void)setPageHeight:(CGFloat)pageHeight
-{
-    _pageHeight = pageHeight;
-}
-- (void)setIsHavePage:(BOOL)isHavePage
-{
-    _isHavePage = isHavePage;
-    self.pageControl.hidesPage = !isHavePage;
-}
-- (void)setPageSize:(CGSize)pageSize
-{
-    _pageSize = pageSize;
-    self.pageControl.dotSize = pageSize;
-}
-- (void)setHidesPage:(BOOL)hidesPage
-{
-    _hidesPage = hidesPage;
-}
-- (void)setPageContolAliment:(CGXHotBrandPageAliment)pageContolAliment
-{
-    _pageContolAliment = pageContolAliment;
 }
 
 - (void)setMinimumLineSpacing:(CGFloat)minimumLineSpacing
@@ -271,31 +179,7 @@
     _autoScrollTimeInterval = autoScrollTimeInterval;
     [self setAutoScroll:self.autoScroll];
 }
-- (void)setPageBetween:(CGFloat)pageBetween
-{
-    _pageBetween = pageBetween;
-    self.pageControl.dotBetween = pageBetween;
-}
-- (void)setPageWidthSpace:(CGFloat)pageWidthSpace
-{
-    _pageWidthSpace= pageWidthSpace;
-    self.pageControl.dotWidthSpace = pageWidthSpace;
-}
-- (void)setPageBorderColor:(UIColor *)pageBorderColor
-{
-    _pageBorderColor = pageBorderColor;
-    self.pageControl.dotBorderColor = pageBorderColor;
-}
-- (void)setPageBorderSelectColor:(UIColor *)pageBorderSelectColor
-{
-    _pageBorderSelectColor = pageBorderSelectColor;
-    self.pageControl.dotBorderSelectColor = pageBorderSelectColor;
-}
-- (void)setPageBorderWidth:(CGFloat)pageBorderWidth
-{
-    _pageBorderWidth = pageBorderWidth;
-    self.pageControl.dotBorderWidth = pageBorderWidth;
-}
+
 #pragma mark - 定时器
 - (void)setupTimer
 {
@@ -308,7 +192,7 @@
         [weakSelf automaticScroll];
     }];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:UITrackingRunLoopMode];
-
+    
     
 }
 // 停止定时器
@@ -342,45 +226,28 @@
     self.autoScroll = YES;
     self.infiniteLoop = YES;
     
-    self.pageSize = CGSizeMake(8, 8);
-    self.pageHeight = 20;
-    self.pageSelectColor = [UIColor redColor];
-    self.pageNormalColor = [UIColor grayColor];
-    self.pagingEnabled = YES;
     self.bounces = NO;
-    self.isHavePage = NO;
-    self.hidesPage = YES;
-    self.pageBottomOffset = 0;
-    self.pageHorizontalOffset = 0;
-    self.pageContolAliment = CGXHotBrandPageAlimentCenter;
-    
-    self.pageWidthSpace = 0;
-    self.pageBetween = 0;
-    self.pageBorderColor = self.pageNormalColor;
-    self.pageBorderSelectColor = self.pageSelectColor;
-    self.pageBorderWidth = 0;
-
     
 }
 - (void)initializeViews
 {
-    self.pageControl = [[CGXHotBrandPageControl alloc] init];
-    [self.pageControl setTransform:CGAffineTransformMakeScale(1, 1)];
-    self.pageControl.hidesForSinglePage = true;
-    self.pageControl.userInteractionEnabled = NO;
-    self.pageControl.dotSize = self.pageSize;
-    [self addSubview:self.pageControl];
-    [self bringSubviewToFront:self.pageControl];
-
-    if (self.pageNormalColor) {
-        self.pageNormalColor = self.pageNormalColor;
-    }
-    if (self.pageSelectColor) {
-        self.pageSelectColor = self.pageSelectColor;
-    }
-    self.pageControl.dotStyle = self.dotStyle;
     [CGXHotBrandTools getTopViewController:self].automaticallyAdjustsScrollViewInsets = NO;
-    
+    _collectionView = [[CGXHotBrandCollectionView alloc] initWithFrame:self.bounds collectionViewLayout:[self preferredFlowLayout]];
+    _collectionView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
+    _collectionView.bounces = YES;
+    _collectionView.pagingEnabled = YES;
+    _collectionView.dataSource = self;
+    _collectionView.delegate = self;
+    _collectionView.showsVerticalScrollIndicator = NO;
+    _collectionView.showsHorizontalScrollIndicator = NO;
+    [_collectionView registerClass:[self preferredCellClass] forCellWithReuseIdentifier:NSStringFromClass([self preferredCellClass])];
+    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([UICollectionReusableView class])];
+    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([UICollectionReusableView class])];
+    if (@available(iOS 11.0, *)) {
+        _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    _collectionView.alwaysBounceVertical = NO;
+    [self addSubview:self.collectionView];
     [self.collectionView reloadData];
 }
 /*
@@ -434,16 +301,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(gx_hotBrandBaseView:didSelectItemAtIndexPath:AtModel:)]) {
         [self.delegate gx_hotBrandBaseView:self didSelectItemAtIndexPath:indexPath AtModel:cellModel];
     }
-}
-- (void)setPagesNumber:(NSInteger)pagesNumber
-{
-    _pagesNumber = pagesNumber;
-    self.pageControl.numberOfPages = pagesNumber;
-}
-- (void)setPageCurrent:(NSInteger)pageCurrent
-{
-    _pageCurrent = pageCurrent;
-    self.pageControl.currentPage = pageCurrent;
 }
 - (int)currentIndex
 {

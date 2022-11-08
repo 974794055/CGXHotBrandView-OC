@@ -6,10 +6,10 @@
 //  Copyright © 2020 CGX. All rights reserved.
 //
 
-#import "CGXHotBrandBaseView.h"
+#import "CGXHotBrandIndicatorView.h"
 #import "CGXHotBrandModel.h"
 
-@interface CGXHotBrandCoverView : CGXHotBrandBaseView
+@interface CGXHotBrandCoverView : CGXHotBrandIndicatorView
 
 
 //高度比例  0.5～1.0之间 适当设置 default 0.9

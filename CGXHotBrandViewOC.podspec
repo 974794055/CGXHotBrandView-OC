@@ -18,19 +18,23 @@ s.public_header_files = 'CGXHotBrandViewOC/CGXHotBrandViewOC.h'
 s.subspec 'Custom' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/Custom/**/*.{h,m}'
 end
-s.subspec 'PageControl' do |ss|
-   ss.source_files = 'CGXHotBrandViewOC/PageControl/**/*.{h,m}'
+s.subspec 'BPageControl' do |ss|
+   ss.source_files = 'CGXHotBrandViewOC/BPageControl/**/*.{h,m}'
    ss.dependency 'CGXHotBrandViewOC/Custom'
 end
 s.subspec 'Base' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/Base/**/*.{h,m}'
    ss.dependency 'CGXHotBrandViewOC/Custom'
-   ss.dependency 'CGXHotBrandViewOC/PageControl'
+   ss.dependency 'CGXHotBrandViewOC/BPageControl'
+end
+s.subspec 'BIndicator' do |ss|
+   ss.source_files = 'CGXHotBrandViewOC/BIndicator/**/*.{h,m}'
+   ss.dependency 'CGXHotBrandViewOC/Custom'
+   ss.dependency 'CGXHotBrandViewOC/Base'
 end
 s.subspec 'HotBrand' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/HotBrand/**/*.{h,m}'
    ss.dependency 'CGXHotBrandViewOC/Base'
-   ss.dependency 'CGXHotBrandViewOC/PageControl'
 end
 s.subspec 'Cycle' do |ss|
    ss.source_files = 'CGXHotBrandViewOC/Cycle/**/*.{h,m}'

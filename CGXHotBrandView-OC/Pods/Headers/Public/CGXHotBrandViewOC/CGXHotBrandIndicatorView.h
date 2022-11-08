@@ -1,0 +1,1 @@
+../../../../../CGXHotBrandViewOC/BIndicator/CGXHotBrandIndicatorView.h

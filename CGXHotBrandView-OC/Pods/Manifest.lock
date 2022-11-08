@@ -1,37 +1,41 @@
 PODS:
-  - CGXHotBrandViewOC (0.0.6):
-    - CGXHotBrandViewOC/Base (= 0.0.6)
-    - CGXHotBrandViewOC/Card (= 0.0.6)
-    - CGXHotBrandViewOC/Cover (= 0.0.6)
-    - CGXHotBrandViewOC/Custom (= 0.0.6)
-    - CGXHotBrandViewOC/Cycle (= 0.0.6)
-    - CGXHotBrandViewOC/HotBrand (= 0.0.6)
-    - CGXHotBrandViewOC/PageControl (= 0.0.6)
-    - CGXHotBrandViewOC/Rotary (= 0.0.6)
-    - CGXHotBrandViewOC/Scroll (= 0.0.6)
-    - CGXHotBrandViewOC/Slider (= 0.0.6)
-    - CGXHotBrandViewOC/Zoom (= 0.0.6)
-  - CGXHotBrandViewOC/Base (0.0.6):
+  - CGXHotBrandViewOC (0.0.7):
+    - CGXHotBrandViewOC/Base (= 0.0.7)
+    - CGXHotBrandViewOC/BIndicator (= 0.0.7)
+    - CGXHotBrandViewOC/BPageControl (= 0.0.7)
+    - CGXHotBrandViewOC/Card (= 0.0.7)
+    - CGXHotBrandViewOC/Cover (= 0.0.7)
+    - CGXHotBrandViewOC/Custom (= 0.0.7)
+    - CGXHotBrandViewOC/Cycle (= 0.0.7)
+    - CGXHotBrandViewOC/HotBrand (= 0.0.7)
+    - CGXHotBrandViewOC/Rotary (= 0.0.7)
+    - CGXHotBrandViewOC/Scroll (= 0.0.7)
+    - CGXHotBrandViewOC/Slider (= 0.0.7)
+    - CGXHotBrandViewOC/Zoom (= 0.0.7)
+  - CGXHotBrandViewOC/Base (0.0.7):
+    - CGXHotBrandViewOC/BPageControl
     - CGXHotBrandViewOC/Custom
-    - CGXHotBrandViewOC/PageControl
-  - CGXHotBrandViewOC/Card (0.0.6):
+  - CGXHotBrandViewOC/BIndicator (0.0.7):
     - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/Cover (0.0.6):
+    - CGXHotBrandViewOC/Custom
+  - CGXHotBrandViewOC/BPageControl (0.0.7):
+    - CGXHotBrandViewOC/Custom
+  - CGXHotBrandViewOC/Card (0.0.7):
     - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/Custom (0.0.6)
-  - CGXHotBrandViewOC/Cycle (0.0.6):
+  - CGXHotBrandViewOC/Cover (0.0.7):
     - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/HotBrand (0.0.6):
+  - CGXHotBrandViewOC/Custom (0.0.7)
+  - CGXHotBrandViewOC/Cycle (0.0.7):
     - CGXHotBrandViewOC/Base
-    - CGXHotBrandViewOC/PageControl
-  - CGXHotBrandViewOC/PageControl (0.0.6)
-  - CGXHotBrandViewOC/Rotary (0.0.6):
+  - CGXHotBrandViewOC/HotBrand (0.0.7):
     - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/Scroll (0.0.6):
+  - CGXHotBrandViewOC/Rotary (0.0.7):
     - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/Slider (0.0.6):
+  - CGXHotBrandViewOC/Scroll (0.0.7):
     - CGXHotBrandViewOC/Base
-  - CGXHotBrandViewOC/Zoom (0.0.6):
+  - CGXHotBrandViewOC/Slider (0.0.7):
+    - CGXHotBrandViewOC/Base
+  - CGXHotBrandViewOC/Zoom (0.0.7):
     - CGXHotBrandViewOC/Base
   - SDWebImage (5.10.2):
     - SDWebImage/Core (= 5.10.2)
@@ -42,7 +46,7 @@ DEPENDENCIES:
   - SDWebImage
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
+  trunk:
     - SDWebImage
 
 EXTERNAL SOURCES:
@@ -50,9 +54,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CGXHotBrandViewOC: 7d0c218e57c2a2a4f0d4f4908d9b967951c77eab
+  CGXHotBrandViewOC: a18fee0313993d3c85c0a7a16564abf27017d519
   SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
 
 PODFILE CHECKSUM: 12d4863de68581180da27419bd5ac8c84453181a
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.2

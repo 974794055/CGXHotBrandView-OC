@@ -14,7 +14,7 @@
 #define pMaxScale 1.0//最大的拉伸比例
 #define pNormalScale 0.7 //最小的缩放比例
 
-@interface CGXHotBrandZoomView()<FirstCellZoomInLayoutTwoDelegate>
+@interface CGXHotBrandZoomView()<CGXHotBrandZoomFlowLayoutFirstDelegate>
 
 @property(strong,nonatomic,readwrite)NSMutableArray<CGXHotBrandModel *> *dataArray;
 

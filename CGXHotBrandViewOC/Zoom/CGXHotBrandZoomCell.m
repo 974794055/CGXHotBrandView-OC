@@ -6,7 +6,6 @@
 //  Copyright © 2020 CGX. All rights reserved.
 //
 #import "CGXHotBrandZoomCell.h"
-#import "UIView+CGXHotBrandRounded.h"
 #import "CGXHotBrandZoomFlowLayout.h"
 
 #define pMaxScale 1.0//最大的拉伸比例

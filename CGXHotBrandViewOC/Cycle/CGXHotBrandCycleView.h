@@ -6,11 +6,11 @@
 //  Copyright © 2020 CGX. All rights reserved.
 //
 
-#import "CGXHotBrandBaseView.h"
+#import "CGXHotBrandIndicatorView.h"
 #import "CGXHotBrandCycleCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CGXHotBrandCycleView : CGXHotBrandBaseView
+@interface CGXHotBrandCycleView : CGXHotBrandIndicatorView
 
 /** 多少行  默认2行  */
 @property (nonatomic, assign) NSInteger itemSectionCount;

@@ -25,9 +25,10 @@
 		B5C8A60525CC26680058E488 /* CoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C8A60425CC26680058E488 /* CoverViewController.m */; };
 		B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDEE75258B8B6E00359A78 /* CycleViewController.m */; };
 		B627137E971B883F05749DA6 /* libPods-CGXHotBrandView-OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */; };
-		E0121F452667D28100594AC9 /* CGXHotBrandViewOC.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E0121F422667D28100594AC9 /* CGXHotBrandViewOC.podspec */; };
-		E0121F462667D28100594AC9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E0121F432667D28100594AC9 /* LICENSE */; };
-		E0121F472667D28100594AC9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E0121F442667D28100594AC9 /* README.md */; };
+		E05CA604269E6A1C00E2C4D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E05CA603269E6A1B00E2C4D9 /* main.m */; };
+		E0ECE49E26B1977800A72797 /* CGXHotBrandViewOC.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E0ECE49B26B1977800A72797 /* CGXHotBrandViewOC.podspec */; };
+		E0ECE49F26B1977800A72797 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E0ECE49C26B1977800A72797 /* README.md */; };
+		E0ECE4A026B1977800A72797 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E0ECE49D26B1977800A72797 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,9 +69,10 @@
 		B5EDEE75258B8B6E00359A78 /* CycleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CycleViewController.m; sourceTree = "<group>"; };
 		C7CB7AD86E851CBE37EBCA1C /* Pods-CGXHotBrandView-OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.debug.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.debug.xcconfig"; sourceTree = "<group>"; };
 		DF9AC596FFE1958157B59526 /* Pods-CGXHotBrandView-OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.release.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.release.xcconfig"; sourceTree = "<group>"; };
-		E0121F422667D28100594AC9 /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CGXHotBrandViewOC.podspec; path = ../../../CGXHotBrandViewOC.podspec; sourceTree = "<group>"; };
-		E0121F432667D28100594AC9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../../LICENSE; sourceTree = "<group>"; };
-		E0121F442667D28100594AC9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../README.md; sourceTree = "<group>"; };
+		E05CA603269E6A1B00E2C4D9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E0ECE49B26B1977800A72797 /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CGXHotBrandViewOC.podspec; path = ../../../CGXHotBrandViewOC.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E0ECE49C26B1977800A72797 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../README.md; sourceTree = "<group>"; };
+		E0ECE49D26B1977800A72797 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +117,7 @@
 		04AD1F68258711F600B7544D /* CGXHotBrandView-OC */ = {
 			isa = PBXGroup;
 			children = (
-				04BFA2462599A7A80042801C /* Podspec Metadata */,
+				E0ECE49A26B1976800A72797 /* Podspec Metadata */,
 				04AD1F69258711F600B7544D /* AppDelegate.h */,
 				04AD1F6A258711F600B7544D /* AppDelegate.m */,
 				04AD1F6F258711F600B7544D /* ViewController.h */,
@@ -149,18 +151,9 @@
 				04AD1F75258711FC00B7544D /* Assets.xcassets */,
 				04AD1F77258711FC00B7544D /* LaunchScreen.storyboard */,
 				04AD1F7A258711FC00B7544D /* Info.plist */,
+				E05CA603269E6A1B00E2C4D9 /* main.m */,
 			);
 			path = "CGXHotBrandView-OC";
-			sourceTree = "<group>";
-		};
-		04BFA2462599A7A80042801C /* Podspec Metadata */ = {
-			isa = PBXGroup;
-			children = (
-				E0121F422667D28100594AC9 /* CGXHotBrandViewOC.podspec */,
-				E0121F432667D28100594AC9 /* LICENSE */,
-				E0121F442667D28100594AC9 /* README.md */,
-			);
-			path = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
 		91A87241E701DCC9D5BF5A38 /* Frameworks */ = {
@@ -169,6 +162,16 @@
 				866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E0ECE49A26B1976800A72797 /* Podspec Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				E0ECE49B26B1977800A72797 /* CGXHotBrandViewOC.podspec */,
+				E0ECE49D26B1977800A72797 /* LICENSE */,
+				E0ECE49C26B1977800A72797 /* README.md */,
+			);
+			path = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,12 +231,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0121F472667D28100594AC9 /* README.md in Resources */,
+				E0ECE4A026B1977800A72797 /* LICENSE in Resources */,
 				04AD1F79258711FC00B7544D /* LaunchScreen.storyboard in Resources */,
 				04AD1F76258711FC00B7544D /* Assets.xcassets in Resources */,
-				E0121F452667D28100594AC9 /* CGXHotBrandViewOC.podspec in Resources */,
+				E0ECE49F26B1977800A72797 /* README.md in Resources */,
+				E0ECE49E26B1977800A72797 /* CGXHotBrandViewOC.podspec in Resources */,
 				04AD1F74258711F600B7544D /* Main.storyboard in Resources */,
-				E0121F462667D28100594AC9 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +282,7 @@
 				04AD1F71258711F600B7544D /* ViewController.m in Sources */,
 				B55790C525A363A50087B030 /* ScrollViewController.m in Sources */,
 				04BFA28B2599AC340042801C /* CardViewController.m in Sources */,
+				E05CA604269E6A1C00E2C4D9 /* main.m in Sources */,
 				04AD1F6B258711F600B7544D /* AppDelegate.m in Sources */,
 				B54A7AE425A20C1300801BD6 /* ZoomViewController.m in Sources */,
 				B55F82012588F6750018472C /* CustomCollectionViewCell.m in Sources */,

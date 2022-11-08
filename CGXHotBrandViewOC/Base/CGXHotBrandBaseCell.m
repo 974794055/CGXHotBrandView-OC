@@ -7,7 +7,7 @@
 //
 
 #import "CGXHotBrandBaseCell.h"
-#import "UIView+CGXHotBrandRounded.h"
+
 @interface CGXHotBrandBaseCell ()
 
 @property (nonatomic , assign ,readwrite) NSInteger section;
@@ -27,7 +27,6 @@
 }
 - (void)initializeViews
 {
-    self.contentView.backgroundColor = [UIColor whiteColor];
     self.hotImageView = [[UIImageView alloc] init];
     self.hotImageView.contentMode = UIViewContentModeScaleToFill;
     self.hotImageView.layer.masksToBounds = YES;
@@ -44,14 +43,6 @@
     [self.contentView addConstraint:self.hotImageLeft];
     [self.contentView addConstraint:self.hotImageRight];
     [self.contentView addConstraint:self.hotImageBottom];
-    
-}
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
-    
 }
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row
 {
@@ -71,11 +62,10 @@
         }
         self.hotImageView.image = image;
     }
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
-    
-    [self.contentView gx_hotBrandBorderWithColor:cellModel.itemBorderColor borderWidth:cellModel.itemBorderWidth];
-    [self.contentView gx_hotBrandRoundedWithAllRadius:cellModel.itemBorderRadius];
+    self.contentView.layer.masksToBounds = YES;
+    self.contentView.layer.borderColor = [cellModel.itemBorderColor CGColor];
+    self.contentView.layer.borderWidth = cellModel.itemBorderWidth;
+    self.contentView.layer.cornerRadius = cellModel.itemBorderRadius;
     
 }
 - (void)cellOffsetOnCollectionView:(UICollectionView *)collectionView

@@ -73,9 +73,6 @@
 {
     [super layoutSubviews];
     
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
-    
 }
 
 - (void)updateWithHotBrandCellModel:(CGXHotBrandModel *)cellModel Section:(NSInteger)section Row:(NSInteger)row

@@ -6,7 +6,7 @@
 //  Copyright © 2020 CGX. All rights reserved.
 //
 
-#import "CGXHotBrandBaseView.h"
+#import "CGXHotBrandIndicatorView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @class CGXHotBrandZoomView;
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface CGXHotBrandZoomView : CGXHotBrandBaseView
+@interface CGXHotBrandZoomView : CGXHotBrandIndicatorView
 
 /*界面设置代理*/
 @property (nonatomic , weak) id<CGXHotBrandZoomViewDataSource>dataSource;

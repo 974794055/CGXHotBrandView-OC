@@ -9,7 +9,7 @@
 #import "CGXHotBrandBaseFlowLayout.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@protocol FirstCellZoomInLayoutTwoDelegate <UICollectionViewDelegateFlowLayout>
+@protocol CGXHotBrandZoomFlowLayoutFirstDelegate <UICollectionViewDelegateFlowLayout>
 
 @required
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CGXHotBrandZoomFlowLayout : CGXHotBrandBaseFlowLayout
 
-@property (nonatomic, weak) id<FirstCellZoomInLayoutTwoDelegate> delegate;
+@property (nonatomic, weak) id<CGXHotBrandZoomFlowLayoutFirstDelegate> delegate;
 
 // 滚动时cell的缩放放大比例
 - (CGFloat)cellOffsetAtIndex:(NSInteger)index;

@@ -1,1 +1,1 @@
-../../../../../CGXHotBrandViewOC/PageControl/CGXHotBrandPageModel.h
+../../../../../CGXHotBrandViewOC/BPageControl/CGXHotBrandPageModel.h
