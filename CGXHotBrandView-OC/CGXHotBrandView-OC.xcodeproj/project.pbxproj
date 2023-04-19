@@ -24,11 +24,11 @@
 		B5ADD2F425B5D2CB00978B53 /* SliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADD2F325B5D2CB00978B53 /* SliderViewController.m */; };
 		B5C8A60525CC26680058E488 /* CoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C8A60425CC26680058E488 /* CoverViewController.m */; };
 		B5EDEE76258B8B6E00359A78 /* CycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EDEE75258B8B6E00359A78 /* CycleViewController.m */; };
+		B5FFA300293E513B00FDC5A7 /* CGXHotBrandViewOC.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B5FFA2FD293E513A00FDC5A7 /* CGXHotBrandViewOC.podspec */; };
+		B5FFA301293E513B00FDC5A7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B5FFA2FE293E513A00FDC5A7 /* LICENSE */; };
+		B5FFA302293E513B00FDC5A7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B5FFA2FF293E513A00FDC5A7 /* README.md */; };
 		B627137E971B883F05749DA6 /* libPods-CGXHotBrandView-OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AE889C0B8ADBBFD67A4C7 /* libPods-CGXHotBrandView-OC.a */; };
 		E05CA604269E6A1C00E2C4D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E05CA603269E6A1B00E2C4D9 /* main.m */; };
-		E0ECE49E26B1977800A72797 /* CGXHotBrandViewOC.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E0ECE49B26B1977800A72797 /* CGXHotBrandViewOC.podspec */; };
-		E0ECE49F26B1977800A72797 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E0ECE49C26B1977800A72797 /* README.md */; };
-		E0ECE4A026B1977800A72797 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E0ECE49D26B1977800A72797 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,12 +67,12 @@
 		B5DA5E20258A5B100044A0CF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B5EDEE74258B8B6E00359A78 /* CycleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CycleViewController.h; sourceTree = "<group>"; };
 		B5EDEE75258B8B6E00359A78 /* CycleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CycleViewController.m; sourceTree = "<group>"; };
+		B5FFA2FD293E513A00FDC5A7 /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CGXHotBrandViewOC.podspec; path = ../../../CGXHotBrandViewOC.podspec; sourceTree = "<group>"; };
+		B5FFA2FE293E513A00FDC5A7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../../LICENSE; sourceTree = "<group>"; };
+		B5FFA2FF293E513A00FDC5A7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../README.md; sourceTree = "<group>"; };
 		C7CB7AD86E851CBE37EBCA1C /* Pods-CGXHotBrandView-OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.debug.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.debug.xcconfig"; sourceTree = "<group>"; };
 		DF9AC596FFE1958157B59526 /* Pods-CGXHotBrandView-OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGXHotBrandView-OC.release.xcconfig"; path = "Target Support Files/Pods-CGXHotBrandView-OC/Pods-CGXHotBrandView-OC.release.xcconfig"; sourceTree = "<group>"; };
 		E05CA603269E6A1B00E2C4D9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E0ECE49B26B1977800A72797 /* CGXHotBrandViewOC.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CGXHotBrandViewOC.podspec; path = ../../../CGXHotBrandViewOC.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		E0ECE49C26B1977800A72797 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../README.md; sourceTree = "<group>"; };
-		E0ECE49D26B1977800A72797 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +117,7 @@
 		04AD1F68258711F600B7544D /* CGXHotBrandView-OC */ = {
 			isa = PBXGroup;
 			children = (
-				E0ECE49A26B1976800A72797 /* Podspec Metadata */,
+				B5FFA2FC293E512700FDC5A7 /* Podspec Metadata */,
 				04AD1F69258711F600B7544D /* AppDelegate.h */,
 				04AD1F6A258711F600B7544D /* AppDelegate.m */,
 				04AD1F6F258711F600B7544D /* ViewController.h */,
@@ -164,12 +164,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E0ECE49A26B1976800A72797 /* Podspec Metadata */ = {
+		B5FFA2FC293E512700FDC5A7 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				E0ECE49B26B1977800A72797 /* CGXHotBrandViewOC.podspec */,
-				E0ECE49D26B1977800A72797 /* LICENSE */,
-				E0ECE49C26B1977800A72797 /* README.md */,
+				B5FFA2FD293E513A00FDC5A7 /* CGXHotBrandViewOC.podspec */,
+				B5FFA2FE293E513A00FDC5A7 /* LICENSE */,
+				B5FFA2FF293E513A00FDC5A7 /* README.md */,
 			);
 			path = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -231,12 +231,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0ECE4A026B1977800A72797 /* LICENSE in Resources */,
+				B5FFA302293E513B00FDC5A7 /* README.md in Resources */,
 				04AD1F79258711FC00B7544D /* LaunchScreen.storyboard in Resources */,
 				04AD1F76258711FC00B7544D /* Assets.xcassets in Resources */,
-				E0ECE49F26B1977800A72797 /* README.md in Resources */,
-				E0ECE49E26B1977800A72797 /* CGXHotBrandViewOC.podspec in Resources */,
+				B5FFA300293E513B00FDC5A7 /* CGXHotBrandViewOC.podspec in Resources */,
 				04AD1F74258711F600B7544D /* Main.storyboard in Resources */,
+				B5FFA301293E513B00FDC5A7 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

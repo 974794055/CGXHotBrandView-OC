@@ -57,7 +57,7 @@
     };
     
     
-    NSInteger inter = 7;
+    NSInteger inter = 1;
     CGFloat height = floor((ScreenHeight-kTopHeight-kSafeHeight-40)/4.0);
     CGFloat y = 10;
     for (int i = 0; i<inter; i++) {
