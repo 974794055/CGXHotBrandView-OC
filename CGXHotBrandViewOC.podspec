@@ -14,7 +14,6 @@ s.frameworks = 'UIKit'
 s.source_files = 'CGXHotBrandViewOC/CGXHotBrandViewOC.h'
 #开源库头文件
 s.public_header_files = 'CGXHotBrandViewOC/CGXHotBrandViewOC.h'
-
 s.subspec 'Custom' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Custom/**/*.{h,m}'
 end
