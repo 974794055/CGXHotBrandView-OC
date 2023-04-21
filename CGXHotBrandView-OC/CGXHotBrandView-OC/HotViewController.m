@@ -91,8 +91,7 @@
         [hotBrandView updateWithDataArray:dataArray];
     }
     self.mainScrollViewH.contentSize = CGSizeMake(0,30+y);
-
-    
+ 
 }
 
 //
@@ -107,7 +106,6 @@
 - (void)gx_hotBrandBaseView:(CGXHotBrandBaseView *)hotView didSelectItemAtIndexPath:(NSIndexPath *)indexPath AtModel:(CGXHotBrandModel *)hotModel
 {
     NSLog(@"didSelectItemAtIndexPath：%@---%@" , hotModel.titleModel.text,hotModel.dataModel);
-    
     hotModel.titleModel.text = [NSString stringWithFormat:@"猫咪%u",arc4random() % 10+100];
     CGXHotBrandView *hotBrandView = (CGXHotBrandView *)hotView;
     [hotBrandView updateWithItemModel:hotModel AtIndexPath:indexPath];

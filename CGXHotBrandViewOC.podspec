@@ -55,6 +55,7 @@ end
 s.subspec 'Scroll' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Scroll/**/*.{h,m}'
   ss.dependency 'CGXHotBrandViewOC/Base'
+  ss.dependency 'CGXHotBrandViewOC/BIndicator'
 end
 s.subspec 'Rotary' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Rotary/**/*.{h,m}'
