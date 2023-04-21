@@ -65,7 +65,6 @@ hotBrandView.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1];
 hotBrandView.hotBrand_loadImageCallback = ^(UIImageView * _Nonnull hotImageView, NSURL * _Nonnull hotImageURL) {
     [hotImageView sd_setImageWithURL:hotImageURL];
 };
-
 ```
 - 2.配置CGXHotBrandView数据的属性
 ```Objective-C

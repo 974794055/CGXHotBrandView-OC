@@ -16,6 +16,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+    if(@available(iOS 13.0,*)){
+        self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
+#endif
+    self.window.backgroundColor = [UIColor whiteColor];
     if (@available(iOS 15.0, *)) {
         [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-200, 0) forBarMetrics:UIBarMetricsDefault];
         UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
@@ -26,13 +32,6 @@
         [[UINavigationBar appearance] setScrollEdgeAppearance: appearance];
         [[UINavigationBar appearance] setStandardAppearance:appearance];
     }
-#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
-    if(@available(iOS 13.0,*)){
-        self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
-#endif
-    self.window.backgroundColor = [UIColor whiteColor];
-    
     return YES;
 }
 

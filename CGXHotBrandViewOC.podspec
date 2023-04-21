@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 s.name         = "CGXHotBrandViewOC"
 s.version      = "1.0"
 s.summary      = "CGXHotBrandViewOC是基于UICollectionView封装的热门菜单库"
-s.description  = "UICollectionView封装的热门菜单库"
+s.description  = "UICollectionView封装的热门菜单库,水平菜单库"
 s.homepage     = "https://github.com/974794055/CGXHotBrandView-OC"
 s.license      = { :type => "MIT", :file => "LICENSE" }
 s.author             = { "974794055" => "974794055@qq.com" }

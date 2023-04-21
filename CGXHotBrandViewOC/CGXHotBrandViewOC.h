@@ -46,5 +46,4 @@
 #import "CGXHotBrandCoverView.h"
 #import "CGXHotBrandCoverCell.h"
 
-
 #endif /* CGXHotBrandViewOC_h */
