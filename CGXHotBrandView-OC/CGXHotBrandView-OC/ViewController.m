@@ -50,7 +50,6 @@
         [[UINavigationBar appearance] setScrollEdgeAppearance:appearance];
         [[UINavigationBar appearance] setStandardAppearance:appearance];
     }
-    
     self.titleArr =  [NSMutableArray arrayWithObjects:
                       @"热门菜单Banner",
                       @"仿爱奇艺错位Banner",

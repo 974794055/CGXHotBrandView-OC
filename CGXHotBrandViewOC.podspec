@@ -35,18 +35,22 @@ end
 s.subspec 'HotBrand' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/HotBrand/**/*.{h,m}'
   ss.dependency 'CGXHotBrandViewOC/Base'
+  ss.dependency 'CGXHotBrandViewOC/BIndicator'
 end
 s.subspec 'Cycle' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Cycle/**/*.{h,m}'
   ss.dependency 'CGXHotBrandViewOC/Base'
+  ss.dependency 'CGXHotBrandViewOC/BIndicator'
 end
 s.subspec 'Card' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Card/**/*.{h,m}'
   ss.dependency 'CGXHotBrandViewOC/Base'
+  ss.dependency 'CGXHotBrandViewOC/BIndicator'
 end
 s.subspec 'Zoom' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Zoom/**/*.{h,m}'
   ss.dependency 'CGXHotBrandViewOC/Base'
+  ss.dependency 'CGXHotBrandViewOC/BIndicator'
 end
 s.subspec 'Scroll' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Scroll/**/*.{h,m}'
@@ -55,14 +59,17 @@ end
 s.subspec 'Rotary' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Rotary/**/*.{h,m}'
   ss.dependency 'CGXHotBrandViewOC/Base'
+  ss.dependency 'CGXHotBrandViewOC/BIndicator'
 end
 s.subspec 'Slider' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Slider/**/*.{h,m}'
   ss.dependency 'CGXHotBrandViewOC/Base'
+  ss.dependency 'CGXHotBrandViewOC/BIndicator'
 end
 s.subspec 'Cover' do |ss|
   ss.source_files = 'CGXHotBrandViewOC/Cover/**/*.{h,m}'
   ss.dependency 'CGXHotBrandViewOC/Base'
+  ss.dependency 'CGXHotBrandViewOC/BIndicator'
 end
 
 end
