@@ -221,7 +221,6 @@
     
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
     return img;
 }
 
