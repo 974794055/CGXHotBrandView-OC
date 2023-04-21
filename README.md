@@ -26,7 +26,6 @@
 Appstore滚动  |  <img src="https://github.com/974794055/CGXHotBrandView-OC/blob/master/CGXCategoryViewGif/hotBrand2.gif" width="287" height="600"> |
 
 ## 要求
-
 - iOS 8.0+
 - Xcode 9+
 - Objective-C
