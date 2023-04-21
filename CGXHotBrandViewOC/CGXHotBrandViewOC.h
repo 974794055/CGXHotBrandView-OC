@@ -10,7 +10,7 @@
  QQ号：974794055
  群名称：
  群   号：
- 版本： 1.0
+ 版本： 0.0.8
  */
 
 #ifndef CGXHotBrandViewOC_h

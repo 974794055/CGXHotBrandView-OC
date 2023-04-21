@@ -24,7 +24,6 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.navigationBar.translucent = NO;
     self.extendedLayoutIncludesOpaqueBars = NO;
-    
     UIImage *image = [self imageWithColor:[UIColor whiteColor] Size:CGSizeMake(ScreenWidth, kTopHeight)];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
@@ -65,7 +64,6 @@
                       @"滑块",
                       nil];
     [self creatCollectionView];
-    
     NSMutableArray *rowArray = [NSMutableArray array];
     for (int j = 0; j< 34; j++) {
         CGXHotBrandModel *model = [[CGXHotBrandModel alloc] init];
